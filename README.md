@@ -80,7 +80,7 @@ When starting the game, give the first argument of `startGame` the initial scene
 
 ```nim
 when isMainModule:
-  startGame newExScene()
+  startGame(firstScene = newExScene(), title = "Tinamou Example", width = 1200, height = 800, showFPS = true)
 
 ```
 
