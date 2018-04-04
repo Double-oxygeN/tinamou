@@ -10,6 +10,10 @@ Game Library in Nim with SDL2
 4. Do `startGame`.
 5. That is all!
 
+## Documentation
+
+See http://double-oxygen.net/tinamou/tinamou.html
+
 ## How to Make Scenes
 
 All you have to do first in order to make a scene is extend `TBaseScene`.
@@ -69,6 +73,14 @@ method draw(self: ExScene, painter: TPainter, tools: TTools, actions: TActions) 
   painter.drawImage(tools.imageManager.getImage("spriteName"), 200, 10, spriteNum = 2)
 
   painter.text($actions.mouse.getPosition(), 150, 50).fill(colBlack)
+
+```
+
+When starting the game, give the first argument of `startGame` the initial scene.
+
+```nim
+when isMainModule:
+  startGame newExScene()
 
 ```
 
