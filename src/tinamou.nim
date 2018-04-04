@@ -1,14 +1,14 @@
 ## Tinamou Game Library
 
 import
-  tinamoupkg.core,
-  tinamoupkg.scene,
-  tinamoupkg.imagemanager,
-  tinamoupkg.soundmanager,
-  tinamoupkg.painter,
-  tinamoupkg.keyboard,
-  tinamoupkg.mouse,
-  tinamoupkg.tween
+  tinamou.core,
+  tinamou.scene,
+  tinamou.imagemanager,
+  tinamou.soundmanager,
+  tinamou.painter,
+  tinamou.keyboard,
+  tinamou.mouse,
+  tinamou.tween
 
 export
   core,
@@ -20,5 +20,13 @@ export
   mouse,
   tween
 
+type
+  TestScene = ref object of TBaseScene
+
+proc newTestScene: TestScene =
+  new result
+
 when isMainModule:
   echo "This file was compiled on ", CompileDate, " at ", CompileTime
+
+  startGame newTestScene(), "foobar", 600, 400

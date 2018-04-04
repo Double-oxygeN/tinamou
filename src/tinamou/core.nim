@@ -57,7 +57,7 @@ proc startGame*(firstScene: TBaseScene; title: string; width, height: int = 600;
     raise newTinamouException(INIT_ERROR_CODE, "SDL2_ttf Initialization failed. " & $sdl2.getError())
   defer: ttfQuit()
 
-  if openAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) < 0:
+  if openAudio(mixer.MIX_DEFAULT_FREQUENCY, mixer.MIX_DEFAULT_FORMAT, 2, 1024) < 0:
     raise newTinamouException(INIT_ERROR_CODE, "SDL2_mixer Initialization failed. " & $sdl2.getError())
   defer:
     closeAudio()
