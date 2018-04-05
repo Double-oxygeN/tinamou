@@ -6,8 +6,6 @@ description   = "Game Library in Nim with SDL2"
 license       = "MIT"
 
 srcDir        = "src"
-binDir        = "bin"
-bin           = @["tinamou"]
 skipDirs      = @["tests"]
 
 # Dependencies
@@ -16,9 +14,6 @@ requires "nim >= 0.17.2"
 requires "sdl2 >= 1.1"
 
 # tasks
-
-task run, "run the project":
-  exec "nimble build -w:on --colors:on && ./bin/tinamou"
 
 task release, "do release build":
   exec "nimble build -d:release --opt:speed --app:gui && strip ./bin/tinamou"
