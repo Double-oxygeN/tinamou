@@ -64,6 +64,7 @@ type
     font: FontPtr
     x, y: int16
     str: string
+    origin: TOriginKind
 
   RGBAFillable = concept x
     x.fill(r = uint8, g = uint8, b = uint8, alpha = uint8)
@@ -266,7 +267,7 @@ proc bezier*[N: static[int], T: SomeNumber](self: TPainter, xs, ys: array[N, T])
     result.xs[i] = xs[i].toInt16
     result.ys[i] = ys[i].toInt16
 
-proc text*(self: TPainter, str: string; x, y: SomeNumber): TPaintableText =
+proc text*(self: TPainter, str: string; x, y: SomeNumber, origin: TOriginKind = TOriginKind.SW): TPaintableText =
   ## Create paintable text.
   new result
   result.renderer = self.renderer
@@ -274,7 +275,7 @@ proc text*(self: TPainter, str: string; x, y: SomeNumber): TPaintableText =
   result.font = self.font
   result.x = x.toInt16
   result.y = y.toInt16
-  # result.textureHistory = newTable[uint32, TexturePtr]()
+  result.origin = origin
 
 proc setFont*(self: TPainter, fontPath: string, fontSize: int) =
   ## Set font from path.
@@ -392,11 +393,10 @@ proc fill*(self: TPaintableText; r, g, b: uint8, alpha: uint8 = 255) =
     texture = self.renderer.createTextureFromSurface(surface)
   defer: freeSurface surface
 
-  var
-    textureWidth, textureHeight: cint
+  var textureWidth, textureHeight: cint
   texture.queryTexture(nil, nil, addr textureWidth, addr textureHeight)
-  var
-    dstRect: Rect = (x: self.x.cint, y: self.y.cint, w: textureWidth, h: textureHeight)
+  let originPos: tuple[x, y: float] = self.origin.getOrigin(self.x.int, self.y.int, textureWidth.int, textureHeight.int)
+  var dstRect: Rect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: textureWidth, h: textureHeight)
 
   self.renderer.copy(texture, nil, addr dstRect)
 
