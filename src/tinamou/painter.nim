@@ -2,6 +2,7 @@
 
 import
   colors,
+  math,
 
   sdl2,
   sdl2.gfx,
@@ -94,7 +95,7 @@ proc clear*(self: TPainter, color: sdl2.Color) =
   self.renderer.setDrawColor(color)
   self.renderer.clear()
 
-proc drawImage(self: TPainter, image: TImage, srcRect: ptr Rect = nil, dstRect: ptr Rect, spriteNum: int = 0) =
+proc drawImage0(self: TPainter, image: TImage, srcRect: ptr Rect = nil, dstRect: ptr Rect, spriteNum: int = 0) =
   ## Draw image.
   if image.isSprite:
     let
@@ -111,25 +112,46 @@ proc drawImage(self: TPainter, image: TImage, srcRect: ptr Rect = nil, dstRect: 
   else:
     self.renderer.copy(image.getTexture(), srcRect, dstRect)
 
-proc drawImage*(self: TPainter, image: TImage; x, y: SomeNumber; spriteNum: int = 0) =
+proc drawImage*(self: TPainter, image: TImage; x, y: SomeNumber; spriteNum: int = 0; fixRatio: bool = false) =
   ## Draw image.
   var dstRect: Rect = (x: x.toInt16.cint, y: y.toInt16.cint, w: image.width.cint, h: image.height.cint)
 
-  self.drawImage(image = image, dstRect = addr dstRect, spriteNum = spriteNum)
+  self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum)
 
-proc drawImage*(self: TPainter, image: TImage; x, y, width, height: SomeNumber; spriteNum: int = 0) =
+proc drawImage*(self: TPainter, image: TImage; x, y, width, height: SomeNumber; spriteNum: int = 0; fixRatio: bool = false) =
   ## Draw image.
-  var dstRect: Rect = (x: x.toInt16.cint, y: y.toInt16.cint, w: width.toInt16.cint, h: height.toInt16.cint)
+  var dstRect: Rect
 
-  self.drawImage(image = image, dstRect = addr dstRect, spriteNum = spriteNum)
+  if fixRatio:
+    let zoom: float = min(width / image.width, height / image.height)
+    dstRect = (x: x.toInt16.cint, y: y.toInt16.cint, w: (image.width.float * zoom).toInt.cint, h: (image.height.float * zoom).toInt.cint)
+  else:
+    dstRect = (x: x.toInt16.cint, y: y.toInt16.cint, w: width.toInt16.cint, h: height.toInt16.cint)
 
-proc drawImage*(self: TPainter, image: TImage; srcX, srcY, srcWidth, srcHeight, x, y, width, height: SomeNumber; spriteNum: int = 0) =
+  self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum)
+
+proc drawImage*(self: TPainter, image: TImage; srcX, srcY, srcWidth, srcHeight, x, y, width, height: SomeNumber; spriteNum: int = 0; fixRatio: bool = false) =
   ## Draw image.
+  let
+    actualSrcWidth: float = min(srcWidth.float, image.width.float - srcX.float)
+    actualSrcHeight: float = min(srcHeight.float, image.height.float - srcY.float)
   var
-    srcRect: Rect = (x: srcX.toInt16.cint, y: srcY.toInt16.cint, w: srcWidth.toInt16.cint, h: srcHeight.toInt16.cint)
-    dstRect: Rect = (x: x.toInt16.cint, y: y.toInt16.cint, w: width.toInt16.cint, h: height.toInt16.cint)
+    srcRect: Rect = (x: srcX.toInt16.cint, y: srcY.toInt16.cint, w: actualSrcWidth.toInt.cint, h: actualSrcHeight.toInt.cint)
+    dstRect: Rect
 
-  self.drawImage(image = image, srcRect = addr srcRect, dstRect = addr dstRect, spriteNum = spriteNum)
+  if fixRatio:
+    let
+      zoom: float = min(width / srcWidth, height / srcHeight)
+      actualWidth: float = zoom * actualSrcWidth
+      actualHeight: float = zoom * actualSrcHeight
+    dstRect = (x: x.toInt16.cint, y: y.toInt16.cint, w: actualWidth.toInt.cint, h: actualHeight.toInt.cint)
+  else:
+    let
+      actualWidth: float = width.float * (actualSrcWidth / srcWidth.float)
+      actualHeight: float = height.float * (actualSrcHeight / srcHeight.float)
+    dstRect = (x: x.toInt16.cint, y: y.toInt16.cint, w: actualWidth.toInt.cint, h: actualHeight.toInt.cint)
+
+  self.drawImage0(image = image, srcRect = addr srcRect, dstRect = addr dstRect, spriteNum = spriteNum)
 
 proc rect*(self: TPainter; x, y, w, h: SomeNumber): TPaintableRect =
   ## Create paintable rectangle.
