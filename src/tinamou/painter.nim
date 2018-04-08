@@ -19,6 +19,9 @@ type
     fontPath: string
     fontSize: int
 
+  TOriginKind* {.pure.} = enum
+    NW = 0, N, NE, W, C, E, SW, S, SE
+
   TPaintableRect* = ref object of RootObj
     renderer: RendererPtr
     x, y, w, h: int16
@@ -71,6 +74,17 @@ type
 proc toInt16(n: SomeInteger): int16 = n.int16
 proc toInt16(n: SomeReal): int16 = n.toInt.int16
 
+proc getOrigin(origin: TOriginKind, x, y: SomeNumber; width, height: SomeNumber): tuple[x, y: float] =
+  case origin
+  of TOriginKind.NW, TOriginKind.W, TOriginKind.SW: result.x = x.float
+  of TOriginKind.N, TOriginKind.C, TOriginKind.S: result.x = x.float - width / 2
+  of TOriginKind.NE, TOriginKind.E, TOriginKind.SE: result.x = x.float - width.float
+
+  case origin
+  of TOriginKind.NW, TOriginKind.N, TOriginKind.NE: result.y = y.float
+  of TOriginKind.W, TOriginKind.C, TOriginKind.E: result.y = y.float - height / 2
+  of TOriginKind.SW, TOriginKind.S, TOriginKind.SE: result.y = y.float - height.float
+
 proc newTPainter*(renderer: RendererPtr): TPainter =
   ## Create new painter from given renderer.
   new result
@@ -112,25 +126,31 @@ proc drawImage0(self: TPainter, image: TImage, srcRect: ptr Rect = nil, dstRect:
   else:
     self.renderer.copy(image.getTexture(), srcRect, dstRect)
 
-proc drawImage*(self: TPainter, image: TImage; x, y: SomeNumber; spriteNum: int = 0; fixRatio: bool = false) =
+proc drawImage*(self: TPainter, image: TImage; x, y: SomeNumber; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
   ## Draw image.
-  var dstRect: Rect = (x: x.toInt16.cint, y: y.toInt16.cint, w: image.width.cint, h: image.height.cint)
+  let originPos: tuple[x, y: float] = origin.getOrigin(x, y, image.width, image.height)
+  var dstRect: Rect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: image.width.cint, h: image.height.cint)
 
   self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum)
 
-proc drawImage*(self: TPainter, image: TImage; x, y, width, height: SomeNumber; spriteNum: int = 0; fixRatio: bool = false) =
+proc drawImage*(self: TPainter, image: TImage; x, y, width, height: SomeNumber; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
   ## Draw image.
   var dstRect: Rect
 
   if fixRatio:
-    let zoom: float = min(width / image.width, height / image.height)
-    dstRect = (x: x.toInt16.cint, y: y.toInt16.cint, w: (image.width.float * zoom).toInt.cint, h: (image.height.float * zoom).toInt.cint)
+    let
+      zoom: float = min(width / image.width, height / image.height)
+      actualWidth: float = zoom * image.width.float
+      actualHeight: float = zoom * image.height.float
+      originPos: tuple[x, y: float] = origin.getOrigin(x, y, actualWidth.SomeNumber, actualHeight.SomeNumber)
+    dstRect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: actualWidth.toInt.cint, h: actualHeight.toInt.cint)
   else:
-    dstRect = (x: x.toInt16.cint, y: y.toInt16.cint, w: width.toInt16.cint, h: height.toInt16.cint)
+    let originPos: tuple[x, y: float] = origin.getOrigin(x, y, width, height)
+    dstRect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: width.toInt16.cint, h: height.toInt16.cint)
 
   self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum)
 
-proc drawImage*(self: TPainter, image: TImage; srcX, srcY, srcWidth, srcHeight, x, y, width, height: SomeNumber; spriteNum: int = 0; fixRatio: bool = false) =
+proc drawImage*(self: TPainter, image: TImage; srcX, srcY, srcWidth, srcHeight, x, y, width, height: SomeNumber; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
   ## Draw image.
   let
     actualSrcWidth: float = min(srcWidth.float, image.width.float - srcX.float)
@@ -144,12 +164,14 @@ proc drawImage*(self: TPainter, image: TImage; srcX, srcY, srcWidth, srcHeight, 
       zoom: float = min(width / srcWidth, height / srcHeight)
       actualWidth: float = zoom * actualSrcWidth
       actualHeight: float = zoom * actualSrcHeight
-    dstRect = (x: x.toInt16.cint, y: y.toInt16.cint, w: actualWidth.toInt.cint, h: actualHeight.toInt.cint)
+      originPos: tuple[x, y: float] = origin.getOrigin(x, y, (zoom * srcWidth.float).SomeNumber, (zoom * srcHeight.float).SomeNumber)
+    dstRect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: actualWidth.toInt.cint, h: actualHeight.toInt.cint)
   else:
     let
       actualWidth: float = width.float * (actualSrcWidth / srcWidth.float)
       actualHeight: float = height.float * (actualSrcHeight / srcHeight.float)
-    dstRect = (x: x.toInt16.cint, y: y.toInt16.cint, w: actualWidth.toInt.cint, h: actualHeight.toInt.cint)
+      originPos: tuple[x, y: float] = origin.getOrigin(x, y, width, height)
+    dstRect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: actualWidth.toInt.cint, h: actualHeight.toInt.cint)
 
   self.drawImage0(image = image, srcRect = addr srcRect, dstRect = addr dstRect, spriteNum = spriteNum)
 
