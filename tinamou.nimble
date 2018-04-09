@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.2.0"
 author        = "Double_oxygeN"
 description   = "Game Library in Nim with SDL2"
 license       = "MIT"
