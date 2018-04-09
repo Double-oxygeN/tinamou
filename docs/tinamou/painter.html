@@ -1247,6 +1247,9 @@ function main() {
   font: FontPtr
   fontPath: string
   fontSize: int"><wbr />TPainter<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#TOriginKind"
+    title="TOriginKind = enum
+  NW = 0, N, NE, W, C, E, SW, S, SE"><wbr />TOrigin<wbr />Kind<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#TPaintableRect"
     title="TPaintableRect = ref object of RootObj
   renderer: RendererPtr
@@ -1289,7 +1292,8 @@ function main() {
   renderer: RendererPtr
   font: FontPtr
   x, y: int16
-  str: string"><wbr />TPaintable<wbr />Text<span class="attachedType" style="visibility:hidden"></span></a></li>
+  str: string
+  origin: TOriginKind"><wbr />TPaintable<wbr />Text<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1304,15 +1308,18 @@ function main() {
     title="clear(self: TPainter; color: colors.Color; alpha: uint8 = 255)"><wbr />clear<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
   <li><a class="reference" href="#clear,TPainter,"
     title="clear(self: TPainter; color: sdl2.Color)"><wbr />clear<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
-  <li><a class="reference" href="#drawImage,TPainter,TImage,SomeNumber,SomeNumber,int"
-    title="drawImage(self: TPainter; image: TImage; x, y: SomeNumber; spriteNum: int = 0)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
-  <li><a class="reference" href="#drawImage,TPainter,TImage,SomeNumber,SomeNumber,SomeNumber,SomeNumber,int"
+  <li><a class="reference" href="#drawImage,TPainter,TImage,SomeNumber,SomeNumber,int,TOriginKind,bool"
+    title="drawImage(self: TPainter; image: TImage; x, y: SomeNumber; spriteNum: int = 0;
+          origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
+  <li><a class="reference" href="#drawImage,TPainter,TImage,SomeNumber,SomeNumber,SomeNumber,SomeNumber,int,TOriginKind,bool"
     title="drawImage(self: TPainter; image: TImage; x, y, width, height: SomeNumber;
-          spriteNum: int = 0)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
-  <li><a class="reference" href="#drawImage,TPainter,TImage,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,int"
+          spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW;
+          fixRatio: bool = false)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
+  <li><a class="reference" href="#drawImage,TPainter,TImage,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,int,TOriginKind,bool"
     title="drawImage(self: TPainter; image: TImage;
           srcX, srcY, srcWidth, srcHeight, x, y, width, height: SomeNumber;
-          spriteNum: int = 0)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
+          spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW;
+          fixRatio: bool = false)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
   <li><a class="reference" href="#rect,TPainter,SomeNumber,SomeNumber,SomeNumber,SomeNumber"
     title="rect(self: TPainter; x, y, w, h: SomeNumber): TPaintableRect"><wbr />rect<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
   <li><a class="reference" href="#roundRect,TPainter,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber"
@@ -1335,8 +1342,9 @@ function main() {
   <li><a class="reference" href="#bezier,TPainter,array[N,T],array[N,T]"
     title="bezier[N: static[int]; T: SomeNumber](self: TPainter; xs, ys: array[N, T]): TPaintableBezier[
     N]"><wbr />bezier<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
-  <li><a class="reference" href="#text,TPainter,string,SomeNumber,SomeNumber"
-    title="text(self: TPainter; str: string; x, y: SomeNumber): TPaintableText"><wbr />text<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
+  <li><a class="reference" href="#text,TPainter,string,SomeNumber,SomeNumber,TOriginKind"
+    title="text(self: TPainter; str: string; x, y: SomeNumber;
+     origin: TOriginKind = TOriginKind.SW): TPaintableText"><wbr />text<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
   <li><a class="reference" href="#setFont,TPainter,string,int"
     title="setFont(self: TPainter; fontPath: string; fontSize: int)"><wbr />set<wbr />Font<span class="attachedType" style="visibility:hidden">TPainter</span></a></li>
   <li><a class="reference" href="#getFontPath,TPainter"
@@ -1395,7 +1403,7 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="colors.html">colors</a>, <a class="reference external" href="sdl2.html">sdl2</a>, <a class="reference external" href="sdl2/gfx.html">sdl2/gfx</a>, <a class="reference external" href="sdl2/image.html">sdl2/image</a>, <a class="reference external" href="sdl2/ttf.html">sdl2/ttf</a>, <a class="reference external" href="imagemanager.html">imagemanager</a>, <a class="reference external" href="exception.html">exception</a>
+<a class="reference external" href="colors.html">colors</a>, <a class="reference external" href="math.html">math</a>, <a class="reference external" href="sdl2.html">sdl2</a>, <a class="reference external" href="sdl2/gfx.html">sdl2/gfx</a>, <a class="reference external" href="sdl2/image.html">sdl2/image</a>, <a class="reference external" href="sdl2/ttf.html">sdl2/ttf</a>, <a class="reference external" href="imagemanager.html">imagemanager</a>, <a class="reference external" href="exception.html">exception</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
@@ -1406,6 +1414,12 @@ function main() {
   <span class="Identifier">fontPath</span><span class="Other">:</span> <span class="Identifier">string</span>
   <span class="Identifier">fontSize</span><span class="Other">:</span> <span class="Identifier">int</span>
 </pre></dt>
+<dd>
+
+
+</dd>
+<dt id="TOriginKind"><a name="TOriginKind"></a><pre><span class="Identifier">TOriginKind</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+  <span class="Identifier">NW</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">N</span><span class="Other">,</span> <span class="Identifier">NE</span><span class="Other">,</span> <span class="Identifier">W</span><span class="Other">,</span> <span class="Identifier">C</span><span class="Other">,</span> <span class="Identifier">E</span><span class="Other">,</span> <span class="Identifier">SW</span><span class="Other">,</span> <span class="Identifier">S</span><span class="Other">,</span> <span class="Identifier">SE</span></pre></dt>
 <dd>
 
 
@@ -1492,6 +1506,7 @@ function main() {
   <span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">FontPtr</span>
   <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int16</span>
   <span class="Identifier">str</span><span class="Other">:</span> <span class="Identifier">string</span>
+  <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">TOriginKind</span>
 </pre></dt>
 <dd>
 
@@ -1522,20 +1537,23 @@ Clear the window.
 Clear the window.
 
 </dd>
-<dt id="drawImage"><a name="drawImage,TPainter,TImage,SomeNumber,SomeNumber,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TPainter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">TImage</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">;</span> <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span></pre></dt>
+<dt id="drawImage"><a name="drawImage,TPainter,TImage,SomeNumber,SomeNumber,int,TOriginKind,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TPainter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">TImage</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">;</span> <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
+              <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">TOriginKind</span> <span class="Other">=</span> <span class="Identifier">TOriginKind</span><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span> <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span></pre></dt>
 <dd>
 Draw image.
 
 </dd>
-<dt id="drawImage"><a name="drawImage,TPainter,TImage,SomeNumber,SomeNumber,SomeNumber,SomeNumber,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TPainter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">TImage</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">,</span> <span class="Identifier">width</span><span class="Other">,</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">;</span>
-              <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span></pre></dt>
+<dt id="drawImage"><a name="drawImage,TPainter,TImage,SomeNumber,SomeNumber,SomeNumber,SomeNumber,int,TOriginKind,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TPainter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">TImage</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">,</span> <span class="Identifier">width</span><span class="Other">,</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">;</span>
+              <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span> <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">TOriginKind</span> <span class="Other">=</span> <span class="Identifier">TOriginKind</span><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span>
+              <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span></pre></dt>
 <dd>
 Draw image.
 
 </dd>
-<dt id="drawImage"><a name="drawImage,TPainter,TImage,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TPainter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">TImage</span><span class="Other">;</span>
+<dt id="drawImage"><a name="drawImage,TPainter,TImage,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,SomeNumber,int,TOriginKind,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TPainter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">TImage</span><span class="Other">;</span>
               <span class="Identifier">srcX</span><span class="Other">,</span> <span class="Identifier">srcY</span><span class="Other">,</span> <span class="Identifier">srcWidth</span><span class="Other">,</span> <span class="Identifier">srcHeight</span><span class="Other">,</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">,</span> <span class="Identifier">width</span><span class="Other">,</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">;</span>
-              <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span></pre></dt>
+              <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span> <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">TOriginKind</span> <span class="Other">=</span> <span class="Identifier">TOriginKind</span><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span>
+              <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span></pre></dt>
 <dd>
 Draw image.
 
@@ -1592,7 +1610,8 @@ Create paintable polygon.
 Create paintable bezier curve.
 
 </dd>
-<dt id="text"><a name="text,TPainter,string,SomeNumber,SomeNumber"></a><pre><span class="Keyword">proc</span> <span class="Identifier">text</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TPainter</span><span class="Other">;</span> <span class="Identifier">str</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TPaintableText</span></pre></dt>
+<dt id="text"><a name="text,TPainter,string,SomeNumber,SomeNumber,TOriginKind"></a><pre><span class="Keyword">proc</span> <span class="Identifier">text</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TPainter</span><span class="Other">;</span> <span class="Identifier">str</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">;</span>
+         <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">TOriginKind</span> <span class="Other">=</span> <span class="Identifier">TOriginKind</span><span class="Other">.</span><span class="Identifier">SW</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TPaintableText</span></pre></dt>
 <dd>
 Create paintable text.
 
@@ -1727,7 +1746,7 @@ Fill rectangle.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-04-09 17:35:39 UTC</small>
+        <small>Made with Nim. Generated: 2018-04-09 17:47:01 UTC</small>
       </div>
     </div>
   </div>
