@@ -13,6 +13,7 @@ import
   # tools
   imagemanager,
   soundmanager,
+  windowmanager,
 
   # actions
   keyboard,
@@ -34,6 +35,7 @@ type
   TTools* = ref object of RootObj
     imageManager: TImageManager
     soundManager: TSoundManager
+    windowManager: TWindowManager
 
   TActions* = ref object of RootObj
     mouse: TMouse
@@ -84,14 +86,16 @@ method draw*(self: TBaseScene, painter: TPainter, tools: TTools, actions: TActio
   ## Output states to the window using painter.
   painter.clear(colBlack)
 
-proc newTools*(renderer: RendererPtr, numchans: int = 16): TTools =
+proc newTools*(window: WindowPtr, renderer: RendererPtr, numchans: int = 16): TTools =
   ## Create new tools.
   new result
   result.imageManager = newImageManager(renderer)
   result.soundManager = newSoundManager(numchans)
+  result.windowManager = newWindowManager(window, renderer)
 
 proc imageManager*(self: TTools): TImageManager = self.imageManager
 proc soundManager*(self: TTools): TSoundManager = self.soundManager
+proc windowManager*(self: TTools): TWindowManager = self.windowManager
 
 proc destroy*(self: TTools) =
   ## Free resources.

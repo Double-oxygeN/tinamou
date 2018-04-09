@@ -81,13 +81,10 @@ proc startGame*(firstScene: TBaseScene; title: string; width, height: int = 600;
     raise newTinamouException(RENDERER_CREATION_ERROR_CODE, "Renderer could not be created. " & $sdl2.getError())
   defer: destroy renderer
 
-  # if renderer.setLogicalSize(width.cint, height.cint) != 0:
-  #   raise newTinamouException(RENDERER_CONFIG_ERROR_CODE, "Renderer could not be configured resolution. " & $sdl2.getError())
-
   # Initialize tools.
   let
     painter: TPainter = newTPainter(renderer)
-    tools: TTools = newTools(renderer)
+    tools: TTools = newTools(window, renderer)
     actions: TActions = newActions()
   defer: destroy tools
 
