@@ -75,7 +75,7 @@ type
 proc toInt16(n: SomeInteger): int16 = n.int16
 proc toInt16(n: SomeReal): int16 = n.toInt.int16
 
-proc getOrigin(origin: TOriginKind, x, y: SomeNumber; width, height: SomeNumber): tuple[x, y: float] =
+proc getOrigin[N0, N1: SomeNumber](origin: TOriginKind, x, y: N0; width, height: N1): tuple[x, y: float] =
   case origin
   of TOriginKind.NW, TOriginKind.W, TOriginKind.SW: result.x = x.float
   of TOriginKind.N, TOriginKind.C, TOriginKind.S: result.x = x.float - width / 2
@@ -127,14 +127,14 @@ proc drawImage0(self: TPainter, image: TImage, srcRect: ptr Rect = nil, dstRect:
   else:
     self.renderer.copy(image.getTexture(), srcRect, dstRect)
 
-proc drawImage*(self: TPainter, image: TImage; x, y: SomeNumber; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
+proc drawImage*[N: SomeNumber](self: TPainter, image: TImage; x, y: N; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
   ## Draw image.
   let originPos: tuple[x, y: float] = origin.getOrigin(x, y, image.width, image.height)
   var dstRect: Rect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: image.width.cint, h: image.height.cint)
 
   self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum)
 
-proc drawImage*(self: TPainter, image: TImage; x, y, width, height: SomeNumber; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
+proc drawImage*[N0, N1: SomeNumber](self: TPainter, image: TImage; x, y: N0; width, height: N1; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
   ## Draw image.
   var dstRect: Rect
 
@@ -143,7 +143,7 @@ proc drawImage*(self: TPainter, image: TImage; x, y, width, height: SomeNumber; 
       zoom: float = min(width / image.width, height / image.height)
       actualWidth: float = zoom * image.width.float
       actualHeight: float = zoom * image.height.float
-      originPos: tuple[x, y: float] = origin.getOrigin(x, y, actualWidth.SomeNumber, actualHeight.SomeNumber)
+      originPos: tuple[x, y: float] = origin.getOrigin(x, y, actualWidth, actualHeight)
     dstRect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: actualWidth.toInt.cint, h: actualHeight.toInt.cint)
   else:
     let originPos: tuple[x, y: float] = origin.getOrigin(x, y, width, height)
@@ -151,7 +151,7 @@ proc drawImage*(self: TPainter, image: TImage; x, y, width, height: SomeNumber; 
 
   self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum)
 
-proc drawImage*(self: TPainter, image: TImage; srcX, srcY, srcWidth, srcHeight, x, y, width, height: SomeNumber; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
+proc drawImage*[N0, N1, N2, N3: SomeNumber](self: TPainter, image: TImage; srcX, srcY: N0; srcWidth, srcHeight: N1; x, y: N2; width, height: N3; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
   ## Draw image.
   let
     actualSrcWidth: float = min(srcWidth.float, image.width.float - srcX.float)
@@ -165,7 +165,7 @@ proc drawImage*(self: TPainter, image: TImage; srcX, srcY, srcWidth, srcHeight, 
       zoom: float = min(width / srcWidth, height / srcHeight)
       actualWidth: float = zoom * actualSrcWidth
       actualHeight: float = zoom * actualSrcHeight
-      originPos: tuple[x, y: float] = origin.getOrigin(x, y, (zoom * srcWidth.float).SomeNumber, (zoom * srcHeight.float).SomeNumber)
+      originPos: tuple[x, y: float] = origin.getOrigin(x, y, zoom * srcWidth.float, zoom * srcHeight.float)
     dstRect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: actualWidth.toInt.cint, h: actualHeight.toInt.cint)
   else:
     let
@@ -176,7 +176,7 @@ proc drawImage*(self: TPainter, image: TImage; srcX, srcY, srcWidth, srcHeight, 
 
   self.drawImage0(image = image, srcRect = addr srcRect, dstRect = addr dstRect, spriteNum = spriteNum)
 
-proc rect*(self: TPainter; x, y, w, h: SomeNumber): TPaintableRect =
+proc rect*[N0, N1: SomeNumber](self: TPainter; x, y: N0; w, h: N1): TPaintableRect =
   ## Create paintable rectangle.
   new result
   result.renderer = self.renderer
@@ -185,7 +185,7 @@ proc rect*(self: TPainter; x, y, w, h: SomeNumber): TPaintableRect =
   result.w = w.toInt16
   result.h = h.toInt16
 
-proc roundRect*(self: TPainter; x, y, w, h, radius: SomeNumber): TPaintableRoundRect =
+proc roundRect*[N0, N1, N2: SomeNumber](self: TPainter; x, y: N0; w, h: N1; radius: N2): TPaintableRoundRect =
   ## Create paintable round rectangle.
   new result
   result.renderer = self.renderer
@@ -195,7 +195,7 @@ proc roundRect*(self: TPainter; x, y, w, h, radius: SomeNumber): TPaintableRound
   result.h = h.toInt16
   result.radius = radius.toInt16
 
-proc line*(self: TPainter; x0, y0, x1, y1: SomeNumber): TPaintableLine =
+proc line*[N: SomeNumber](self: TPainter; x0, y0, x1, y1: N): TPaintableLine =
   ## Create paintable line.
   new result
   result.renderer = self.renderer
@@ -204,7 +204,7 @@ proc line*(self: TPainter; x0, y0, x1, y1: SomeNumber): TPaintableLine =
   result.x1 = x1.toInt16
   result.y1 = y1.toInt16
 
-proc thickLine*(self: TPainter; x0, y0, x1, y1: SomeNumber; width: uint8): TPaintableThickLine =
+proc thickLine*[N: SomeNumber](self: TPainter; x0, y0, x1, y1: N; width: uint8): TPaintableThickLine =
   ## Create paintable thick line.
   new result
   result.renderer = self.renderer
@@ -214,7 +214,7 @@ proc thickLine*(self: TPainter; x0, y0, x1, y1: SomeNumber; width: uint8): TPain
   result.y1 = y1.toInt16
   result.width = width
 
-proc circle*(self: TPainter; x, y, radius: SomeNumber): TPaintableCircle =
+proc circle*[N0, N1: SomeNumber](self: TPainter; x, y: N0; radius: N1): TPaintableCircle =
   ## Create paintable circle.
   new result
   result.renderer = self.renderer
@@ -222,7 +222,7 @@ proc circle*(self: TPainter; x, y, radius: SomeNumber): TPaintableCircle =
   result.y = y.toInt16
   result.radius = radius.toInt16
 
-proc arc*(self: TPainter; x, y, radius, start, finish: SomeNumber): TPaintableArc =
+proc arc*[N0, N1, N2: SomeNumber](self: TPainter; x, y: N0; radius: N1; start, finish: N2): TPaintableArc =
   ## Create paintable arc.
   new result
   result.renderer = self.renderer
@@ -232,7 +232,7 @@ proc arc*(self: TPainter; x, y, radius, start, finish: SomeNumber): TPaintableAr
   result.start = start.toInt16
   result.finish = finish.toInt16
 
-proc ellipse*(self: TPainter; x, y, rx, ry: SomeNumber): TPaintableEllipse =
+proc ellipse*[N: SomeNumber](self: TPainter; x, y, rx, ry: N): TPaintableEllipse =
   ## Create paintable ellipse.
   new result
   result.renderer = self.renderer
@@ -241,7 +241,7 @@ proc ellipse*(self: TPainter; x, y, rx, ry: SomeNumber): TPaintableEllipse =
   result.rx = rx.toInt16
   result.ry = ry.toInt16
 
-proc pie*(self: TPainter; x, y, radius, start, finish: SomeNumber): TPaintablePie =
+proc pie*[N0, N1, N2: SomeNumber](self: TPainter; x, y: N0; radius: N1; start, finish: N2): TPaintablePie =
   ## Create paintable pie.
   new result
   result.renderer = self.renderer
@@ -267,7 +267,7 @@ proc bezier*[N: static[int], T: SomeNumber](self: TPainter, xs, ys: array[N, T])
     result.xs[i] = xs[i].toInt16
     result.ys[i] = ys[i].toInt16
 
-proc text*(self: TPainter, str: string; x, y: SomeNumber, origin: TOriginKind = TOriginKind.SW): TPaintableText =
+proc text*[N: SomeNumber](self: TPainter, str: string; x, y: N; origin: TOriginKind = TOriginKind.SW): TPaintableText =
   ## Create paintable text.
   new result
   result.renderer = self.renderer
