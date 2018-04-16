@@ -27,6 +27,12 @@ proc newMusic(path: static[string]): TMusic =
   result.src = path
   result.music = loadMUS(path)
 
+proc newMusicFromRW(src: RWopsPtr): TMusic =
+  ## Create new music from data.
+  new result
+  result.src = "#!EMBEDDED"
+  result.music = loadMUS_RW(src, 1)
+
 proc play*(self: TMusic) =
   ## Play music.
   if playMusic(self.music, -1) < 0:
@@ -41,6 +47,12 @@ proc newSoundEffect(path: static[string]): TSoundEffect =
   new result
   result.src = path
   result.chunk = loadWAV(path)
+
+proc newSoundEffectFromRW(src: RWopsPtr): TSoundEffect =
+  ## Create new sound effect from data.
+  new result
+  result.src = "#!EMBEDDED"
+  result.chunk = loadWAV_RW(src, 1)
 
 proc play*(self: TSoundEffect) =
   ## Play sound.
@@ -64,10 +76,20 @@ proc setMusic*(self: TSoundManager; name, path: static[string]): TSoundManager {
   if not self.bgms.hasKey(name):
     self.bgms.add(name, newMusic(path))
 
+proc setMusic*(self: TSoundManager; name: static[string]; src: RWopsPtr): TSoundManager {.discardable.} =
+  ## Set new background music from embedded data.
+  if not self.bgms.hasKey(name):
+    self.bgms.add(name, newMusicFromRW(src))
+
 proc setEffect*(self: TSoundManager; name, path: static[string]): TSoundManager {.discardable.} =
   ## Set new sound effect.
   if not self.ses.hasKey(name):
     self.ses.add(name, newSoundEffect(path))
+
+proc setEffect*(self: TSoundManager; name: static[string], src: RWopsPtr): TSoundManager {.discardable.} =
+  ## Set new sound effect.
+  if not self.ses.hasKey(name):
+    self.ses.add(name, newSoundEffectFromRW(src))
 
 proc getMusic*(self: TSoundManager, name: string): TMusic =
   ## Get music.

@@ -41,6 +41,20 @@ proc newImage(renderer: RendererPtr, path: static[string]): TImage =
   result.height = surface.h
   result.kind = source
 
+proc newImageFromRW(renderer: RendererPtr, src: RWopsPtr): TImage =
+  ## Create new image from data.
+  new result
+  result.src = "#!EMBEDDED"
+
+  let surface = image.load_RW(src, 1)
+  if surface.isNil: raise newTinamouException(IMAGE_LOAD_ERROR_CODE, "Image could not be loaded. " & $sdl2.getError())
+  defer: freeSurface surface
+
+  result.texture = renderer.createTextureFromSurface(surface)
+  result.width = surface.w
+  result.height = surface.h
+  result.kind = source
+
 proc newSprite(renderer: RendererPtr, path: static[string], spriteWidth, spriteHeight: static[int]): TImage =
   ## Create new sprite.
   new result
@@ -48,6 +62,23 @@ proc newSprite(renderer: RendererPtr, path: static[string], spriteWidth, spriteH
 
   let surface = image.load(path)
   if surface.isNil: raise newTinamouException(IMAGE_LOAD_ERROR_CODE, "Image " & path & " could not be loaded. " & $sdl2.getError())
+  defer: freeSurface surface
+
+  result.texture = renderer.createTextureFromSurface(surface)
+  result.width = spriteWidth
+  result.height = spriteHeight
+  result.kind = sprite
+  result.spriteWidth = spriteWidth
+  result.spriteHeight = spriteHeight
+  result.spriteColumns = surface.w div spriteWidth
+
+proc newSpriteFromRW(renderer: RendererPtr, src: RWopsPtr, spriteWidth, spriteHeight: static[int]): TImage =
+  ## Create new sprite from data.
+  new result
+  result.src = "#!EMBEDDED"
+
+  let surface = image.load_RW(src, 1)
+  if surface.isNil: raise newTinamouException(IMAGE_LOAD_ERROR_CODE, "Image could not be loaded. " & $sdl2.getError())
   defer: freeSurface surface
 
   result.texture = renderer.createTextureFromSurface(surface)
@@ -74,17 +105,27 @@ proc newImageManager*(renderer: RendererPtr): TImageManager =
   result.table = newTable[string, TImage]()
 
 proc setImage*(self: TImageManager; name, path: static[string]): TImageManager {.discardable.} =
-  ## Set an image
+  ## Set an image.
   if not self.table.hasKey(name):
     self.table.add(name, newImage(self.renderer, path))
 
+proc setImage*(self: TImageManager, name: static[string], src: RWopsPtr): TImageManager {.discardable.} =
+  ## Set an image from embedded data.
+  if not self.table.hasKey(name):
+    self.table.add(name, newImageFromRW(self.renderer, src))
+
 proc setSprite*(self: TImageManager; name, path: static[string]; spriteWidth, spriteHeight: static[int]): TImageManager {.discardable.} =
-  ## Set a sprite image
+  ## Set a sprite image.
   if not self.table.hasKey(name):
     self.table.add(name, newSprite(self.renderer, path, spriteWidth, spriteHeight))
 
+proc setSprite*(self: TImageManager; name: static[string]; src: RWopsPtr, spriteWidth, spriteHeight: static[int]): TImageManager {.discardable.} =
+  ## Set a sprite image from embedded data.
+  if not self.table.hasKey(name):
+    self.table.add(name, newSpriteFromRW(self.renderer, src, spriteWidth, spriteHeight))
+
 proc getImage*(self: TImageManager; name: string): TImage =
-  ## Get an image
+  ## Get an image.
   if self.table.hasKey(name):
     return self.table[name]
   else:
