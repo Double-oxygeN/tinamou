@@ -72,6 +72,7 @@ method draw(self: ExScene, painter: TPainter, tools: TTools, actions: TActions) 
   painter.drawImage(tools.imageManager.getImage("imageName"), 100, 50, 100, 80)
   painter.drawImage(tools.imageManager.getImage("spriteName"), 200, 10, spriteNum = 2)
 
+  painter.setFont("res/fonts/example.ttf", 48)
   painter.text($actions.mouse.getPosition(), 150, 50).fill(colBlack)
 
 ```
