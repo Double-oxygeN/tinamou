@@ -1271,8 +1271,12 @@ function main() {
     title="newSoundManager(numchans: int): TSoundManager"><wbr />new<wbr />Sound<wbr />Manager<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
   <li><a class="reference" href="#setMusic,TSoundManager,,"
     title="setMusic(self: TSoundManager; name, path: static[string]): TSoundManager"><wbr />set<wbr />Music<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
+  <li><a class="reference" href="#setMusic,TSoundManager,,RWopsPtr"
+    title="setMusic(self: TSoundManager; name: static[string]; src: RWopsPtr): TSoundManager"><wbr />set<wbr />Music<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
   <li><a class="reference" href="#setEffect,TSoundManager,,"
     title="setEffect(self: TSoundManager; name, path: static[string]): TSoundManager"><wbr />set<wbr />Effect<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
+  <li><a class="reference" href="#setEffect,TSoundManager,,RWopsPtr"
+    title="setEffect(self: TSoundManager; name: static[string]; src: RWopsPtr): TSoundManager"><wbr />set<wbr />Effect<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
   <li><a class="reference" href="#getMusic,TSoundManager,string"
     title="getMusic(self: TSoundManager; name: string): TMusic"><wbr />get<wbr />Music<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
   <li><a class="reference" href="#getEffect,TSoundManager,string"
@@ -1365,10 +1369,22 @@ Create new sound manager.
 Set new background music.
 
 </dd>
+<dt id="setMusic"><a name="setMusic,TSoundManager,,RWopsPtr"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setMusic</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Identifier">RWopsPtr</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+Set new background music from embedded data.
+
+</dd>
 <dt id="setEffect"><a name="setEffect,TSoundManager,,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setEffect</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">,</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Set new sound effect.
+
+</dd>
+<dt id="setEffect"><a name="setEffect,TSoundManager,,RWopsPtr"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setEffect</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Identifier">RWopsPtr</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+Set new sound effect from embedded data.
 
 </dd>
 <dt id="getMusic"><a name="getMusic,TSoundManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getMusic</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TMusic</span> <span class="Other pragmabegin">{.</span><div class="pragma">
@@ -1418,7 +1434,7 @@ Free sound manager resources.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-04-09 17:47:01 UTC</small>
+        <small>Made with Nim. Generated: 2018-04-16 15:28:15 UTC</small>
       </div>
     </div>
   </div>

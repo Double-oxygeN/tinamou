@@ -43,6 +43,12 @@ var
     MessageBoxData(flags: SDL_MESSAGEBOX_WARNING, window: nil, title: "Confirmation", message: "Are you sure you want to quit?", numbuttons: 2, buttons: cast[ptr MessageBoxButtonData](addr quitDialogButtons), colorScheme: nil)
 
 template embed*(path: string): RWopsPtr =
+  ## Embed resource from path.
+  ##
+  ## **Example:**
+  ## ::
+  ## method init(self: ExScene, tools: TTools) =
+  ##   tools.imageManager.setImage "sampleImg", embed"../../res/img/sample_img.png"
   const file = staticRead(path)
   rwFromConstMem(file.cstring, file.len)
 

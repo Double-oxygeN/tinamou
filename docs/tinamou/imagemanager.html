@@ -1275,8 +1275,13 @@ function main() {
     title="newImageManager(renderer: RendererPtr): TImageManager"><wbr />new<wbr />Image<wbr />Manager<span class="attachedType" style="visibility:hidden">TImageManager</span></a></li>
   <li><a class="reference" href="#setImage,TImageManager,,"
     title="setImage(self: TImageManager; name, path: static[string]): TImageManager"><wbr />set<wbr />Image<span class="attachedType" style="visibility:hidden">TImageManager</span></a></li>
+  <li><a class="reference" href="#setImage,TImageManager,,RWopsPtr"
+    title="setImage(self: TImageManager; name: static[string]; src: RWopsPtr): TImageManager"><wbr />set<wbr />Image<span class="attachedType" style="visibility:hidden">TImageManager</span></a></li>
   <li><a class="reference" href="#setSprite,TImageManager,,,,"
     title="setSprite(self: TImageManager; name, path: static[string];
+          spriteWidth, spriteHeight: static[int]): TImageManager"><wbr />set<wbr />Sprite<span class="attachedType" style="visibility:hidden">TImageManager</span></a></li>
+  <li><a class="reference" href="#setSprite,TImageManager,,RWopsPtr,,"
+    title="setSprite(self: TImageManager; name: static[string]; src: RWopsPtr;
           spriteWidth, spriteHeight: static[int]): TImageManager"><wbr />set<wbr />Sprite<span class="attachedType" style="visibility:hidden">TImageManager</span></a></li>
   <li><a class="reference" href="#getImage,TImageManager,string"
     title="getImage(self: TImageManager; name: string): TImage"><wbr />get<wbr />Image<span class="attachedType" style="visibility:hidden">TImageManager</span></a></li>
@@ -1359,19 +1364,31 @@ Create new image manager.
 <dt id="setImage"><a name="setImage,TImageManager,,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setImage</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TImageManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">,</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TImageManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
-Set an image
+Set an image.
+
+</dd>
+<dt id="setImage"><a name="setImage,TImageManager,,RWopsPtr"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setImage</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TImageManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Identifier">RWopsPtr</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TImageManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+Set an image from embedded data.
 
 </dd>
 <dt id="setSprite"><a name="setSprite,TImageManager,,,,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setSprite</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TImageManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">,</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span>
               <span class="Identifier">spriteWidth</span><span class="Other">,</span> <span class="Identifier">spriteHeight</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TImageManager</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
-Set a sprite image
+Set a sprite image.
+
+</dd>
+<dt id="setSprite"><a name="setSprite,TImageManager,,RWopsPtr,,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setSprite</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TImageManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Identifier">RWopsPtr</span><span class="Other">;</span>
+              <span class="Identifier">spriteWidth</span><span class="Other">,</span> <span class="Identifier">spriteHeight</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TImageManager</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+Set a sprite image from embedded data.
 
 </dd>
 <dt id="getImage"><a name="getImage,TImageManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getImage</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TImageManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TImage</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">TinamouException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
-Get an image
+Get an image.
 
 </dd>
 <dt id="destroy"><a name="destroy,TImageManager"></a><pre><span class="Keyword">proc</span> <span class="Identifier">destroy</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TImageManager</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
@@ -1389,7 +1406,7 @@ Free image manager resources.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-04-09 17:47:01 UTC</small>
+        <small>Made with Nim. Generated: 2018-04-16 15:28:15 UTC</small>
       </div>
     </div>
   </div>

@@ -87,7 +87,7 @@ proc setEffect*(self: TSoundManager; name, path: static[string]): TSoundManager 
     self.ses.add(name, newSoundEffect(path))
 
 proc setEffect*(self: TSoundManager; name: static[string], src: RWopsPtr): TSoundManager {.discardable.} =
-  ## Set new sound effect.
+  ## Set new sound effect from embedded data.
   if not self.ses.hasKey(name):
     self.ses.add(name, newSoundEffectFromRW(src))
 
