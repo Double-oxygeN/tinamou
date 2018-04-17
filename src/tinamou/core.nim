@@ -48,7 +48,7 @@ template embed*(path: string): RWopsPtr =
   ## **Example:**
   ## ::
   ## method init(self: ExScene, tools: TTools) =
-  ##   tools.imageManager.setImage "sampleImg", embed"../../res/img/sample_img.png"
+  ##   tools.imageManager.setImage "sampleImg", embed(currentSourcePath().splitFile().dir / "../../res/img/sample_img.png")
   const file = staticRead(path)
   rwFromConstMem(file.cstring, file.len)
 
