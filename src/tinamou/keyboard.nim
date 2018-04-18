@@ -8,9 +8,9 @@ type
     KEYA, KEYB, KEYC, KEYD, KEYE, KEYF, KEYG, KEYH, KEYI, KEYJ, KEYK, KEYL, KEYM,
     KEYN, KEYO, KEYP, KEYQ, KEYR, KEYS, KEYT, KEYU, KEYV, KEYW, KEYX, KEYY, KEYZ,
     DIGIT0, DIGIT1, DIGIT2, DIGIT3, DIGIT4, DIGIT5, DIGIT6, DIGIT7, DIGIT8, DIGIT9,
-    COMMA, PERIOD, SLASH, SEMICOLON, COLON, MINUS, AT, LEFTBRACKET, RIGHTBRACKET,
+    COMMA, PERIOD, SLASH, SEMICOLON, COLON, MINUS, AT, LEFTBRACKET, RIGHTBRACKET, UNDERSCORE,
     LEFT, UP, RIGHT, DOWN,
-    ENTER, SPACE, SHIFT, BACKSPACE, ESCAPE,
+    ENTER, SPACE, SHIFT, BACKSPACE, ESCAPE, CTRL, ALT, META,
     F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
     UNKNOWN
 
@@ -49,16 +49,16 @@ proc toKeyName(keyCode: cint): TKeyName =
     of K_x: TKeyName.KEYX
     of K_y: TKeyName.KEYY
     of K_z: TKeyName.KEYZ
-    of K_0: TKeyName.DIGIT0
-    of K_1: TKeyName.DIGIT1
-    of K_2: TKeyName.DIGIT2
-    of K_3: TKeyName.DIGIT3
-    of K_4: TKeyName.DIGIT4
-    of K_5: TKeyName.DIGIT5
-    of K_6: TKeyName.DIGIT6
-    of K_7: TKeyName.DIGIT7
-    of K_8: TKeyName.DIGIT8
-    of K_9: TKeyName.DIGIT9
+    of K_0, K_KP_0: TKeyName.DIGIT0
+    of K_1, K_KP_1: TKeyName.DIGIT1
+    of K_2, K_KP_2: TKeyName.DIGIT2
+    of K_3, K_KP_3: TKeyName.DIGIT3
+    of K_4, K_KP_4: TKeyName.DIGIT4
+    of K_5, K_KP_5: TKeyName.DIGIT5
+    of K_6, K_KP_6: TKeyName.DIGIT6
+    of K_7, K_KP_7: TKeyName.DIGIT7
+    of K_8, K_KP_8: TKeyName.DIGIT8
+    of K_9, K_KP_9: TKeyName.DIGIT9
     of K_COMMA: TKeyName.COMMA
     of K_PERIOD: TKeyName.PERIOD
     of K_SLASH: TKeyName.SLASH
@@ -68,6 +68,7 @@ proc toKeyName(keyCode: cint): TKeyName =
     of K_AT: TKeyName.AT
     of K_LEFTBRACKET: TKeyName.LEFTBRACKET
     of K_RIGHTBRACKET: TKeyName.RIGHTBRACKET
+    of K_UNDERSCORE: TKeyName.UNDERSCORE
     of K_LEFT: TKeyName.LEFT
     of K_UP: TKeyName.UP
     of K_RIGHT: TKeyName.RIGHT
@@ -77,6 +78,9 @@ proc toKeyName(keyCode: cint): TKeyName =
     of K_LSHIFT, K_RSHIFT: TKeyName.SHIFT
     of K_BACKSPACE: TKeyName.BACKSPACE
     of K_ESCAPE: TKeyName.ESCAPE
+    of K_LCTRL, K_RCTRL: TKeyName.CTRL
+    of K_LALT, K_RALT: TKeyName.ALT
+    of K_LGUI, K_RGUI: TKeyName.META
     of K_F1: TKeyName.F1
     of K_F2: TKeyName.F2
     of K_F3: TKeyName.F3
