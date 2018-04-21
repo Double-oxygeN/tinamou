@@ -53,17 +53,23 @@ proc frameEnd*(self: TMouse) =
     elif self.buttonStates[button] == released:
       self.buttonStates[button] = up
 
-proc isDown*(self: TMouse, button: TMouseButton): bool =
-  ## Check if the button is down or pressed now.
-  return (self.buttonStates[button] == down) or (self.buttonStates[button] == pressed)
+proc isDown*(self: TMouse, buttons: varargs[TMouseButton]): bool =
+  ## Check if any button of buttons is down or pressed now.
+  result = false
+  for button in buttons:
+    if (self.buttonStates[button] == down) or (self.buttonStates[button] == pressed): return true
 
-proc isPressed*(self: TMouse, button: TMouseButton): bool =
-  ## Check if the button is now pressed.
-  return self.buttonStates[button] == pressed
+proc isPressed*(self: TMouse, buttons: varargs[TMouseButton]): bool =
+  ## Check if any button of buttons is now pressed.
+  result = false
+  for button in buttons:
+    if self.buttonStates[button] == pressed: return true
 
-proc isReleased*(self: TMouse, button: TMouseButton): bool =
-  ## Check if the button is now released.
-  return self.buttonStates[button] == released
+proc isReleased*(self: TMouse, buttons: varargs[TMouseButton]): bool =
+  ## Check if any button of buttons is now released.
+  result = false
+  for button in buttons:
+    if self.buttonStates[button] == released: return true
 
 proc getPosition*(self: TMouse): tuple[x, y: int] =
   ## Get current mouse position.

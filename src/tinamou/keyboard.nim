@@ -99,17 +99,23 @@ proc newKeyboard*(): TKeyboard =
   ## Create new keyboard.
   new result
 
-proc isDown*(self: TKeyboard, keyName: TKeyName): bool =
-  ## Check if the key is down or pressed now.
-  return (self.keyStates[keyName] == down) or (self.keyStates[keyName] == pressed)
+proc isDown*(self: TKeyboard, keyNames: varargs[TKeyName]): bool =
+  ## Check if any key of key names is down or pressed now.
+  result = false
+  for keyName in keyNames:
+    if self.keyStates[keyName] == down or self.keyStates[keyName] == pressed: return true
 
-proc isPressed*(self: TKeyboard, keyName: TKeyName): bool =
-  ## Check if the key is now pressed.
-  return self.keyStates[keyName] == pressed
+proc isPressed*(self: TKeyboard, keyNames: varargs[TKeyName]): bool =
+  ## Check if any key of key names is now pressed.
+  result = false
+  for keyname in keyNames:
+    if self.keyStates[keyName] == pressed: return true
 
-proc isReleased*(self: TKeyboard, keyName: TKeyName): bool =
-  ## Check if the key is now released.
-  return self.keyStates[keyName] == released
+proc isReleased*(self: TKeyboard, keyNames: varargs[TKeyName]): bool =
+  ## Check if any key of keynames is now released.
+  result = false
+  for keyName in keyNames:
+    if self.keyStates[keyName] == released: return true
 
 proc update*(self: TKeyboard, event: Event) =
   ## Update keyboard state by event.
