@@ -5,10 +5,11 @@ Game Library in Nim with SDL2
 ## How to Use
 
 1. Prepare this library.
-2. import `tinamou` module.
-3. Create scenes. (See **How to Make Scenes**)
-4. Do `startGame`.
-5. That is all!
+    - Add `requires "tinamou"` in your `.nimble` file.
+1. import `tinamou` module.
+1. Create scenes. (See **How to Make Scenes**)
+1. Do `startGame`.
+1. That is all!
 
 ## Documentation
 
