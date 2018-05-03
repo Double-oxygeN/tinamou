@@ -13,13 +13,15 @@ import
 
 export
   core,
-  scene,
+  scene.TBaseScene, scene.TTransition, scene.TTools, scene.TActions,
+  scene.stay, scene.next, scene.final, scene.reset, scene.init, scene.update, scene.draw,
+  scene.imageManager, scene.soundManager, scene.windowManager, scene.mouse, scene.keyboard,
   imagemanager,
   soundmanager,
   windowmanager,
   painter,
-  keyboard,
-  mouse,
+  keyboard.TKeyboard, keyboard.TKeyName, keyboard.isPressed, keyboard.isDown, keyboard.isReleased, keyboard.getPressingKeyNames,
+  mouse.TMouse, mouse.TMouseButton, mouse.isPressed, mouse.isDown, mouse.isReleased, mouse.getPosition,
   tween
 
 type
