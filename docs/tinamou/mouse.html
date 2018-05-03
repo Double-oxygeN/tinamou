@@ -1260,12 +1260,12 @@ function main() {
     title="update(self: TMouse; event: Event)"><wbr />update<span class="attachedType" style="visibility:hidden">TMouse</span></a></li>
   <li><a class="reference" href="#frameEnd,TMouse"
     title="frameEnd(self: TMouse)"><wbr />frame<wbr />End<span class="attachedType" style="visibility:hidden">TMouse</span></a></li>
-  <li><a class="reference" href="#isDown,TMouse,TMouseButton"
-    title="isDown(self: TMouse; button: TMouseButton): bool"><wbr />is<wbr />Down<span class="attachedType" style="visibility:hidden">TMouse</span></a></li>
-  <li><a class="reference" href="#isPressed,TMouse,TMouseButton"
-    title="isPressed(self: TMouse; button: TMouseButton): bool"><wbr />is<wbr />Pressed<span class="attachedType" style="visibility:hidden">TMouse</span></a></li>
-  <li><a class="reference" href="#isReleased,TMouse,TMouseButton"
-    title="isReleased(self: TMouse; button: TMouseButton): bool"><wbr />is<wbr />Released<span class="attachedType" style="visibility:hidden">TMouse</span></a></li>
+  <li><a class="reference" href="#isDown,TMouse,varargs[TMouseButton]"
+    title="isDown(self: TMouse; buttons: varargs[TMouseButton]): bool"><wbr />is<wbr />Down<span class="attachedType" style="visibility:hidden">TMouse</span></a></li>
+  <li><a class="reference" href="#isPressed,TMouse,varargs[TMouseButton]"
+    title="isPressed(self: TMouse; buttons: varargs[TMouseButton]): bool"><wbr />is<wbr />Pressed<span class="attachedType" style="visibility:hidden">TMouse</span></a></li>
+  <li><a class="reference" href="#isReleased,TMouse,varargs[TMouseButton]"
+    title="isReleased(self: TMouse; buttons: varargs[TMouseButton]): bool"><wbr />is<wbr />Released<span class="attachedType" style="visibility:hidden">TMouse</span></a></li>
   <li><a class="reference" href="#getPosition,TMouse"
     title="getPosition(self: TMouse): tuple[x, y: int]"><wbr />get<wbr />Position<span class="attachedType" style="visibility:hidden">TMouse</span></a></li>
 
@@ -1320,19 +1320,21 @@ Update mouse state by event.
 Tell keyboard the end of a frame.
 
 </dd>
-<dt id="isDown"><a name="isDown,TMouse,TMouseButton"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isDown</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TMouse</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">TMouseButton</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="isDown"><a name="isDown,TMouse,varargs[TMouseButton]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isDown</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TMouse</span><span class="Other">;</span> <span class="Identifier">buttons</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">TMouseButton</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
-Check if the button is down or pressed now.
+Check if any button of buttons is down or pressed now.
 
 </dd>
-<dt id="isPressed"><a name="isPressed,TMouse,TMouseButton"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isPressed</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TMouse</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">TMouseButton</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="isPressed"><a name="isPressed,TMouse,varargs[TMouseButton]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isPressed</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TMouse</span><span class="Other">;</span> <span class="Identifier">buttons</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">TMouseButton</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
-Check if the button is now pressed.
+Check if any button of buttons is now pressed.
 
 </dd>
-<dt id="isReleased"><a name="isReleased,TMouse,TMouseButton"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isReleased</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TMouse</span><span class="Other">;</span> <span class="Identifier">button</span><span class="Other">:</span> <span class="Identifier">TMouseButton</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="isReleased"><a name="isReleased,TMouse,varargs[TMouseButton]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isReleased</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TMouse</span><span class="Other">;</span> <span class="Identifier">buttons</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">TMouseButton</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
-Check if the button is now released.
+Check if any button of buttons is now released.
 
 </dd>
 <dt id="getPosition"><a name="getPosition,TMouse"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getPosition</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TMouse</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">]</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
@@ -1350,7 +1352,7 @@ Get current mouse position. If mouse is out of window, then result is negative.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-04-17 09:09:11 UTC</small>
+        <small>Made with Nim. Generated: 2018-05-03 12:53:36 UTC</small>
       </div>
     </div>
   </div>
