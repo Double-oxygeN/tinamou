@@ -9,7 +9,8 @@ import
   tinamou.painter,
   tinamou.keyboard,
   tinamou.mouse,
-  tinamou.tween
+  tinamou.tween,
+  tinamou.exception
 
 export
   core,
@@ -22,15 +23,17 @@ export
   painter,
   keyboard.TKeyboard, keyboard.TKeyName, keyboard.isPressed, keyboard.isDown, keyboard.isReleased, keyboard.getPressingKeyNames,
   mouse.TMouse, mouse.TMouseButton, mouse.isPressed, mouse.isDown, mouse.isReleased, mouse.getPosition,
-  tween
+  tween,
+  exception.TinamouException, exception.`$`, exception.getErrorCode
 
-type
-  TestScene = ref object of TBaseScene
-
-proc newTestScene: TestScene =
-  new result
 
 when isMainModule:
+  type
+    TestScene = ref object of TBaseScene
+
+  proc newTestScene: TestScene =
+    new result
+
   echo "This file was compiled on ", CompileDate, " at ", CompileTime
 
   startGame newTestScene(), "foobar", 600, 400

@@ -24,3 +24,8 @@ task cleanup, "clean up files":
 
 task docgen, "generate documentation":
   exec "nimble doc src/tinamou.nim --project -o:docs"
+
+task test, "test codes":
+  withDir "tests":
+    exec "nim c -r test"
+    exec "rm -f test"

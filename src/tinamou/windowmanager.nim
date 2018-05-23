@@ -46,3 +46,7 @@ proc setFullScreen*(self: TWindowManager, flag: bool) =
   ## Change fullscreen flag.
   if not self.window.setFullscreen(if flag: SDL_WINDOW_FULLSCREEN else: 0):
     raise newTinamouException(FULLSCREEN_ERROR, "Could not set full screen. " & $sdl2.getError())
+
+proc alert*(self: TWindowManager, message: string, title: string = "") =
+  ## Pop up alert window.
+  discard showSimpleMessageBox(message = message, title = title, flags = SDL_MESSAGEBOX_WARNING, window = self.window)

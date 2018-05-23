@@ -14,10 +14,20 @@ import
   # tinamou
   exception,
   scene,
-  painter
+  painter,
+  windowmanager
 
 const
   errorLogFileName: string = "TinamouError.log"
+
+type
+  ExceptionHandler* = proc (exception: ref TinamouException, msg: string, tools: TTools)
+
+proc defaultExceptionHandler*(exception: ref TinamouException, msg: string, tools: TTools) =
+  tools.windowManager.alert(message = "Tinamou caught an exception!\pFor details, please see " & errorLogFileName & ".", title = "Tinamou Error")
+
+var
+  exceptionHandler: ExceptionHandler = defaultExceptionHandler
 
 proc calcFPSMaker(startTicks: uint32, interval: int = 30): (proc (ticks: uint32): float) =
   var
@@ -159,21 +169,26 @@ proc startGame*(firstScene: TBaseScene; title: string; width, height: int = 600;
 
   except TinamouException:
 
-    # TODO: exception handling
-    let currentException: ref TinamouException = cast[ref TinamouException](getCurrentException())
+    let
+      currentException: ref TinamouException = cast[ref TinamouException](getCurrentException())
+      currentExceptionMsg: string = getCurrentExceptionMsg()
 
     try:
       let logFile: File = open(filename = errorLogFileName, mode = fmAppend)
       defer: close logFile
 
-      logFile.write "Tinamou caught an exception!\nat: " & times.now().format("dd/MMM/yyyy HH:mm:ss ('GMT'z)") & "\n" & getCurrentExceptionMsg() & "\n"
+      logFile.write "Tinamou caught an exception!\pat: " & times.now().format("dd/MMM/yyyy HH:mm:ss ('GMT'z)") & "\p" & currentExceptionMsg & "\p"
       if stackTraceAvailable(): logFile.write getStackTrace(currentException)
-      logFile.write "\n"
+      logFile.write "\p"
 
-      stderr.write "Tinamou caught an exception!\nFor details, please see " & errorLogFileName & ".\n"
-
+      exceptionHandler(currentException, currentExceptionMsg, tools)
+      
     except IOError:
 
-      stderr.write "Tinamou caught an exception!\n" & getCurrentExceptionMsg() & "\n"
+      stderr.write "Tinamou caught an exception!\p" & currentExceptionMsg & "\p"
       if stackTraceAvailable(): stderr.write getStackTrace(currentException)
       stderr.write errorLogFileName & " file could not open."
+
+proc setExceptionHandler*(handler: ExceptionHandler): ExceptionHandler =
+  result = exceptionHandler
+  exceptionHandler = handler
