@@ -110,8 +110,10 @@ proc clear*(self: TPainter, color: sdl2.Color) =
   self.renderer.setDrawColor(color)
   self.renderer.clear()
 
-proc drawImage0(self: TPainter, image: TImage, srcRect: ptr Rect = nil, dstRect: ptr Rect, spriteNum: int = 0) =
+proc drawImage0(self: TPainter, image: TImage, srcRect: ptr Rect = nil, dstRect: ptr Rect, spriteNum: int, alpha: uint8) =
   ## Draw image.
+  image.getTexture().setTextureAlphaMod(alpha)
+
   if image.isSprite:
     let
       spriteSize = image.getSpriteSize()
@@ -127,14 +129,14 @@ proc drawImage0(self: TPainter, image: TImage, srcRect: ptr Rect = nil, dstRect:
   else:
     self.renderer.copy(image.getTexture(), srcRect, dstRect)
 
-proc drawImage*[N: SomeNumber](self: TPainter, image: TImage; x, y: N; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
+proc drawImage*[N: SomeNumber](self: TPainter, image: TImage; x, y: N; spriteNum: int = 0; alpha: uint8 = 255; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
   ## Draw image.
   let originPos: tuple[x, y: float] = origin.getOrigin(x, y, image.width, image.height)
   var dstRect: Rect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: image.width.cint, h: image.height.cint)
 
-  self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum)
+  self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum, alpha = alpha)
 
-proc drawImage*[N0, N1: SomeNumber](self: TPainter, image: TImage; x, y: N0; width, height: N1; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
+proc drawImage*[N0, N1: SomeNumber](self: TPainter, image: TImage; x, y: N0; width, height: N1; spriteNum: int = 0; alpha: uint8 = 255; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
   ## Draw image.
   var dstRect: Rect
 
@@ -149,9 +151,9 @@ proc drawImage*[N0, N1: SomeNumber](self: TPainter, image: TImage; x, y: N0; wid
     let originPos: tuple[x, y: float] = origin.getOrigin(x, y, width, height)
     dstRect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: width.toInt16.cint, h: height.toInt16.cint)
 
-  self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum)
+  self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum, alpha = alpha)
 
-proc drawImage*[N0, N1, N2, N3: SomeNumber](self: TPainter, image: TImage; srcX, srcY: N0; srcWidth, srcHeight: N1; x, y: N2; width, height: N3; spriteNum: int = 0; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
+proc drawImage*[N0, N1, N2, N3: SomeNumber](self: TPainter, image: TImage; srcX, srcY: N0; srcWidth, srcHeight: N1; x, y: N2; width, height: N3; spriteNum: int = 0; alpha: uint8 = 255; origin: TOriginKind = TOriginKind.NW; fixRatio: bool = false) =
   ## Draw image.
   let
     actualSrcWidth: float = min(srcWidth.float, image.width.float - srcX.float)
@@ -174,7 +176,7 @@ proc drawImage*[N0, N1, N2, N3: SomeNumber](self: TPainter, image: TImage; srcX,
       originPos: tuple[x, y: float] = origin.getOrigin(x, y, width, height)
     dstRect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: actualWidth.toInt.cint, h: actualHeight.toInt.cint)
 
-  self.drawImage0(image = image, srcRect = addr srcRect, dstRect = addr dstRect, spriteNum = spriteNum)
+  self.drawImage0(image = image, srcRect = addr srcRect, dstRect = addr dstRect, spriteNum = spriteNum, alpha = alpha)
 
 proc rect*[N0, N1: SomeNumber](self: TPainter; x, y: N0; w, h: N1): TPaintableRect =
   ## Create paintable rectangle.
