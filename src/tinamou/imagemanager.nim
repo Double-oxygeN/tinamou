@@ -92,7 +92,11 @@ proc newSpriteFromRW(renderer: RendererPtr, src: RWopsPtr, spriteWidth, spriteHe
 proc getSrc*(self: TImage): string = self.src
 proc getTexture*(self: TImage): TexturePtr = self.texture
 proc isSprite*(self: TImage): bool = self.kind == sprite
-proc getSpriteSize*(self: TImage): tuple[width, height, columns: int] = (width: self.spriteWidth, height: self.spriteHeight, columns: self.spriteColumns)
+proc getSpriteSize*(self: TImage): tuple[width, height, columns: int] =
+  if self.kind == sprite:
+    (width: self.spriteWidth, height: self.spriteHeight, columns: self.spriteColumns)
+  else:
+    (width: self.width, height: self.height, columns: 0)
 
 proc destroy(self: TImage) =
   ## Free image resources.
