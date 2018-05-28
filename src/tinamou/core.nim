@@ -14,6 +14,7 @@ import
   # tinamou
   exception,
   scene,
+  scenemanager,
   painter,
   windowmanager
 
@@ -62,7 +63,7 @@ template embed*(path: string): RWopsPtr =
   const file = staticRead(path)
   rwFromConstMem(file.cstring, file.len)
 
-proc startGame*(firstScene: TBaseScene; title: string; width, height: int = 600; showFPS: bool = false) =
+proc startGame*(sceneManager: TSceneManager; firstSceneId: TSceneId; title: string; width, height: int = 600; showFPS: bool = false) =
   ## Start the game
 
   if not sdl2.init(INIT_VIDEO or INIT_AUDIO or INIT_TIMER or INIT_EVENTS):
@@ -114,11 +115,11 @@ proc startGame*(firstScene: TBaseScene; title: string; width, height: int = 600;
   var
     q: bool = false
     e: Event = sdl2.defaultEvent
-
-    currentScene = firstScene
+    currentScene: TBaseScene
 
   try:
-    currentScene.init(tools)
+    currentScene = sceneManager.getScene(firstSceneId)
+    currentScene.init(tools, TNOSHARE)
 
     # Start game-loop.
     while not q:
@@ -149,14 +150,18 @@ proc startGame*(firstScene: TBaseScene; title: string; width, height: int = 600;
 
       elif transition.isNext():
         # TODO: transition animation is not implemented yet
-        currentScene = transition.getNextScene()
-        currentScene.init(tools)
+        let
+          nextSceneId = transition.getNextSceneId()
+          sharedInfo = transition.getSharedInfo()
+        currentScene = sceneManager.getScene(nextSceneId)
+        currentScene.init(tools, sharedInfo)
 
       elif transition.isFinal():
         q = true
 
       elif transition.isReset():
-        currentScene = firstScene
+        currentScene = sceneManager.getScene(firstSceneId)
+        currentScene.init(tools, TNOSHARE)
 
       else:
         raise newTinamouException(UNKNOWN_TRANSITION_ERROR_CODE, "Unknown transition.")

@@ -3,6 +3,7 @@
 import
   tinamou.core,
   tinamou.scene,
+  tinamou.scenemanager,
   tinamou.imagemanager,
   tinamou.soundmanager,
   tinamou.windowmanager,
@@ -14,9 +15,11 @@ import
 
 export
   core,
-  scene.TBaseScene, scene.TTransition, scene.TTools, scene.TActions,
+  scene.TBaseScene, scene.TTransition, scene.TTools, scene.TActions, scene.TSharedInfo,
   scene.stay, scene.next, scene.final, scene.reset, scene.init, scene.update, scene.draw,
   scene.imageManager, scene.soundManager, scene.windowManager, scene.mouse, scene.keyboard,
+  scene.TNOSHARE,
+  scenemanager.TSceneManager, scenemanager.newSceneManager, scenemanager.setScene,
   imagemanager,
   soundmanager,
   windowmanager,
@@ -33,7 +36,10 @@ when isMainModule:
 
   proc newTestScene: TestScene =
     new result
+  
+  let scenes = newSceneManager()
+  scenes.setScene("test", newTestScene())
 
   echo "This file was compiled on ", CompileDate, " at ", CompileTime
 
-  startGame newTestScene(), "foobar", 600, 400
+  startGame scenes, "test", "foobar", 600, 400

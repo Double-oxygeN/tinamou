@@ -17,20 +17,28 @@ import
 
   # actions
   keyboard,
-  mouse
+  mouse,
+
+  # exception
+  exception
 
 type
   TTransitionKind = enum
     ttstay, ttnext, ttfinal, ttreset
 
+  TSceneId* = string
+
   TTransition* = object
     case kind: TTransitionKind
     of ttnext:
-      nextScene: TBaseScene
+      nextSceneId: TSceneId
+      sharedInfo: TSharedInfo
     else:
       discard
 
   TBaseScene* = ref object of RootObj
+
+  TSharedInfo* = ref object of RootObj
 
   TTools* = ref object of RootObj
     imageManager: TImageManager
@@ -50,9 +58,9 @@ proc stay*(): TTransition =
   ## Stay current scene.
   stayObj
 
-proc next*(scene: TBaseScene): TTransition =
+proc next*(sceneId: TSceneId, sharedInfo: TSharedInfo): TTransition =
   ## Transition to the next scene.
-  TTransition(kind: ttnext, nextScene: scene)
+  TTransition(kind: ttnext, nextSceneId: sceneId, sharedInfo: sharedInfo)
 
 proc final*(): TTransition =
   ## End the game.
@@ -67,13 +75,22 @@ proc isNext*(self: TTransition): bool = self.kind == ttnext
 proc isFinal*(self: TTransition): bool = self.kind == ttfinal
 proc isReset*(self: TTransition): bool = self.kind == ttreset
 
-proc getNextScene*(self: TTransition): TBaseScene =
-  if self.kind == ttnext:
-    return self.nextScene
-  else:
-    raise Exception.newException "Only next transition has the next scene."
+let
+  TNOSHARE*: TSharedInfo = new TSharedInfo
 
-method init*(self: TBaseScene, tools: TTools) {.base.} =
+proc getNextSceneId*(self: TTransition): TSceneId =
+  if self.kind == ttnext:
+    return self.nextSceneId
+  else:
+    raise newTinamouException(INVALID_TRANSITION_ERROR_CODE, "Only next transition has the next scene id.")
+
+proc getSharedInfo*(self: TTransition): TSharedInfo =
+  if self.kind == ttnext:
+    return self.sharedInfo
+  else:
+    raise newTinamouException(INVALID_TRANSITION_ERROR_CODE, "Only next transition has the shared info.")
+
+method init*(self: TBaseScene, tools: TTools, info: TSharedInfo) {.base.} =
   ## Scene initialization.
   discard
 
