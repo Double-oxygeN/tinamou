@@ -40,7 +40,7 @@ Then override the methods.
 proc newExScene(): ExScene =
   new result
 
-method init(self: ExScene, tools: TTools) =
+method init(self: ExScene, tools: TTools, info: TSharedInfo) =
   # Scene initialization should be written in `init` method.
   self.count = 0
 
@@ -60,9 +60,9 @@ method update(self: ExScene, tools: TTools, actions: TActions): TTransition =
   self.count += 1
 
   if actions.keyboard.isPressed(SPACE):
-    result = next(newExScene2())
+    result = next("ex2", TNOSHARE)
   elif self.count >= 1200:
-    result = next(newExScene3())
+    result = next("ex3", TNOSHARE)
   elif actions.mouse.isPressed(RIGHT):
     tools.soundManager.getEffect("seName").play()
 
@@ -78,11 +78,17 @@ method draw(self: ExScene, painter: TPainter, tools: TTools, actions: TActions) 
 
 ```
 
-When starting the game, give the first argument of `startGame` the initial scene.
+And then register all scenes into scene manager.
+When starting the game, give the second argument of `startGame` the initial scene ID.
 
 ```nim
 when isMainModule:
-  startGame(firstScene = newExScene(), title = "Tinamou Example", width = 1200, height = 800, showFPS = true)
+  let scenes = newSceneManager()
+  scenes.addScene("ex1", newExScene())
+  scenes.addScene("ex2", newExScene2())
+  scenes.addScene("ex3", newExScene3())
+
+  startGame(sceneManager = scenes, firstSceneId = "ex1", title = "Tinamou Example", width = 1200, height = 800, showFPS = true)
 
 ```
 
