@@ -128,7 +128,7 @@ proc startGame*(sceneManager: TSceneManager; firstSceneId: TSceneId; title: stri
       while e.pollEvent():
 
         if e.kind == QuitEvent:
-          ## TODO: quit handlinng
+          ## TODO: quit handling
           var buttonId: cint
           if showMessageBox(messageboxdata = addr quitDialogData, buttonid = buttonId) < 0:
             raise newTinamouException(WINDOW_CREATION_ERROR_CODE, "Could not show quit dialog.")
