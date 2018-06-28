@@ -54,11 +54,13 @@ let
   finalObj = Transition(kind: ttfinal)
   resetObj = Transition(kind: ttreset)
 
+  NOSHARE*: SharedInfo = new SharedInfo
+
 proc stay*(): Transition =
   ## Stay current scene.
   stayObj
 
-proc next*(sceneId: SceneId, sharedInfo: SharedInfo): Transition =
+proc next*(sceneId: SceneId, sharedInfo: SharedInfo = NOSHARE): Transition =
   ## Transition to the next scene.
   Transition(kind: ttnext, nextSceneId: sceneId, sharedInfo: sharedInfo)
 
@@ -74,9 +76,6 @@ proc isStay*(self: Transition): bool = self.kind == ttstay
 proc isNext*(self: Transition): bool = self.kind == ttnext
 proc isFinal*(self: Transition): bool = self.kind == ttfinal
 proc isReset*(self: Transition): bool = self.kind == ttreset
-
-let
-  NOSHARE*: SharedInfo = new SharedInfo
 
 proc getNextSceneId*(self: Transition): SceneId =
   if self.kind == ttnext:
