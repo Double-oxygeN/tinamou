@@ -22,9 +22,9 @@ const
   errorLogFileName: string = "TinamouError.log"
 
 type
-  ExceptionHandler* = proc (exception: ref TinamouException, msg: string, tools: TTools)
+  ExceptionHandler* = proc (exception: ref TinamouException, msg: string, tools: Tools)
 
-proc defaultExceptionHandler*(exception: ref TinamouException, msg: string, tools: TTools) =
+proc defaultExceptionHandler*(exception: ref TinamouException, msg: string, tools: Tools) =
   tools.windowManager.alert(message = "Tinamou caught an exception!\pFor details, please see " & errorLogFileName & ".", title = "Tinamou Error")
 
 var
@@ -58,12 +58,12 @@ template embed*(path: string): RWopsPtr =
   ##
   ## **Example:**
   ## ::
-  ## method init(self: ExScene, tools: TTools) =
+  ## method init(self: ExScene, tools: Tools) =
   ##   tools.imageManager.setImage "sampleImg", embed(currentSourcePath().splitFile().dir / "../../res/img/sample_img.png")
   const file = staticRead(path)
   rwFromConstMem(file.cstring, file.len)
 
-proc startGame*(sceneManager: TSceneManager; firstSceneId: TSceneId; title: string; width, height: int = 600; showFPS: bool = false) =
+proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string; width, height: int = 600; showFPS: bool = false) =
   ## Start the game
 
   if not sdl2.init(INIT_VIDEO or INIT_AUDIO or INIT_TIMER or INIT_EVENTS):
@@ -104,9 +104,9 @@ proc startGame*(sceneManager: TSceneManager; firstSceneId: TSceneId; title: stri
 
   # Initialize tools.
   let
-    painter: TPainter = newTPainter(renderer)
-    tools: TTools = newTools(window, renderer)
-    actions: TActions = newActions()
+    painter: Painter = newTPainter(renderer)
+    tools: Tools = newTools(window, renderer)
+    actions: Actions = newActions()
   defer: destroy tools
 
   let calcFPS = calcFPSMaker(getTicks())
@@ -115,7 +115,7 @@ proc startGame*(sceneManager: TSceneManager; firstSceneId: TSceneId; title: stri
   var
     q: bool = false
     e: Event = sdl2.defaultEvent
-    currentScene: TBaseScene
+    currentScene: BaseScene
 
   try:
     currentScene = sceneManager.getScene(firstSceneId)

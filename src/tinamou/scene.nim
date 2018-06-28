@@ -23,117 +23,117 @@ import
   exception
 
 type
-  TTransitionKind = enum
+  TransitionKind = enum
     ttstay, ttnext, ttfinal, ttreset
 
-  TSceneId* = string
+  SceneId* = string
 
-  TTransition* = object
-    case kind: TTransitionKind
+  Transition* = object
+    case kind: TransitionKind
     of ttnext:
-      nextSceneId: TSceneId
-      sharedInfo: TSharedInfo
+      nextSceneId: SceneId
+      sharedInfo: SharedInfo
     else:
       discard
 
-  TBaseScene* = ref object of RootObj
+  BaseScene* = ref object of RootObj
 
-  TSharedInfo* = ref object of RootObj
+  SharedInfo* = ref object of RootObj
 
-  TTools* = ref object of RootObj
-    imageManager: TImageManager
-    soundManager: TSoundManager
-    windowManager: TWindowManager
+  Tools* = ref object of RootObj
+    imageManager: ImageManager
+    soundManager: SoundManager
+    windowManager: WindowManager
 
-  TActions* = ref object of RootObj
-    mouse: TMouse
-    keyboard: TKeyboard
+  Actions* = ref object of RootObj
+    mouse: Mouse
+    keyboard: Keyboard
 
 let
-  stayObj = TTransition(kind: ttstay)
-  finalObj = TTransition(kind: ttfinal)
-  resetObj = TTransition(kind: ttreset)
+  stayObj = Transition(kind: ttstay)
+  finalObj = Transition(kind: ttfinal)
+  resetObj = Transition(kind: ttreset)
 
-proc stay*(): TTransition =
+proc stay*(): Transition =
   ## Stay current scene.
   stayObj
 
-proc next*(sceneId: TSceneId, sharedInfo: TSharedInfo): TTransition =
+proc next*(sceneId: SceneId, sharedInfo: SharedInfo): Transition =
   ## Transition to the next scene.
-  TTransition(kind: ttnext, nextSceneId: sceneId, sharedInfo: sharedInfo)
+  Transition(kind: ttnext, nextSceneId: sceneId, sharedInfo: sharedInfo)
 
-proc final*(): TTransition =
+proc final*(): Transition =
   ## End the game.
   finalObj
 
-proc reset*(): TTransition =
+proc reset*(): Transition =
   ## Reset the game.
   resetObj
 
-proc isStay*(self: TTransition): bool = self.kind == ttstay
-proc isNext*(self: TTransition): bool = self.kind == ttnext
-proc isFinal*(self: TTransition): bool = self.kind == ttfinal
-proc isReset*(self: TTransition): bool = self.kind == ttreset
+proc isStay*(self: Transition): bool = self.kind == ttstay
+proc isNext*(self: Transition): bool = self.kind == ttnext
+proc isFinal*(self: Transition): bool = self.kind == ttfinal
+proc isReset*(self: Transition): bool = self.kind == ttreset
 
 let
-  TNOSHARE*: TSharedInfo = new TSharedInfo
+  NOSHARE*: SharedInfo = new SharedInfo
 
-proc getNextSceneId*(self: TTransition): TSceneId =
+proc getNextSceneId*(self: Transition): SceneId =
   if self.kind == ttnext:
     return self.nextSceneId
   else:
     raise newTinamouException(INVALID_TRANSITION_ERROR_CODE, "Only next transition has the next scene id.")
 
-proc getSharedInfo*(self: TTransition): TSharedInfo =
+proc getSharedInfo*(self: Transition): SharedInfo =
   if self.kind == ttnext:
     return self.sharedInfo
   else:
     raise newTinamouException(INVALID_TRANSITION_ERROR_CODE, "Only next transition has the shared info.")
 
-method init*(self: TBaseScene, tools: TTools, info: TSharedInfo) {.base.} =
+method init*(self: BaseScene, tools: Tools, info: SharedInfo) {.base.} =
   ## Scene initialization.
   discard
 
-method update*(self: TBaseScene, tools: TTools, actions: TActions): TTransition {.base.} =
+method update*(self: BaseScene, tools: Tools, actions: Actions): Transition {.base.} =
   ## Update the scene.
   ## Returns the transition.
   stay()
 
-method draw*(self: TBaseScene, painter: TPainter, tools: TTools, actions: TActions) {.base.} =
+method draw*(self: BaseScene, painter: Painter, tools: Tools, actions: Actions) {.base.} =
   ## Output states to the window using painter.
   painter.clear(colBlack)
 
-proc newTools*(window: WindowPtr, renderer: RendererPtr, numchans: int = 16): TTools =
+proc newTools*(window: WindowPtr, renderer: RendererPtr, numchans: int = 16): Tools =
   ## Create new tools.
   new result
   result.imageManager = newImageManager(renderer)
   result.soundManager = newSoundManager(numchans)
   result.windowManager = newWindowManager(window, renderer)
 
-proc imageManager*(self: TTools): TImageManager = self.imageManager
-proc soundManager*(self: TTools): TSoundManager = self.soundManager
-proc windowManager*(self: TTools): TWindowManager = self.windowManager
+proc imageManager*(self: Tools): ImageManager = self.imageManager
+proc soundManager*(self: Tools): SoundManager = self.soundManager
+proc windowManager*(self: Tools): WindowManager = self.windowManager
 
-proc destroy*(self: TTools) =
+proc destroy*(self: Tools) =
   ## Free resources.
   destroy self.imageManager
   destroy self.soundManager
 
-proc newActions*(): TActions =
+proc newActions*(): Actions =
   ## Create new actions.
   new result
   result.mouse = newMouse()
   result.keyboard = newKeyboard()
 
-proc mouse*(self: TActions): TMouse = self.mouse
-proc keyboard*(self: TActions): TKeyboard = self.keyboard
+proc mouse*(self: Actions): Mouse = self.mouse
+proc keyboard*(self: Actions): Keyboard = self.keyboard
 
-proc update*(self: TActions, event: Event) =
+proc update*(self: Actions, event: Event) =
   ## Update actions.
   self.keyboard.update(event)
   self.mouse.update(event)
 
-proc frameEnd*(self: TActions) =
+proc frameEnd*(self: Actions) =
   ## Tell keyboard the end of a frame.
   frameEnd self.keyboard
   frameEnd self.mouse

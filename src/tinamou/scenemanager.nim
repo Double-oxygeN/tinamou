@@ -7,18 +7,18 @@ import
   exception
 
 type
-  TSceneManager* = ref object of RootObj
-    table: TableRef[TSceneId, TBaseScene]
+  SceneManager* = ref object of RootObj
+    table: TableRef[SceneId, BaseScene]
 
-proc newSceneManager*: TSceneManager =
+proc newSceneManager*: SceneManager =
   new result
-  result.table = newTable[string, TBaseScene]()
+  result.table = newTable[string, BaseScene]()
 
-proc setScene*(self: TSceneManager, name: string, scene: TBaseScene) =
+proc setScene*(self: SceneManager, name: string, scene: BaseScene) =
   if not self.table.hasKey(name):
     self.table.add(name, scene)
 
-proc getScene*(self: TSceneManager, name: string): TBaseScene =
+proc getScene*(self: SceneManager, name: string): BaseScene =
   try:
     result = self.table[name]
   except KeyError:
