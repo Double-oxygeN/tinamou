@@ -119,7 +119,7 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
 
   try:
     currentScene = sceneManager.getScene(firstSceneId)
-    currentScene.init(tools, TNOSHARE)
+    currentScene.init(tools, NOSHARE)
 
     # Start game-loop.
     while not q:
@@ -161,7 +161,7 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
 
       elif transition.isReset():
         currentScene = sceneManager.getScene(firstSceneId)
-        currentScene.init(tools, TNOSHARE)
+        currentScene.init(tools, NOSHARE)
 
       else:
         raise newTinamouException(UNKNOWN_TRANSITION_ERROR_CODE, "Unknown transition.")
