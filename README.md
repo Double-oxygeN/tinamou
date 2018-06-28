@@ -17,7 +17,7 @@ See http://double-oxygen.net/tinamou/tinamou.html
 
 ## How to Make Scenes
 
-All you have to do first in order to make a scene is extend `TBaseScene`.
+All you have to do first in order to make a scene is extend `BaseScene`.
 
 ```nim
 # Example
@@ -25,12 +25,12 @@ import tinamou
 import colors
 
 type
-  ExScene = ref object of TBaseScene
+  ExScene = ref object of BaseScene
     count: uint
 
-  ExScene2 = ref object of TBaseScene
+  ExScene2 = ref object of BaseScene
 
-  ExScene3 = ref object of TBaseScene
+  ExScene3 = ref object of BaseScene
 
 ```
 
@@ -40,7 +40,7 @@ Then override the methods.
 proc newExScene(): ExScene =
   new result
 
-method init(self: ExScene, tools: TTools, info: TSharedInfo) =
+method init(self: ExScene, tools: Tools, info: SharedInfo) =
   # Scene initialization should be written in `init` method.
   self.count = 0
 
@@ -52,7 +52,7 @@ method init(self: ExScene, tools: TTools, info: TSharedInfo) =
 
   tools.soundManager.getMusic("bgmName").play()
 
-method update(self: ExScene, tools: TTools, actions: TActions): TTransition =
+method update(self: ExScene, tools: Tools, actions: Actions): Transition =
   # What the scene do each frames should be written in `update` method.
   # This method returns scene transition.
   result = stay()
@@ -60,13 +60,13 @@ method update(self: ExScene, tools: TTools, actions: TActions): TTransition =
   self.count += 1
 
   if actions.keyboard.isPressed(SPACE):
-    result = next("ex2", TNOSHARE)
+    result = next("ex2")
   elif self.count >= 1200:
-    result = next("ex3", TNOSHARE)
+    result = next("ex3")
   elif actions.mouse.isPressed(RIGHT):
     tools.soundManager.getEffect("seName").play()
 
-method draw(self: ExScene, painter: TPainter, tools: TTools, actions: TActions) =
+method draw(self: ExScene, painter: Painter, tools: Tools, actions: Actions) =
   # Output to the screen should be written in `draw` method.
   painter.clear(colWhite)
 
