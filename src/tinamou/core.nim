@@ -111,6 +111,8 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
     actions: Actions = newActions()
   defer: destroy tools
 
+  tools.windowManager.setResolution(width = width, height = height)
+
   let calcFPS = calcFPSMaker(getTicks())
 
   # Declare variables.
