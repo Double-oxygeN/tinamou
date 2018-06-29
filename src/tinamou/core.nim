@@ -19,6 +19,8 @@ import
   windowmanager
 
 const
+  framesPerSecond: int = 60
+  oneFrameInterval: float = 1e3 / framesPerSecond.toFloat() # [ms]
   errorLogFileName: string = "TinamouError.log"
 
 type
@@ -97,7 +99,7 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
   defer: destroy window
 
   let renderer = window.createRenderer(index = -1,
-    flags = Renderer_Accelerated or Renderer_PresentVSync)
+    flags = Renderer_Accelerated)
   if renderer.isNil:
     raise newTinamouException(RENDERER_CREATION_ERROR_CODE, "Renderer could not be created. " & $sdl2.getError())
   defer: destroy renderer
@@ -116,10 +118,14 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
     q: bool = false
     e: Event = sdl2.defaultEvent
     currentScene: BaseScene
+    ticks: uint32
+    intervalTime: float = 0'f32
 
   try:
     currentScene = sceneManager.getScene(firstSceneId)
     currentScene.init(tools, NOSHARE)
+
+    ticks = getTicks()
 
     # Start game-loop.
     while not q:
@@ -166,8 +172,20 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
       else:
         raise newTinamouException(UNKNOWN_TRANSITION_ERROR_CODE, "Unknown transition.")
 
+      # FPS control
+      intervalTime += oneFrameInterval
+      let
+        endTicks: uint32 = getTicks()
+        restTime: float = intervalTime - (endTicks.int - ticks.int).toFloat()
+      if restTime > 0:
+        sdl2.delay((restTime * 0.987).toInt().uint32)
+        intervalTime = 0
+      else:
+        intervalTime = restTime
+      ticks = getTicks()
+
       if showFPS:
-        let fps = calcFPS(getTicks()).round(2)
+        let fps = calcFPS(ticks).round(2)
         window.setTitle title & " (FPS = " & $fps & ")"
 
       frameEnd actions
@@ -187,7 +205,7 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
       logFile.write "\p"
 
       exceptionHandler(currentException, currentExceptionMsg, tools)
-      
+
     except IOError:
 
       stderr.write "Tinamou caught an exception!\p" & currentExceptionMsg & "\p"
@@ -195,5 +213,6 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
       stderr.write errorLogFileName & " file could not open."
 
 proc setExceptionHandler*(handler: ExceptionHandler): ExceptionHandler =
+  ## Set exception handler.
   result = exceptionHandler
   exceptionHandler = handler
