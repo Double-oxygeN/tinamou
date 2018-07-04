@@ -33,9 +33,10 @@ proc tweenOut*(f: BaseTween): BaseTween = (proc (x: float): float = 1 - f(1 - x)
 proc tweenInOut*(f: BaseTween): BaseTween = (proc (x: float): float = (if x < 0.5: f(x * 2) / 2 else: 1 - f(2 - x * 2) / 2))
 
 proc yoyo*(f: BaseTween): BaseTween =
-  (proc (x: float): float =
+  ## Repeat forwarding and backwarding.
+  return proc (x: float): float =
     let l: float = x mod 2
-    return if l < 1: f(l) else: f(2 - l))
+    return if l < 1: f(l) else: f(2 - l)
 
 proc ease*(f: BaseTween; time: uint; begin, delta: float; duration: uint): float =
   ## Apply easing function.
