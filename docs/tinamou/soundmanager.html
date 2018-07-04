@@ -1241,46 +1241,46 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#TMusic"
-    title="TMusic = ref object of RootObj
+      <li><a class="reference" href="#Music"
+    title="Music = ref object of RootObj
   src: string
-  music: MusicPtr"><wbr />TMusic<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#TSoundEffect"
-    title="TSoundEffect = ref object of RootObj
+  music: MusicPtr"><wbr />Music<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#SoundEffect"
+    title="SoundEffect = ref object of RootObj
   src: string
-  chunk: ChunkPtr"><wbr />TSound<wbr />Effect<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#TSoundManager"
-    title="TSoundManager = ref object of RootObj
-  bgms: TableRef[string, TMusic]
-  ses: TableRef[string, TSoundEffect]"><wbr />TSound<wbr />Manager<span class="attachedType" style="visibility:hidden"></span></a></li>
+  chunk: ChunkPtr"><wbr />Sound<wbr />Effect<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#SoundManager"
+    title="SoundManager = ref object of RootObj
+  bgms: TableRef[string, Music]
+  ses: TableRef[string, SoundEffect]"><wbr />Sound<wbr />Manager<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#play,TMusic"
-    title="play(self: TMusic)"><wbr />play<span class="attachedType" style="visibility:hidden">TMusic</span></a></li>
+      <li><a class="reference" href="#play,Music"
+    title="play(self: Music)"><wbr />play<span class="attachedType" style="visibility:hidden">Music</span></a></li>
   <li><a class="reference" href="#stopMusic,"
     title="stopMusic()"><wbr />stop<wbr />Music<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#play,TSoundEffect"
-    title="play(self: TSoundEffect)"><wbr />play<span class="attachedType" style="visibility:hidden">TSoundEffect</span></a></li>
+  <li><a class="reference" href="#play,SoundEffect"
+    title="play(self: SoundEffect)"><wbr />play<span class="attachedType" style="visibility:hidden">SoundEffect</span></a></li>
   <li><a class="reference" href="#stopAllEffects,"
     title="stopAllEffects()"><wbr />stop<wbr />All<wbr />Effects<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#newSoundManager,int"
-    title="newSoundManager(numchans: int): TSoundManager"><wbr />new<wbr />Sound<wbr />Manager<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
-  <li><a class="reference" href="#setMusic,TSoundManager,,"
-    title="setMusic(self: TSoundManager; name, path: static[string]): TSoundManager"><wbr />set<wbr />Music<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
-  <li><a class="reference" href="#setMusic,TSoundManager,,RWopsPtr"
-    title="setMusic(self: TSoundManager; name: static[string]; src: RWopsPtr): TSoundManager"><wbr />set<wbr />Music<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
-  <li><a class="reference" href="#setEffect,TSoundManager,,"
-    title="setEffect(self: TSoundManager; name, path: static[string]): TSoundManager"><wbr />set<wbr />Effect<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
-  <li><a class="reference" href="#setEffect,TSoundManager,,RWopsPtr"
-    title="setEffect(self: TSoundManager; name: static[string]; src: RWopsPtr): TSoundManager"><wbr />set<wbr />Effect<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
-  <li><a class="reference" href="#getMusic,TSoundManager,string"
-    title="getMusic(self: TSoundManager; name: string): TMusic"><wbr />get<wbr />Music<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
-  <li><a class="reference" href="#getEffect,TSoundManager,string"
-    title="getEffect(self: TSoundManager; name: string): TSoundEffect"><wbr />get<wbr />Effect<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
+    title="newSoundManager(numchans: int): SoundManager"><wbr />new<wbr />Sound<wbr />Manager<span class="attachedType" style="visibility:hidden">SoundManager</span></a></li>
+  <li><a class="reference" href="#setMusic,SoundManager,,"
+    title="setMusic(self: SoundManager; name, path: static[string]): SoundManager"><wbr />set<wbr />Music<span class="attachedType" style="visibility:hidden">SoundManager</span></a></li>
+  <li><a class="reference" href="#setMusic,SoundManager,,RWopsPtr"
+    title="setMusic(self: SoundManager; name: static[string]; src: RWopsPtr): SoundManager"><wbr />set<wbr />Music<span class="attachedType" style="visibility:hidden">SoundManager</span></a></li>
+  <li><a class="reference" href="#setEffect,SoundManager,,"
+    title="setEffect(self: SoundManager; name, path: static[string]): SoundManager"><wbr />set<wbr />Effect<span class="attachedType" style="visibility:hidden">SoundManager</span></a></li>
+  <li><a class="reference" href="#setEffect,SoundManager,,RWopsPtr"
+    title="setEffect(self: SoundManager; name: static[string]; src: RWopsPtr): SoundManager"><wbr />set<wbr />Effect<span class="attachedType" style="visibility:hidden">SoundManager</span></a></li>
+  <li><a class="reference" href="#getMusic,SoundManager,string"
+    title="getMusic(self: SoundManager; name: string): Music"><wbr />get<wbr />Music<span class="attachedType" style="visibility:hidden">SoundManager</span></a></li>
+  <li><a class="reference" href="#getEffect,SoundManager,string"
+    title="getEffect(self: SoundManager; name: string): SoundEffect"><wbr />get<wbr />Effect<span class="attachedType" style="visibility:hidden">SoundManager</span></a></li>
   <li><a class="reference" href="#setMusicVolume,float"
     title="setMusicVolume(vol: float)"><wbr />set<wbr />Music<wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#getMusicVolume,"
@@ -1289,8 +1289,8 @@ function main() {
     title="setEffectVolume(vol: float)"><wbr />set<wbr />Effect<wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#getEffectVolume,"
     title="getEffectVolume(): float"><wbr />get<wbr />Effect<wbr />Volume<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#destroy,TSoundManager"
-    title="destroy(self: TSoundManager)"><wbr />destroy<span class="attachedType" style="visibility:hidden">TSoundManager</span></a></li>
+  <li><a class="reference" href="#destroy,SoundManager"
+    title="destroy(self: SoundManager)"><wbr />destroy<span class="attachedType" style="visibility:hidden">SoundManager</span></a></li>
 
   </ul>
 </li>
@@ -1309,7 +1309,7 @@ function main() {
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="TMusic"><a name="TMusic"></a><pre><span class="Identifier">TMusic</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<dt id="Music"><a name="Music"></a><pre><span class="Identifier">Music</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">src</span><span class="Other">:</span> <span class="Identifier">string</span>
   <span class="Identifier">music</span><span class="Other">:</span> <span class="Identifier">MusicPtr</span>
 </pre></dt>
@@ -1317,7 +1317,7 @@ function main() {
 
 
 </dd>
-<dt id="TSoundEffect"><a name="TSoundEffect"></a><pre><span class="Identifier">TSoundEffect</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<dt id="SoundEffect"><a name="SoundEffect"></a><pre><span class="Identifier">SoundEffect</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">src</span><span class="Other">:</span> <span class="Identifier">string</span>
   <span class="Identifier">chunk</span><span class="Other">:</span> <span class="Identifier">ChunkPtr</span>
 </pre></dt>
@@ -1325,9 +1325,9 @@ function main() {
 
 
 </dd>
-<dt id="TSoundManager"><a name="TSoundManager"></a><pre><span class="Identifier">TSoundManager</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
-  <span class="Identifier">bgms</span><span class="Other">:</span> <span class="Identifier">TableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">TMusic</span><span class="Other">]</span>
-  <span class="Identifier">ses</span><span class="Other">:</span> <span class="Identifier">TableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">TSoundEffect</span><span class="Other">]</span>
+<dt id="SoundManager"><a name="SoundManager"></a><pre><span class="Identifier">SoundManager</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+  <span class="Identifier">bgms</span><span class="Other">:</span> <span class="Identifier">TableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">Music</span><span class="Other">]</span>
+  <span class="Identifier">ses</span><span class="Other">:</span> <span class="Identifier">TableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">SoundEffect</span><span class="Other">]</span>
 </pre></dt>
 <dd>
 
@@ -1338,7 +1338,7 @@ function main() {
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="play"><a name="play,TMusic"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TMusic</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TinamouException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="play"><a name="play,Music"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Music</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TinamouException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Play music.
 
@@ -1348,7 +1348,7 @@ Play music.
 Stop background music.
 
 </dd>
-<dt id="play"><a name="play,TSoundEffect"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundEffect</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TinamouException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="play"><a name="play,SoundEffect"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SoundEffect</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TinamouException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Play sound.
 
@@ -1358,42 +1358,42 @@ Play sound.
 Stop sound.
 
 </dd>
-<dt id="newSoundManager"><a name="newSoundManager,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newSoundManager</span><span class="Other">(</span><span class="Identifier">numchans</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="newSoundManager"><a name="newSoundManager,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newSoundManager</span><span class="Other">(</span><span class="Identifier">numchans</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">SoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Create new sound manager.
 
 </dd>
-<dt id="setMusic"><a name="setMusic,TSoundManager,,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setMusic</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">,</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="setMusic"><a name="setMusic,SoundManager,,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setMusic</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">,</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">SoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Set new background music.
 
 </dd>
-<dt id="setMusic"><a name="setMusic,TSoundManager,,RWopsPtr"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setMusic</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Identifier">RWopsPtr</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="setMusic"><a name="setMusic,SoundManager,,RWopsPtr"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setMusic</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Identifier">RWopsPtr</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">SoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Set new background music from embedded data.
 
 </dd>
-<dt id="setEffect"><a name="setEffect,TSoundManager,,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setEffect</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">,</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="setEffect"><a name="setEffect,SoundManager,,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setEffect</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">,</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">SoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Set new sound effect.
 
 </dd>
-<dt id="setEffect"><a name="setEffect,TSoundManager,,RWopsPtr"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setEffect</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Identifier">RWopsPtr</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="setEffect"><a name="setEffect,SoundManager,,RWopsPtr"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setEffect</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <span class="Identifier">RWopsPtr</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">SoundManager</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Set new sound effect from embedded data.
 
 </dd>
-<dt id="getMusic"><a name="getMusic,TSoundManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getMusic</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TMusic</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="getMusic"><a name="getMusic,SoundManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getMusic</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Music</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">TinamouException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Get music.
 
 </dd>
-<dt id="getEffect"><a name="getEffect,TSoundManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getEffect</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TSoundEffect</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="getEffect"><a name="getEffect,SoundManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getEffect</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SoundManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">SoundEffect</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">TinamouException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Get sound effect.
@@ -1419,7 +1419,7 @@ Set sound effects' volume. <cite>vol</cite> must be in 0–1.
 Get sound effects' volume.
 
 </dd>
-<dt id="destroy"><a name="destroy,TSoundManager"></a><pre><span class="Keyword">proc</span> <span class="Identifier">destroy</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">TSoundManager</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="destroy"><a name="destroy,SoundManager"></a><pre><span class="Keyword">proc</span> <span class="Identifier">destroy</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SoundManager</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Free sound manager resources.
 
@@ -1434,7 +1434,7 @@ Free sound manager resources.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-05-03 12:53:36 UTC</small>
+        <small>Made with Nim. Generated: 2018-07-04 15:39:26 UTC</small>
       </div>
     </div>
   </div>

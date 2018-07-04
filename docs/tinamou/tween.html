@@ -1243,47 +1243,47 @@ function main() {
   <a class="reference reference-toplevel" href="#9" id="59">Lets</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#linear"
-    title="linear: TBaseTween = (proc (x: float): float = result = x, nil)"><wbr />linear<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="linear: BaseTween = (proc (x: float): float = result = x, nil)"><wbr />linear<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#quad"
-    title="quad: TBaseTween = (proc (x: float): float = result = x * x, nil)"><wbr />quad<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="quad: BaseTween = (proc (x: float): float = result = x * x, nil)"><wbr />quad<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#cubic"
-    title="cubic: TBaseTween = (proc (x: float): float = result = x * x * x, nil)"><wbr />cubic<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="cubic: BaseTween = (proc (x: float): float = result = x * x * x, nil)"><wbr />cubic<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#quint"
-    title="quint: TBaseTween = (proc (x: float): float = result = x * x * x * x, nil)"><wbr />quint<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="quint: BaseTween = (proc (x: float): float = result = x * x * x * x, nil)"><wbr />quint<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#quart"
-    title="quart: TBaseTween = (proc (x: float): float = result = x * x * x * x * x, nil)"><wbr />quart<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="quart: BaseTween = (proc (x: float): float = result = x * x * x * x * x, nil)"><wbr />quart<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#sinusoidal"
-    title="sinusoidal: TBaseTween = (proc (x: float): float = result = 1.0 -
+    title="sinusoidal: BaseTween = (proc (x: float): float = result = 1.0 -
     cos(x &#x2F; 2.0 * 3.141592653589793), nil)"><wbr />sinusoidal<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#exponential"
-    title="exponential: TBaseTween = (proc (x: float): float = result = if x == 0.0: 0.0
+    title="exponential: BaseTween = (proc (x: float): float = result = if x == 0.0: 0.0
 else: pow(1024.0, x - 1.0)
 , nil)"><wbr />exponential<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#circular"
-    title="circular: TBaseTween = (proc (x: float): float = result = 1.0 - sqrt(1.0 - x * x), nil)"><wbr />circular<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="circular: BaseTween = (proc (x: float): float = result = 1.0 - sqrt(1.0 - x * x), nil)"><wbr />circular<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#elastic"
-    title="elastic: TBaseTween = (proc (x: float): float = result = 56.0 * x * x * x * x * x -
+    title="elastic: BaseTween = (proc (x: float): float = result = 56.0 * x * x * x * x * x -
     105.0 * x * x * x * x + 60.0 * x * x * x - 10.0 * x * x, nil)"><wbr />elastic<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#softback"
-    title="softback: TBaseTween = (proc (x: float): float = result = x * x * 2.0 * x - 1.0, nil)"><wbr />softback<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="softback: BaseTween = (proc (x: float): float = result = x * x * 2.0 * x - 1.0, nil)"><wbr />softback<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#back"
-    title="back: TBaseTween = (proc (x: float): float = result = x * x * 2.70158 * x - 1.70158, nil)"><wbr />back<span class="attachedType" style="visibility:hidden"></span></a></li>
+    title="back: BaseTween = (proc (x: float): float = result = x * x * 2.70158 * x - 1.70158, nil)"><wbr />back<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#tweenIn,TBaseTween not nil"
-    title="tweenIn(f: TBaseTween): TBaseTween"><wbr />tween<wbr />In<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#tweenOut,TBaseTween not nil"
-    title="tweenOut(f: TBaseTween): TBaseTween"><wbr />tween<wbr />Out<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#tweenInOut,TBaseTween not nil"
-    title="tweenInOut(f: TBaseTween): TBaseTween"><wbr />tween<wbr />In<wbr />Out<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#yoyo,TBaseTween not nil"
-    title="yoyo(f: TBaseTween): TBaseTween"><wbr />yoyo<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#ease,TBaseTween not nil,uint,float,float,uint"
-    title="ease(f: TBaseTween; time: uint; begin, delta: float; duration: uint): float"><wbr />ease<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#tweenIn,BaseTween not nil"
+    title="tweenIn(f: BaseTween): BaseTween"><wbr />tween<wbr />In<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#tweenOut,BaseTween not nil"
+    title="tweenOut(f: BaseTween): BaseTween"><wbr />tween<wbr />Out<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#tweenInOut,BaseTween not nil"
+    title="tweenInOut(f: BaseTween): BaseTween"><wbr />tween<wbr />In<wbr />Out<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#yoyo,BaseTween not nil"
+    title="yoyo(f: BaseTween): BaseTween"><wbr />yoyo<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#ease,BaseTween not nil,uint,float,float,uint"
+    title="ease(f: BaseTween; time: uint; begin, delta: float; duration: uint): float"><wbr />ease<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1307,61 +1307,61 @@ else: pow(1024.0, x - 1.0)
 <div class="section" id="9">
 <h1><a class="toc-backref" href="#9">Lets</a></h1>
 <dl class="item">
-<dt id="linear"><a name="linear"></a><pre><span class="Identifier">linear</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
+<dt id="linear"><a name="linear"></a><pre><span class="Identifier">linear</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="quad"><a name="quad"></a><pre><span class="Identifier">quad</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
+<dt id="quad"><a name="quad"></a><pre><span class="Identifier">quad</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="cubic"><a name="cubic"></a><pre><span class="Identifier">cubic</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
+<dt id="cubic"><a name="cubic"></a><pre><span class="Identifier">cubic</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="quint"><a name="quint"></a><pre><span class="Identifier">quint</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
+<dt id="quint"><a name="quint"></a><pre><span class="Identifier">quint</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="quart"><a name="quart"></a><pre><span class="Identifier">quart</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
+<dt id="quart"><a name="quart"></a><pre><span class="Identifier">quart</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="sinusoidal"><a name="sinusoidal"></a><pre><span class="Identifier">sinusoidal</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="FloatNumber">1.0</span> <span class="Operator">-</span>
+<dt id="sinusoidal"><a name="sinusoidal"></a><pre><span class="Identifier">sinusoidal</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="FloatNumber">1.0</span> <span class="Operator">-</span>
     <span class="Identifier">cos</span><span class="Other">(</span><span class="Identifier">x</span> <span class="Operator">/</span> <span class="FloatNumber">2.0</span> <span class="Operator">*</span> <span class="FloatNumber">3.141592653589793</span><span class="Other">)</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="exponential"><a name="exponential"></a><pre><span class="Identifier">exponential</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Keyword">if</span> <span class="Identifier">x</span> <span class="Operator">==</span> <span class="FloatNumber">0.0</span><span class="Other">:</span> <span class="FloatNumber">0.0</span>
+<dt id="exponential"><a name="exponential"></a><pre><span class="Identifier">exponential</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Keyword">if</span> <span class="Identifier">x</span> <span class="Operator">==</span> <span class="FloatNumber">0.0</span><span class="Other">:</span> <span class="FloatNumber">0.0</span>
 <span class="Keyword">else</span><span class="Other">:</span> <span class="Identifier">pow</span><span class="Other">(</span><span class="FloatNumber">1024.0</span><span class="Other">,</span> <span class="Identifier">x</span> <span class="Operator">-</span> <span class="FloatNumber">1.0</span><span class="Other">)</span>
 <span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="circular"><a name="circular"></a><pre><span class="Identifier">circular</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="FloatNumber">1.0</span> <span class="Operator">-</span> <span class="Identifier">sqrt</span><span class="Other">(</span><span class="FloatNumber">1.0</span> <span class="Operator">-</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">)</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
+<dt id="circular"><a name="circular"></a><pre><span class="Identifier">circular</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="FloatNumber">1.0</span> <span class="Operator">-</span> <span class="Identifier">sqrt</span><span class="Other">(</span><span class="FloatNumber">1.0</span> <span class="Operator">-</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">)</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="elastic"><a name="elastic"></a><pre><span class="Identifier">elastic</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="FloatNumber">56.0</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">-</span>
+<dt id="elastic"><a name="elastic"></a><pre><span class="Identifier">elastic</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="FloatNumber">56.0</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">-</span>
     <span class="FloatNumber">105.0</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">+</span> <span class="FloatNumber">60.0</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">-</span> <span class="FloatNumber">10.0</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="softback"><a name="softback"></a><pre><span class="Identifier">softback</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="FloatNumber">2.0</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">-</span> <span class="FloatNumber">1.0</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
+<dt id="softback"><a name="softback"></a><pre><span class="Identifier">softback</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="FloatNumber">2.0</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">-</span> <span class="FloatNumber">1.0</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="back"><a name="back"></a><pre><span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="FloatNumber">2.70158</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">-</span> <span class="FloatNumber">1.70158</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
+<dt id="back"><a name="back"></a><pre><span class="Identifier">back</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other">=</span> <span class="Other">(</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="Identifier">result</span> <span class="Other">=</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="FloatNumber">2.70158</span> <span class="Operator">*</span> <span class="Identifier">x</span> <span class="Operator">-</span> <span class="FloatNumber">1.70158</span><span class="Other">,</span> <span class="Keyword">nil</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
@@ -1371,27 +1371,27 @@ else: pow(1024.0, x - 1.0)
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="tweenIn"><a name="tweenIn,TBaseTween not nil"></a><pre><span class="Keyword">proc</span> <span class="Identifier">tweenIn</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="tweenIn"><a name="tweenIn,BaseTween not nil"></a><pre><span class="Keyword">proc</span> <span class="Identifier">tweenIn</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">BaseTween</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="tweenOut"><a name="tweenOut,TBaseTween not nil"></a><pre><span class="Keyword">proc</span> <span class="Identifier">tweenOut</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="tweenOut"><a name="tweenOut,BaseTween not nil"></a><pre><span class="Keyword">proc</span> <span class="Identifier">tweenOut</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">BaseTween</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="tweenInOut"><a name="tweenInOut,TBaseTween not nil"></a><pre><span class="Keyword">proc</span> <span class="Identifier">tweenInOut</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="tweenInOut"><a name="tweenInOut,BaseTween not nil"></a><pre><span class="Keyword">proc</span> <span class="Identifier">tweenInOut</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">BaseTween</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="yoyo"><a name="yoyo,TBaseTween not nil"></a><pre><span class="Keyword">proc</span> <span class="Identifier">yoyo</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="yoyo"><a name="yoyo,BaseTween not nil"></a><pre><span class="Keyword">proc</span> <span class="Identifier">yoyo</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">BaseTween</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BaseTween</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
-
+Repeat forwarding and backwarding.
 
 </dd>
-<dt id="ease"><a name="ease,TBaseTween not nil,uint,float,float,uint"></a><pre><span class="Keyword">proc</span> <span class="Identifier">ease</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">TBaseTween</span><span class="Other">;</span> <span class="Identifier">time</span><span class="Other">:</span> <span class="Identifier">uint</span><span class="Other">;</span> <span class="Identifier">begin</span><span class="Other">,</span> <span class="Identifier">delta</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">uint</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="ease"><a name="ease,BaseTween not nil,uint,float,float,uint"></a><pre><span class="Keyword">proc</span> <span class="Identifier">ease</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">BaseTween</span><span class="Other">;</span> <span class="Identifier">time</span><span class="Other">:</span> <span class="Identifier">uint</span><span class="Other">;</span> <span class="Identifier">begin</span><span class="Other">,</span> <span class="Identifier">delta</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">uint</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Apply easing function.
@@ -1407,7 +1407,7 @@ Apply easing function.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-05-03 12:53:36 UTC</small>
+        <small>Made with Nim. Generated: 2018-07-04 15:39:27 UTC</small>
       </div>
     </div>
   </div>

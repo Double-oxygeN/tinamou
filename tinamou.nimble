@@ -23,7 +23,7 @@ task cleanup, "clean up files":
   exec "find tests -type f ! -name \"*.*\" -delete && rm -rf tests/nimcache"
 
 task docgen, "generate documentation":
-  exec "nimble doc src/tinamou.nim --project -o:docs"
+  exec "nimble doc2 src/tinamou.nim --project -o:docs"
 
 task test, "test codes":
   withDir "tests":
