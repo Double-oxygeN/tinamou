@@ -10,14 +10,13 @@ import
   sdl2.ttf,
 
   imagemanager,
+  fontmanager,
   exception
 
 type
   Painter* = ref object of RootObj
     renderer: RendererPtr
-    font: FontPtr
-    fontPath: string
-    fontSize: int
+    font: Font
 
   OriginKind* {.pure.} = enum
     NW = 0, N, NE, W, C, E, SW, S, SE
@@ -91,8 +90,6 @@ proc newTPainter*(renderer: RendererPtr): Painter =
   new result
   result.renderer = renderer
   result.font = nil
-  result.fontPath = ""
-  result.fontSize = 20
 
 proc clear*(self: Painter; r, g, b: uint8; alpha: uint8 = 255) =
   ## Clear the window.
@@ -271,35 +268,23 @@ proc bezier*[N: static[int], T: SomeNumber](self: Painter, xs, ys: array[N, T]):
 
 proc text*[N: SomeNumber](self: Painter, str: string; x, y: N; origin: OriginKind = OriginKind.SW): PaintableText =
   ## Create paintable text.
-  new result
-  result.renderer = self.renderer
-  result.str = str
-  result.font = self.font
-  result.x = x.toInt16
-  result.y = y.toInt16
-  result.origin = origin
-
-proc setFont*(self: Painter, fontPath: string, fontSize: int) =
-  ## Set font from path.
-  ## If loading fails, then raise an error.
-  if ttfWasInit():
-    if (fontPath != self.fontPath) or (fontSize != self.fontSize):
-      if not self.font.isNil:
-        ttf.close self.font
-
-      self.font = openFont(fontPath, fontSize.cint)
-      if self.font.isNil:
-        raise newTinamouException(FONT_LOAD_ERROR_CODE, "Failed loading font " & fontPath & ".")
-
-      self.fontPath = fontPath
-      self.fontSize = fontSize
+  ## Please set font by Painter#setFont before calling it.
+  if self.font.isNil:
+    raise newTinamouException(FONT_NEVER_SET_ERROR_CODE, "No font is set on a painter. Please call Painter#setFont before filling text.")
 
   else:
-    raise newTinamouException(INIT_ERROR_CODE, "SDL2_TTF was not initialized.")
+    new result
+    result.renderer = self.renderer
+    result.str = str
+    result.font = self.font.getFontPtr()
+    result.x = x.toInt16
+    result.y = y.toInt16
+    result.origin = origin
 
-proc getFontPath*(self: Painter): string =
-  ## Get current font path.
-  return self.fontPath
+proc setFont*(self: Painter, font: Font) =
+  ## Set font from path.
+  ## If loading fails, then raise an error.
+  self.font = font
 
 proc stroke*(self: PaintableRect; r, g, b: uint8, alpha: uint8 = 255) =
   ## Stroke rectangle.
