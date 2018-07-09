@@ -16,7 +16,11 @@ import
   scene,
   scenemanager,
   painter,
-  windowmanager
+  windowmanager,
+  tools,
+  actions,
+  sharedinfo,
+  transition
 
 const
   framesPerSecond: int = 61
