@@ -19,7 +19,7 @@ import
   windowmanager
 
 const
-  framesPerSecond: int = 60
+  framesPerSecond: int = 61
   oneFrameInterval: float = 1e3 / framesPerSecond.toFloat() # [ms]
   errorLogFileName: string = "TinamouError.log"
 
@@ -99,7 +99,7 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
   defer: destroy window
 
   let renderer = window.createRenderer(index = -1,
-    flags = Renderer_Accelerated)
+    flags = Renderer_Accelerated or Renderer_PresentVsync)
   if renderer.isNil:
     raise newTinamouException(RENDERER_CREATION_ERROR_CODE, "Renderer could not be created. " & $sdl2.getError())
   defer: destroy renderer
@@ -146,8 +146,9 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
         actions.update(e)
 
       # Drawing.
-      currentScene.draw(painter, tools, actions)
-      painter.present()
+      if intervalTime >= 0:
+        currentScene.draw(painter, tools, actions)
+        painter.present()
 
       # Update states.
       let
@@ -180,7 +181,7 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
         endTicks: uint32 = getTicks()
         restTime: float = intervalTime - (endTicks.int - ticks.int).toFloat()
       if restTime > 0:
-        sdl2.delay((restTime * 0.987).toInt().uint32)
+        sdl2.delay(restTime.toInt().uint32)
         intervalTime = 0
       else:
         intervalTime = restTime
