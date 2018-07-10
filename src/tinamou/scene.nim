@@ -1,4 +1,4 @@
-## Scene and Transition
+## Scene
 
 import
   colors,

@@ -1244,9 +1244,7 @@ function main() {
       <li><a class="reference" href="#Painter"
     title="Painter = ref object of RootObj
   renderer: RendererPtr
-  font: FontPtr
-  fontPath: string
-  fontSize: int"><wbr />Painter<span class="attachedType" style="visibility:hidden"></span></a></li>
+  font: Font"><wbr />Painter<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#OriginKind"
     title="OriginKind = enum
   NW = 0, N, NE, W, C, E, SW, S, SE"><wbr />Origin<wbr />Kind<span class="attachedType" style="visibility:hidden"></span></a></li>
@@ -1349,10 +1347,8 @@ function main() {
   <li><a class="reference" href="#text,Painter,string,N,N,OriginKind"
     title="text[N: SomeNumber](self: Painter; str: string; x, y: N;
                    origin: OriginKind = OriginKind.SW): PaintableText"><wbr />text<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#setFont,Painter,string,int"
-    title="setFont(self: Painter; fontPath: string; fontSize: int)"><wbr />set<wbr />Font<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#getFontPath,Painter"
-    title="getFontPath(self: Painter): string"><wbr />get<wbr />Font<wbr />Path<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
+  <li><a class="reference" href="#setFont,Painter,Font"
+    title="setFont(self: Painter; font: Font)"><wbr />set<wbr />Font<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
   <li><a class="reference" href="#stroke,PaintableRect,uint8,uint8,uint8,uint8"
     title="stroke(self: PaintableRect; r, g, b: uint8; alpha: uint8 = 255)"><wbr />stroke<span class="attachedType" style="visibility:hidden">PaintableRect</span></a></li>
   <li><a class="reference" href="#stroke,PaintableRoundRect,uint8,uint8,uint8,uint8"
@@ -1407,16 +1403,14 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="colors.html">colors</a>, <a class="reference external" href="math.html">math</a>, <a class="reference external" href="sdl2.html">sdl2</a>, <a class="reference external" href="sdl2/gfx.html">sdl2/gfx</a>, <a class="reference external" href="sdl2/image.html">sdl2/image</a>, <a class="reference external" href="sdl2/ttf.html">sdl2/ttf</a>, <a class="reference external" href="imagemanager.html">imagemanager</a>, <a class="reference external" href="exception.html">exception</a>
+<a class="reference external" href="colors.html">colors</a>, <a class="reference external" href="math.html">math</a>, <a class="reference external" href="sdl2.html">sdl2</a>, <a class="reference external" href="sdl2/gfx.html">sdl2/gfx</a>, <a class="reference external" href="sdl2/image.html">sdl2/image</a>, <a class="reference external" href="sdl2/ttf.html">sdl2/ttf</a>, <a class="reference external" href="imagemanager.html">imagemanager</a>, <a class="reference external" href="fontmanager.html">fontmanager</a>, <a class="reference external" href="exception.html">exception</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
 <dt id="Painter"><a name="Painter"></a><pre><span class="Identifier">Painter</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">RendererPtr</span>
-  <span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">FontPtr</span>
-  <span class="Identifier">fontPath</span><span class="Other">:</span> <span class="Identifier">string</span>
-  <span class="Identifier">fontSize</span><span class="Other">:</span> <span class="Identifier">int</span>
+  <span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">Font</span>
 </pre></dt>
 <dd>
 
@@ -1622,18 +1616,12 @@ Create paintable bezier curve.
 <dt id="text"><a name="text,Painter,string,N,N,OriginKind"></a><pre><span class="Keyword">proc</span> <span class="Identifier">text</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">str</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">;</span>
                        <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">OriginKind</span> <span class="Other">=</span> <span class="Identifier">OriginKind</span><span class="Other">.</span><span class="Identifier">SW</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintableText</span></pre></dt>
 <dd>
-Create paintable text.
+Create paintable text. Please set font by Painter#setFont before calling it.
 
 </dd>
-<dt id="setFont"><a name="setFont,Painter,string,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setFont</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">fontPath</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">fontSize</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TinamouException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="setFont"><a name="setFont,Painter,Font"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setFont</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">Font</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Set font from path. If loading fails, then raise an error.
-
-</dd>
-<dt id="getFontPath"><a name="getFontPath,Painter"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getFontPath</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-Get current font path.
 
 </dd>
 <dt id="stroke"><a name="stroke,PaintableRect,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableRect</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
@@ -1753,7 +1741,7 @@ Fill rectangle.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-07-04 15:39:26 UTC</small>
+        <small>Made with Nim. Generated: 2018-07-10 01:07:51 UTC</small>
       </div>
     </div>
   </div>
