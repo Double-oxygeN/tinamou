@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.4.0"
+version       = "0.5.0"
 author        = "Double_oxygeN"
 description   = "Game Library in Nim with SDL2"
 license       = "MIT"
@@ -10,7 +10,7 @@ skipDirs      = @["tests"]
 
 # Dependencies
 
-requires "nim >= 0.17.2"
+requires "nim >= 0.18.0"
 requires "sdl2 >= 1.1"
 
 # tasks
