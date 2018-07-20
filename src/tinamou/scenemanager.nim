@@ -14,14 +14,14 @@ type
 proc newSceneManager*: SceneManager =
   ## Create new SceneManager.
   new result
-  result.table = newTable[string, BaseScene]()
+  result.table = newTable[SceneId, BaseScene]()
 
-proc setScene*(self: SceneManager, name: string, scene: BaseScene) =
+proc setScene*(self: SceneManager, name: SceneId, scene: BaseScene) =
   ## Set scene with key string.
   if not self.table.hasKey(name):
     self.table.add(name, scene)
 
-proc getScene*(self: SceneManager, name: string): BaseScene =
+proc getScene*(self: SceneManager, name: SceneId): BaseScene =
   ## Get scene by key string.
   ## If no scenes are found, then throw exception.
   try:
