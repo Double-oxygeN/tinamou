@@ -1306,22 +1306,22 @@ function main() {
     title="clear(self: Painter; color: colors.Color; alpha: uint8 = 255)"><wbr />clear<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
   <li><a class="reference" href="#clear,Painter,"
     title="clear(self: Painter; color: sdl2.Color)"><wbr />clear<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#drawImage,Painter,Image,N,N,int,uint8,OriginKind,bool"
+  <li><a class="reference" href="#drawImage,Painter,Image,N,N,int,uint8,OriginKind,bool,float"
     title="drawImage[N: SomeNumber](self: Painter; image: Image; x, y: N; spriteNum: int = 0;
                         alpha: uint8 = 255; origin: OriginKind = OriginKind.NW;
-                        fixRatio: bool = false)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#drawImage,Painter,Image,N0,N0,N1,N1,int,uint8,OriginKind,bool"
+                        fixRatio: bool = false; rotAngle: float = 0.0)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
+  <li><a class="reference" href="#drawImage,Painter,Image,N0,N0,N1,N1,int,uint8,OriginKind,bool,float"
     title="drawImage[N0, N1: SomeNumber](self: Painter; image: Image; x, y: N0; width, height: N1;
                             spriteNum: int = 0; alpha: uint8 = 255;
                             origin: OriginKind = OriginKind.NW;
-                            fixRatio: bool = false)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#drawImage,Painter,Image,N0,N0,N1,N1,N2,N2,N3,N3,int,uint8,OriginKind,bool"
+                            fixRatio: bool = false; rotAngle: float = 0.0)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
+  <li><a class="reference" href="#drawImage,Painter,Image,N0,N0,N1,N1,N2,N2,N3,N3,int,uint8,OriginKind,bool,float"
     title="drawImage[N0, N1, N2, N3: SomeNumber](self: Painter; image: Image; srcX, srcY: N0;
                                   srcWidth, srcHeight: N1; x, y: N2;
                                   width, height: N3; spriteNum: int = 0;
                                   alpha: uint8 = 255;
                                   origin: OriginKind = OriginKind.NW;
-                                  fixRatio: bool = false)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
+                                  fixRatio: bool = false; rotAngle: float = 0.0)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
   <li><a class="reference" href="#rect,Painter,N0,N0,N1,N1"
     title="rect[N0, N1: SomeNumber](self: Painter; x, y: N0; w, h: N1): PaintableRect"><wbr />rect<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
   <li><a class="reference" href="#roundRect,Painter,N0,N0,N1,N1,N2"
@@ -1403,7 +1403,7 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="colors.html">colors</a>, <a class="reference external" href="math.html">math</a>, <a class="reference external" href="sdl2.html">sdl2</a>, <a class="reference external" href="sdl2/gfx.html">sdl2/gfx</a>, <a class="reference external" href="sdl2/image.html">sdl2/image</a>, <a class="reference external" href="sdl2/ttf.html">sdl2/ttf</a>, <a class="reference external" href="imagemanager.html">imagemanager</a>, <a class="reference external" href="fontmanager.html">fontmanager</a>, <a class="reference external" href="exception.html">exception</a>
+<a class="reference external" href="colors.html">colors</a>, <a class="reference external" href="math.html">math</a>, <a class="reference external" href="lenientops.html">lenientops</a>, <a class="reference external" href="sdl2.html">sdl2</a>, <a class="reference external" href="sdl2/gfx.html">sdl2/gfx</a>, <a class="reference external" href="sdl2/image.html">sdl2/image</a>, <a class="reference external" href="sdl2/ttf.html">sdl2/ttf</a>, <a class="reference external" href="imagemanager.html">imagemanager</a>, <a class="reference external" href="fontmanager.html">fontmanager</a>, <a class="reference external" href="exception.html">exception</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
@@ -1535,30 +1535,30 @@ Clear the window.
 Clear the window.
 
 </dd>
-<dt id="drawImage"><a name="drawImage,Painter,Image,N,N,int,uint8,OriginKind,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">Image</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">;</span> <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
+<dt id="drawImage"><a name="drawImage,Painter,Image,N,N,int,uint8,OriginKind,bool,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">Image</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">;</span> <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
                             <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">;</span> <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">OriginKind</span> <span class="Other">=</span> <span class="Identifier">OriginKind</span><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span>
-                            <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span></pre></dt>
+                            <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">rotAngle</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.0</span><span class="Other">)</span></pre></dt>
 <dd>
-Draw image.
+Draw image. The unit of <tt class="docutils literal"><span class="pre">rotAngle</span></tt> is degree.
 
 </dd>
-<dt id="drawImage"><a name="drawImage,Painter,Image,N0,N0,N1,N1,int,uint8,OriginKind,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">Image</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span>
+<dt id="drawImage"><a name="drawImage,Painter,Image,N0,N0,N1,N1,int,uint8,OriginKind,bool,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">Image</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span>
                                 <span class="Identifier">width</span><span class="Other">,</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">;</span> <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
                                 <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">;</span>
                                 <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">OriginKind</span> <span class="Other">=</span> <span class="Identifier">OriginKind</span><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span>
-                                <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span></pre></dt>
+                                <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">rotAngle</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.0</span><span class="Other">)</span></pre></dt>
 <dd>
-Draw image.
+Draw image. The unit of <tt class="docutils literal"><span class="pre">rotAngle</span></tt> is degree.
 
 </dd>
-<dt id="drawImage"><a name="drawImage,Painter,Image,N0,N0,N1,N1,N2,N2,N3,N3,int,uint8,OriginKind,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">,</span> <span class="Identifier">N2</span><span class="Other">,</span> <span class="Identifier">N3</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">Image</span><span class="Other">;</span> <span class="Identifier">srcX</span><span class="Other">,</span> <span class="Identifier">srcY</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span>
+<dt id="drawImage"><a name="drawImage,Painter,Image,N0,N0,N1,N1,N2,N2,N3,N3,int,uint8,OriginKind,bool,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">,</span> <span class="Identifier">N2</span><span class="Other">,</span> <span class="Identifier">N3</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">Image</span><span class="Other">;</span> <span class="Identifier">srcX</span><span class="Other">,</span> <span class="Identifier">srcY</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span>
                                       <span class="Identifier">srcWidth</span><span class="Other">,</span> <span class="Identifier">srcHeight</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N2</span><span class="Other">;</span>
                                       <span class="Identifier">width</span><span class="Other">,</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">N3</span><span class="Other">;</span> <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
                                       <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">;</span>
                                       <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">OriginKind</span> <span class="Other">=</span> <span class="Identifier">OriginKind</span><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span>
-                                      <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span></pre></dt>
+                                      <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">rotAngle</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.0</span><span class="Other">)</span></pre></dt>
 <dd>
-Draw image.
+Draw image. The unit of <tt class="docutils literal"><span class="pre">rotAngle</span></tt> is degree.
 
 </dd>
 <dt id="rect"><a name="rect,Painter,N0,N0,N1,N1"></a><pre><span class="Keyword">proc</span> <span class="Identifier">rect</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span> <span class="Identifier">w</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintableRect</span></pre></dt>
@@ -1741,7 +1741,7 @@ Fill rectangle.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-07-10 01:07:51 UTC</small>
+        <small>Made with Nim. Generated: 2018-09-02 13:58:31 UTC</small>
       </div>
     </div>
   </div>

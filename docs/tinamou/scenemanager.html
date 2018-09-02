@@ -1252,10 +1252,10 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#newSceneManager,"
     title="newSceneManager(): SceneManager"><wbr />new<wbr />Scene<wbr />Manager<span class="attachedType" style="visibility:hidden">SceneManager</span></a></li>
-  <li><a class="reference" href="#setScene,SceneManager,string,BaseScene"
-    title="setScene(self: SceneManager; name: string; scene: BaseScene)"><wbr />set<wbr />Scene<span class="attachedType" style="visibility:hidden">SceneManager</span></a></li>
-  <li><a class="reference" href="#getScene,SceneManager,string"
-    title="getScene(self: SceneManager; name: string): BaseScene"><wbr />get<wbr />Scene<span class="attachedType" style="visibility:hidden">SceneManager</span></a></li>
+  <li><a class="reference" href="#setScene,SceneManager,SceneId,BaseScene"
+    title="setScene(self: SceneManager; name: SceneId; scene: BaseScene)"><wbr />set<wbr />Scene<span class="attachedType" style="visibility:hidden">SceneManager</span></a></li>
+  <li><a class="reference" href="#getScene,SceneManager,SceneId"
+    title="getScene(self: SceneManager; name: SceneId): BaseScene"><wbr />get<wbr />Scene<span class="attachedType" style="visibility:hidden">SceneManager</span></a></li>
 
   </ul>
 </li>
@@ -1291,12 +1291,12 @@ function main() {
 Create new SceneManager.
 
 </dd>
-<dt id="setScene"><a name="setScene,SceneManager,string,BaseScene"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setScene</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SceneManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">scene</span><span class="Other">:</span> <span class="Identifier">BaseScene</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="setScene"><a name="setScene,SceneManager,SceneId,BaseScene"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setScene</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SceneManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">SceneId</span><span class="Other">;</span> <span class="Identifier">scene</span><span class="Other">:</span> <span class="Identifier">BaseScene</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Set scene with key string.
 
 </dd>
-<dt id="getScene"><a name="getScene,SceneManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getScene</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SceneManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BaseScene</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="getScene"><a name="getScene,SceneManager,SceneId"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getScene</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">SceneManager</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">SceneId</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">BaseScene</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TinamouException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Get scene by key string. If no scenes are found, then throw exception.
@@ -1312,7 +1312,7 @@ Get scene by key string. If no scenes are found, then throw exception.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-07-10 01:07:51 UTC</small>
+        <small>Made with Nim. Generated: 2018-09-02 13:58:31 UTC</small>
       </div>
     </div>
   </div>
