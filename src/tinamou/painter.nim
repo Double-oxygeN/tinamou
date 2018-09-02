@@ -108,7 +108,7 @@ proc clear*(self: Painter, color: sdl2.Color) =
   self.renderer.setDrawColor(color)
   self.renderer.clear()
 
-proc drawImage0(self: Painter, image: Image, srcRect: ptr Rect = nil, dstRect: ptr Rect, spriteNum: int, alpha: uint8) =
+proc drawImage0(self: Painter, image: Image, srcRect: ptr Rect = nil, dstRect: ptr Rect, spriteNum: int, alpha: uint8, rotAngle: float = 0.0, rotCenter: ptr Point = nil) =
   ## Draw image.
   image.getTexture().setTextureAlphaMod(alpha)
 
@@ -122,20 +122,28 @@ proc drawImage0(self: Painter, image: Image, srcRect: ptr Rect = nil, dstRect: p
         else:
           (x: (origin.x + srcRect.x).cint, y: (origin.y + srcRect.y).cint, w: (spriteSize.width - srcRect.x).cint, h: (spriteSize.height - srcRect.y).cint)
 
-    self.renderer.copy(image.getTexture(), addr actualSrcRect, dstRect)
+    if rotAngle != 0.0:
+      self.renderer.copyEx(image.getTexture(), addr actualSrcRect, dstRect, rotAngle, rotCenter)
+    else:
+      self.renderer.copy(image.getTexture(), addr actualSrcRect, dstRect)
 
   else:
-    self.renderer.copy(image.getTexture(), srcRect, dstRect)
+    if rotAngle != 0.0:
+      self.renderer.copyEx(image.getTexture(), srcRect, dstRect, rotAngle, rotCenter)
+    else:
+      self.renderer.copy(image.getTexture(), srcRect, dstRect)
 
-proc drawImage*[N: SomeNumber](self: Painter, image: Image; x, y: N; spriteNum: int = 0; alpha: uint8 = 255; origin: OriginKind = OriginKind.NW; fixRatio: bool = false) =
+proc drawImage*[N: SomeNumber](self: Painter, image: Image; x, y: N; spriteNum: int = 0; alpha: uint8 = 255; origin: OriginKind = OriginKind.NW; fixRatio: bool = false; rotAngle: float = 0.0) =
   ## Draw image.
+  ## The unit of ``rotAngle`` is degree.
   let originPos: tuple[x, y: float] = origin.getOrigin(x, y, image.width, image.height)
   var dstRect: Rect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: image.width.cint, h: image.height.cint)
 
-  self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum, alpha = alpha)
+  self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum, alpha = alpha, rotAngle = rotAngle)
 
-proc drawImage*[N0, N1: SomeNumber](self: Painter, image: Image; x, y: N0; width, height: N1; spriteNum: int = 0; alpha: uint8 = 255; origin: OriginKind = OriginKind.NW; fixRatio: bool = false) =
+proc drawImage*[N0, N1: SomeNumber](self: Painter, image: Image; x, y: N0; width, height: N1; spriteNum: int = 0; alpha: uint8 = 255; origin: OriginKind = OriginKind.NW; fixRatio: bool = false; rotAngle: float = 0.0) =
   ## Draw image.
+  ## The unit of ``rotAngle`` is degree.
   var dstRect: Rect
 
   if fixRatio:
@@ -149,10 +157,11 @@ proc drawImage*[N0, N1: SomeNumber](self: Painter, image: Image; x, y: N0; width
     let originPos: tuple[x, y: float] = origin.getOrigin(x, y, width, height)
     dstRect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: width.toInt16.cint, h: height.toInt16.cint)
 
-  self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum, alpha = alpha)
+  self.drawImage0(image = image, dstRect = addr dstRect, spriteNum = spriteNum, alpha = alpha, rotAngle = rotAngle)
 
-proc drawImage*[N0, N1, N2, N3: SomeNumber](self: Painter, image: Image; srcX, srcY: N0; srcWidth, srcHeight: N1; x, y: N2; width, height: N3; spriteNum: int = 0; alpha: uint8 = 255; origin: OriginKind = OriginKind.NW; fixRatio: bool = false) =
+proc drawImage*[N0, N1, N2, N3: SomeNumber](self: Painter, image: Image; srcX, srcY: N0; srcWidth, srcHeight: N1; x, y: N2; width, height: N3; spriteNum: int = 0; alpha: uint8 = 255; origin: OriginKind = OriginKind.NW; fixRatio: bool = false; rotAngle: float = 0.0) =
   ## Draw image.
+  ## The unit of ``rotAngle`` is degree.
   let
     actualSrcWidth: float = min(srcWidth.float, image.width.float - srcX.float)
     actualSrcHeight: float = min(srcHeight.float, image.height.float - srcY.float)
@@ -174,7 +183,7 @@ proc drawImage*[N0, N1, N2, N3: SomeNumber](self: Painter, image: Image; srcX, s
       originPos: tuple[x, y: float] = origin.getOrigin(x, y, width, height)
     dstRect = (x: originPos.x.toInt.cint, y: originPos.y.toInt.cint, w: actualWidth.toInt.cint, h: actualHeight.toInt.cint)
 
-  self.drawImage0(image = image, srcRect = addr srcRect, dstRect = addr dstRect, spriteNum = spriteNum, alpha = alpha)
+  self.drawImage0(image = image, srcRect = addr srcRect, dstRect = addr dstRect, spriteNum = spriteNum, alpha = alpha, rotAngle = rotAngle)
 
 proc rect*[N0, N1: SomeNumber](self: Painter; x, y: N0; w, h: N1): PaintableRect =
   ## Create paintable rectangle.
