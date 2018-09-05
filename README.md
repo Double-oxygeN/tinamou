@@ -84,9 +84,9 @@ When starting the game, give the second argument of `startGame` the initial scen
 ```nim
 when isMainModule:
   let scenes = newSceneManager()
-  scenes.addScene("ex1", newExScene())
-  scenes.addScene("ex2", newExScene2())
-  scenes.addScene("ex3", newExScene3())
+  scenes.setScene("ex1", newExScene())
+  scenes.setScene("ex2", newExScene2())
+  scenes.setScene("ex3", newExScene3())
 
   startGame(sceneManager = scenes, firstSceneId = "ex1", title = "Tinamou Example", width = 1200, height = 800, showFPS = true)
 
