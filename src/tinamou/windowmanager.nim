@@ -44,7 +44,7 @@ proc isFullScreen*(self: WindowManager): bool =
 
 proc setFullScreen*(self: WindowManager, flag: bool) =
   ## Change fullscreen flag.
-  if not self.window.setFullscreen(if flag: SDL_WINDOW_FULLSCREEN else: 0):
+  if not self.window.setFullscreen(if flag: SDL_WINDOW_FULLSCREEN_DESKTOP else: 0):
     raise newTinamouException(FULLSCREEN_ERROR, "Could not set full screen. " & $sdl2.getError())
 
 proc alert*(self: WindowManager, message: string, title: string = "") =
