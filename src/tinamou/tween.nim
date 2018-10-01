@@ -38,6 +38,6 @@ proc yoyo*(f: BaseTween): BaseTween =
     let l: float = x mod 2
     return if l < 1: f(l) else: f(2 - l)
 
-proc ease*(f: BaseTween; time: Positive; begin, delta: float; duration: Positive): float =
+proc ease*(f: BaseTween; time: Natural; begin, delta: float; duration: Positive): float =
   ## Apply easing function.
   return begin + delta * f(time / duration)

@@ -26,7 +26,7 @@ import colors
 
 type
   ExScene = ref object of BaseScene
-    count: Positive
+    count: Natural
 
   ExScene2 = ref object of BaseScene
 
