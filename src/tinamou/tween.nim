@@ -5,7 +5,7 @@
 ##
 ## ::
 ##   var
-##     t: uint = 0
+##     t: int = 0
 ##     x: float = quad.tweenIn().ease(t, 0.0, 400.0, 120)
 ##     y: float = exponential.tweenInOut().yoyo().ease(t, 0.0, 600.0, 30)
 ##
@@ -38,6 +38,6 @@ proc yoyo*(f: BaseTween): BaseTween =
     let l: float = x mod 2
     return if l < 1: f(l) else: f(2 - l)
 
-proc ease*(f: BaseTween; time: uint; begin, delta: float; duration: uint): float =
+proc ease*(f: BaseTween; time: Positive; begin, delta: float; duration: Positive): float =
   ## Apply easing function.
-  return begin + delta * f(time.int / duration.int)
+  return begin + delta * f(time / duration)

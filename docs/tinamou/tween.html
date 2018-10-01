@@ -1282,8 +1282,8 @@ else: pow(1024.0, x - 1.0)
     title="tweenInOut(f: BaseTween): BaseTween"><wbr />tween<wbr />In<wbr />Out<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#yoyo,BaseTween not nil"
     title="yoyo(f: BaseTween): BaseTween"><wbr />yoyo<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#ease,BaseTween not nil,uint,float,float,uint"
-    title="ease(f: BaseTween; time: uint; begin, delta: float; duration: uint): float"><wbr />ease<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#ease,BaseTween not nil,Positive,float,float,Positive"
+    title="ease(f: BaseTween; time: Positive; begin, delta: float; duration: Positive): float"><wbr />ease<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
@@ -1295,7 +1295,7 @@ else: pow(1024.0, x - 1.0)
   <div id="tocRoot"></div>
   <p class="module-desc">Tween
 <h1><a class="toc-backref" id="usage" href="#usage">Usage</a></h1><pre>var
-  t: uint = 0
+  t: int = 0
   x: float = quad.tweenIn().ease(t, 0.0, 400.0, 120)
   y: float = exponential.tweenInOut().yoyo().ease(t, 0.0, 600.0, 30)</pre>
 </p>
@@ -1391,7 +1391,7 @@ else: pow(1024.0, x - 1.0)
 Repeat forwarding and backwarding.
 
 </dd>
-<dt id="ease"><a name="ease,BaseTween not nil,uint,float,float,uint"></a><pre><span class="Keyword">proc</span> <span class="Identifier">ease</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">BaseTween</span><span class="Other">;</span> <span class="Identifier">time</span><span class="Other">:</span> <span class="Identifier">uint</span><span class="Other">;</span> <span class="Identifier">begin</span><span class="Other">,</span> <span class="Identifier">delta</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">uint</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="ease"><a name="ease,BaseTween not nil,Positive,float,float,Positive"></a><pre><span class="Keyword">proc</span> <span class="Identifier">ease</span><span class="Other">(</span><span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">BaseTween</span><span class="Other">;</span> <span class="Identifier">time</span><span class="Other">:</span> <span class="Identifier">Positive</span><span class="Other">;</span> <span class="Identifier">begin</span><span class="Other">,</span> <span class="Identifier">delta</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">duration</span><span class="Other">:</span> <span class="Identifier">Positive</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Apply easing function.
@@ -1407,7 +1407,7 @@ Apply easing function.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-09-02 13:58:31 UTC</small>
+        <small>Made with Nim. Generated: 2018-10-01 13:46:44 UTC</small>
       </div>
     </div>
   </div>

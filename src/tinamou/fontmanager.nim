@@ -14,12 +14,12 @@ type
 
   FontSrc = ref object of RootObj
     src: string
-    savedFonts: TableRef[uint, Font]
+    savedFonts: TableRef[Positive, Font]
 
   FontManager* = ref object of RootObj
     table: TableRef[string, FontSrc]
 
-proc newFont(path: string, fontSize: uint): Font =
+proc newFont(path: string, fontSize: Positive): Font =
   ## Create new font.
   new result
   if ttfWasInit():
@@ -36,9 +36,9 @@ proc newFontSrc(path: string): FontSrc =
   ## Create new font source.
   new result
   result.src = path
-  result.savedFonts = newTable[uint, Font]()
+  result.savedFonts = newTable[Positive, Font]()
 
-proc getFont(self: FontSrc, size: uint): Font =
+proc getFont(self: FontSrc, size: Positive): Font =
   ## Get font of given font size.
   if self.savedFonts.hasKey(size):
     result = self.savedFonts[size]
@@ -56,7 +56,7 @@ proc setFont*(self: FontManager, name, path: string): FontManager {.discardable.
   if not self.table.hasKey(name):
     self.table.add(name, newFontSrc(path))
 
-proc getFont*(self: FontManager, name: string, size: uint): Font =
+proc getFont*(self: FontManager, name: string, size: Positive): Font =
   ## Get a font.
   ## This method requires font size.
   if self.table.hasKey(name):

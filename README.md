@@ -26,7 +26,7 @@ import colors
 
 type
   ExScene = ref object of BaseScene
-    count: uint
+    count: Positive
 
   ExScene2 = ref object of BaseScene
 
@@ -57,7 +57,7 @@ method update(self: ExScene, tools: Tools, actions: Actions): Transition =
   # This method returns scene transition.
   result = stay()
 
-  self.count += 1
+  inc self.count
 
   if actions.keyboard.isPressed(SPACE):
     result = next("ex2")
