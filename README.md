@@ -13,7 +13,7 @@ Game Library in Nim with SDL2
 
 ## Documentation
 
-See https://double-oxygen.github.io/tinamou/tinamou.html
+See https://gh.double-oxygen.net/tinamou/tinamou.html
 
 ## How to Make Scenes
 
