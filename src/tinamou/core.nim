@@ -7,9 +7,9 @@ import
 
   # sdl2
   sdl2,
-  sdl2.image,
-  sdl2.ttf,
-  sdl2.mixer,
+  sdl2/image,
+  sdl2/ttf,
+  sdl2/mixer,
 
   # tinamou
   exception,

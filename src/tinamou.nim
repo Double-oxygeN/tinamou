@@ -1,22 +1,22 @@
 ## Tinamou Game Library
 
 import
-  tinamou.core,
-  tinamou.scene,
-  tinamou.transition,
-  tinamou.tools,
-  tinamou.actions,
-  tinamou.sharedinfo,
-  tinamou.scenemanager,
-  tinamou.imagemanager,
-  tinamou.soundmanager,
-  tinamou.windowmanager,
-  tinamou.fontmanager,
-  tinamou.painter,
-  tinamou.keyboard,
-  tinamou.mouse,
-  tinamou.tween,
-  tinamou.exception
+  tinamou/core,
+  tinamou/scene,
+  tinamou/transition,
+  tinamou/tools,
+  tinamou/actions,
+  tinamou/sharedinfo,
+  tinamou/scenemanager,
+  tinamou/imagemanager,
+  tinamou/soundmanager,
+  tinamou/windowmanager,
+  tinamou/fontmanager,
+  tinamou/painter,
+  tinamou/keyboard,
+  tinamou/mouse,
+  tinamou/tween,
+  tinamou/exception
 
 export
   core,
@@ -42,17 +42,3 @@ export
   tween,
   exception.TinamouException, exception.`$`, exception.getErrorCode
 
-
-when isMainModule:
-  type
-    TestScene = ref object of BaseScene
-
-  proc newTestScene: TestScene =
-    new result
-
-  let scenes = newSceneManager()
-  scenes.setScene("test", newTestScene())
-
-  echo "This file was compiled on ", CompileDate, " at ", CompileTime
-
-  startGame scenes, "test", "foobar", 600, 400

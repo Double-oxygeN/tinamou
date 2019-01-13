@@ -6,9 +6,9 @@ import
   lenientops,
 
   sdl2,
-  sdl2.gfx,
-  sdl2.image,
-  sdl2.ttf,
+  sdl2/gfx,
+  sdl2/image,
+  sdl2/ttf,
 
   imagemanager,
   fontmanager,
@@ -73,7 +73,7 @@ type
     x.stroke(r = uint8, g = uint8, b = uint8, alpha = uint8)
 
 proc toInt16(n: SomeInteger): int16 = n.int16
-proc toInt16(n: SomeReal): int16 = n.toInt.int16
+proc toInt16(n: SomeFloat): int16 = n.toInt.int16
 
 proc getOrigin[N0, N1: SomeNumber](origin: OriginKind, x, y: N0; width, height: N1): tuple[x, y: float] =
   case origin

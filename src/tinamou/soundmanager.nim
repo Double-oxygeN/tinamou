@@ -4,7 +4,7 @@ import
   tables,
 
   sdl2,
-  sdl2.mixer,
+  sdl2/mixer,
 
   exception
 

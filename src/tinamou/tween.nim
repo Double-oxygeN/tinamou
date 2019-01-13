@@ -13,7 +13,7 @@
 import math
 
 type
-  BaseTween = (proc (x: float): float) not nil
+  BaseTween = (proc (x: float): float)
 
 let
   linear*: BaseTween = proc (x: float): float = x

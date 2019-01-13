@@ -4,7 +4,7 @@ import
   tables,
 
   sdl2,
-  sdl2.ttf,
+  sdl2/ttf,
 
   exception
 
