@@ -1,6 +1,13 @@
 import tinamou
 import unittest
 
-suite "Auto Generated Suite":
-  test "Auto Generated Test":
-    check 1 + 1 == 2
+suite "Core Test":
+  test "should start the game by calling `startGame`":
+    type
+      TestScene = ref object of BaseScene
+
+    let scenes = newSceneManager()
+    scenes.setScene "test", new TestScene
+
+    startGame(scenes, "test", "test", 640, 480, off)
+
