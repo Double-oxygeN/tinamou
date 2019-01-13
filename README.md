@@ -98,4 +98,3 @@ MIT
 See LICENSE.
 
 Copyright (c) 2018 Double-oxygeN
-

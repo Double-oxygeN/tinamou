@@ -16,7 +16,8 @@ import
   tinamou/keyboard,
   tinamou/mouse,
   tinamou/tween,
-  tinamou/exception
+  tinamou/exception,
+  tinamou/syntax
 
 export
   core,
@@ -40,5 +41,5 @@ export
   keyboard.Keyboard, keyboard.KeyName, keyboard.isPressed, keyboard.isDown, keyboard.isReleased, keyboard.getPressingKeyNames,
   mouse.Mouse, mouse.MouseButton, mouse.isPressed, mouse.isDown, mouse.isReleased, mouse.getPosition,
   tween,
-  exception.TinamouException, exception.`$`, exception.getErrorCode
-
+  exception.TinamouException, exception.`$`, exception.getErrorCode,
+  syntax.createScene

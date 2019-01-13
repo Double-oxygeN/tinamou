@@ -16,7 +16,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module painter</title>
+<title>painter</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -57,7 +57,7 @@ body {
   line-height: 20px;
   color: #444;
   letter-spacing: 0.15px;
-  background-color: rgba(252, 248, 244, 0.45); }
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -192,10 +192,10 @@ dd > pre {
   table-layout: fixed; }
 
 /* Nim search input */
-div#searchInput {
+div#searchInputDiv {
   margin-bottom: 8px;
 }
-div#searchInput input#searchInput {
+div#searchInputDiv input#searchInput {
   width: 10em;
 }
 div.search-groupby {
@@ -1143,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1158,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-div.pragma {
-  display: none;
-}
-span.pragmabegin {
-  cursor: pointer;
-}
-span.pragmaend {
-  cursor: pointer;
-}
 
 div.search_results {
   background-color: antiquewhite;
@@ -1179,32 +1170,47 @@ div#global-links ul {
   margin-left: 0;
   list-style-type: none;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
 
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
 }
 
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1213,14 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module painter</h1>
+    <h1 class="title">painter</h1>
     <div class="row">
   <div class="three columns">
   <div id="global-links">
     <ul class="simple">
     </ul>
   </div>
-  <div id="searchInput">
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1246,7 +1252,7 @@ function main() {
   renderer: RendererPtr
   font: Font"><wbr />Painter<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#OriginKind"
-    title="OriginKind = enum
+    title="OriginKind {.pure.} = enum
   NW = 0, N, NE, W, C, E, SW, S, SE"><wbr />Origin<wbr />Kind<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#PaintableRect"
     title="PaintableRect = ref object of RootObj
@@ -1298,97 +1304,97 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#newTPainter,RendererPtr"
+      <li><a class="reference" href="#newTPainter%2CRendererPtr"
     title="newTPainter(renderer: RendererPtr): Painter"><wbr />new<wbr />TPainter<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#clear,Painter,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#clear%2CPainter%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="clear(self: Painter; r, g, b: uint8; alpha: uint8 = 255)"><wbr />clear<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#clear,Painter,,uint8"
+  <li><a class="reference" href="#clear%2CPainter%2C%2Cuint8"
     title="clear(self: Painter; color: colors.Color; alpha: uint8 = 255)"><wbr />clear<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#clear,Painter,"
+  <li><a class="reference" href="#clear%2CPainter%2C"
     title="clear(self: Painter; color: sdl2.Color)"><wbr />clear<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#drawImage,Painter,Image,N,N,int,uint8,OriginKind,bool,float"
+  <li><a class="reference" href="#drawImage%2CPainter%2CImage%2CN%2CN%2Cint%2Cuint8%2COriginKind%2Cbool%2Cfloat"
     title="drawImage[N: SomeNumber](self: Painter; image: Image; x, y: N; spriteNum: int = 0;
                         alpha: uint8 = 255; origin: OriginKind = OriginKind.NW;
                         fixRatio: bool = false; rotAngle: float = 0.0)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#drawImage,Painter,Image,N0,N0,N1,N1,int,uint8,OriginKind,bool,float"
+  <li><a class="reference" href="#drawImage%2CPainter%2CImage%2CN0%2CN0%2CN1%2CN1%2Cint%2Cuint8%2COriginKind%2Cbool%2Cfloat"
     title="drawImage[N0, N1: SomeNumber](self: Painter; image: Image; x, y: N0; width, height: N1;
                             spriteNum: int = 0; alpha: uint8 = 255;
                             origin: OriginKind = OriginKind.NW;
                             fixRatio: bool = false; rotAngle: float = 0.0)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#drawImage,Painter,Image,N0,N0,N1,N1,N2,N2,N3,N3,int,uint8,OriginKind,bool,float"
+  <li><a class="reference" href="#drawImage%2CPainter%2CImage%2CN0%2CN0%2CN1%2CN1%2CN2%2CN2%2CN3%2CN3%2Cint%2Cuint8%2COriginKind%2Cbool%2Cfloat"
     title="drawImage[N0, N1, N2, N3: SomeNumber](self: Painter; image: Image; srcX, srcY: N0;
                                   srcWidth, srcHeight: N1; x, y: N2;
                                   width, height: N3; spriteNum: int = 0;
                                   alpha: uint8 = 255;
                                   origin: OriginKind = OriginKind.NW;
                                   fixRatio: bool = false; rotAngle: float = 0.0)"><wbr />draw<wbr />Image<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#rect,Painter,N0,N0,N1,N1"
+  <li><a class="reference" href="#rect%2CPainter%2CN0%2CN0%2CN1%2CN1"
     title="rect[N0, N1: SomeNumber](self: Painter; x, y: N0; w, h: N1): PaintableRect"><wbr />rect<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#roundRect,Painter,N0,N0,N1,N1,N2"
+  <li><a class="reference" href="#roundRect%2CPainter%2CN0%2CN0%2CN1%2CN1%2CN2"
     title="roundRect[N0, N1, N2: SomeNumber](self: Painter; x, y: N0; w, h: N1; radius: N2): PaintableRoundRect"><wbr />round<wbr />Rect<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#line,Painter,N,N,N,N"
+  <li><a class="reference" href="#line%2CPainter%2CN%2CN%2CN%2CN"
     title="line[N: SomeNumber](self: Painter; x0, y0, x1, y1: N): PaintableLine"><wbr />line<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#thickLine,Painter,N,N,N,N,uint8"
+  <li><a class="reference" href="#thickLine%2CPainter%2CN%2CN%2CN%2CN%2Cuint8"
     title="thickLine[N: SomeNumber](self: Painter; x0, y0, x1, y1: N; width: uint8): PaintableThickLine"><wbr />thick<wbr />Line<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#circle,Painter,N0,N0,N1"
+  <li><a class="reference" href="#circle%2CPainter%2CN0%2CN0%2CN1"
     title="circle[N0, N1: SomeNumber](self: Painter; x, y: N0; radius: N1): PaintableCircle"><wbr />circle<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#arc,Painter,N0,N0,N1,N2,N2"
+  <li><a class="reference" href="#arc%2CPainter%2CN0%2CN0%2CN1%2CN2%2CN2"
     title="arc[N0, N1, N2: SomeNumber](self: Painter; x, y: N0; radius: N1; start, finish: N2): PaintableArc"><wbr />arc<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#ellipse,Painter,N,N,N,N"
+  <li><a class="reference" href="#ellipse%2CPainter%2CN%2CN%2CN%2CN"
     title="ellipse[N: SomeNumber](self: Painter; x, y, rx, ry: N): PaintableEllipse"><wbr />ellipse<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#pie,Painter,N0,N0,N1,N2,N2"
+  <li><a class="reference" href="#pie%2CPainter%2CN0%2CN0%2CN1%2CN2%2CN2"
     title="pie[N0, N1, N2: SomeNumber](self: Painter; x, y: N0; radius: N1; start, finish: N2): PaintablePie"><wbr />pie<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#polygon,Painter,array[N,T],array[N,T]"
+  <li><a class="reference" href="#polygon%2CPainter%2Carray%5BN%2CT%5D%2Carray%5BN%2CT%5D"
     title="polygon[N: static[int]; T: SomeNumber](self: Painter; xs, ys: array[N, T]): PaintablePolygon[
     N]"><wbr />polygon<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#bezier,Painter,array[N,T],array[N,T]"
+  <li><a class="reference" href="#bezier%2CPainter%2Carray%5BN%2CT%5D%2Carray%5BN%2CT%5D"
     title="bezier[N: static[int]; T: SomeNumber](self: Painter; xs, ys: array[N, T]): PaintableBezier[
     N]"><wbr />bezier<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#text,Painter,string,N,N,OriginKind"
+  <li><a class="reference" href="#text%2CPainter%2Cstring%2CN%2CN%2COriginKind"
     title="text[N: SomeNumber](self: Painter; str: string; x, y: N;
                    origin: OriginKind = OriginKind.SW): PaintableText"><wbr />text<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#setFont,Painter,Font"
+  <li><a class="reference" href="#setFont%2CPainter%2CFont"
     title="setFont(self: Painter; font: Font)"><wbr />set<wbr />Font<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
-  <li><a class="reference" href="#stroke,PaintableRect,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#stroke%2CPaintableRect%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="stroke(self: PaintableRect; r, g, b: uint8; alpha: uint8 = 255)"><wbr />stroke<span class="attachedType" style="visibility:hidden">PaintableRect</span></a></li>
-  <li><a class="reference" href="#stroke,PaintableRoundRect,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#stroke%2CPaintableRoundRect%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="stroke(self: PaintableRoundRect; r, g, b: uint8; alpha: uint8 = 255)"><wbr />stroke<span class="attachedType" style="visibility:hidden">PaintableRoundRect</span></a></li>
-  <li><a class="reference" href="#stroke,PaintableLine,uint8,uint8,uint8,uint8,bool"
+  <li><a class="reference" href="#stroke%2CPaintableLine%2Cuint8%2Cuint8%2Cuint8%2Cuint8%2Cbool"
     title="stroke(self: PaintableLine; r, g, b: uint8; alpha: uint8 = 255; antialias: bool = false)"><wbr />stroke<span class="attachedType" style="visibility:hidden">PaintableLine</span></a></li>
-  <li><a class="reference" href="#stroke,PaintableThickLine,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#stroke%2CPaintableThickLine%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="stroke(self: PaintableThickLine; r, g, b: uint8; alpha: uint8 = 255)"><wbr />stroke<span class="attachedType" style="visibility:hidden">PaintableThickLine</span></a></li>
-  <li><a class="reference" href="#stroke,PaintableCircle,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#stroke%2CPaintableCircle%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="stroke(self: PaintableCircle; r, g, b: uint8; alpha: uint8 = 255)"><wbr />stroke<span class="attachedType" style="visibility:hidden">PaintableCircle</span></a></li>
-  <li><a class="reference" href="#stroke,PaintableEllipse,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#stroke%2CPaintableEllipse%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="stroke(self: PaintableEllipse; r, g, b: uint8; alpha: uint8 = 255)"><wbr />stroke<span class="attachedType" style="visibility:hidden">PaintableEllipse</span></a></li>
-  <li><a class="reference" href="#stroke,PaintablePie,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#stroke%2CPaintablePie%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="stroke(self: PaintablePie; r, g, b: uint8; alpha: uint8 = 255)"><wbr />stroke<span class="attachedType" style="visibility:hidden">PaintablePie</span></a></li>
-  <li><a class="reference" href="#stroke,PaintablePolygon[N],uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#stroke%2CPaintablePolygon%5BN%5D%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="stroke[N: static[int]](self: PaintablePolygon[N]; r, g, b: uint8; alpha: uint8 = 255)"><wbr />stroke<span class="attachedType" style="visibility:hidden">PaintablePolygon</span></a></li>
-  <li><a class="reference" href="#stroke,PaintableBezier[N],uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#stroke%2CPaintableBezier%5BN%5D%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="stroke[N: static[int]](self: PaintableBezier[N]; r, g, b: uint8; alpha: uint8 = 255)"><wbr />stroke<span class="attachedType" style="visibility:hidden">PaintableBezier</span></a></li>
-  <li><a class="reference" href="#stroke,RGBAStrokeable,,uint8"
+  <li><a class="reference" href="#stroke%2CRGBAStrokeable%2C%2Cuint8"
     title="stroke(self: RGBAStrokeable; color: colors.Color; alpha: uint8 = 255)"><wbr />stroke<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#stroke,PaintableLine,,uint8,bool"
+  <li><a class="reference" href="#stroke%2CPaintableLine%2C%2Cuint8%2Cbool"
     title="stroke(self: PaintableLine; color: colors.Color; alpha: uint8 = 255;
        antialias: bool = false)"><wbr />stroke<span class="attachedType" style="visibility:hidden">PaintableLine</span></a></li>
-  <li><a class="reference" href="#fill,PaintableRect,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#fill%2CPaintableRect%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="fill(self: PaintableRect; r, g, b: uint8; alpha: uint8 = 255)"><wbr />fill<span class="attachedType" style="visibility:hidden">PaintableRect</span></a></li>
-  <li><a class="reference" href="#fill,PaintableRoundRect,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#fill%2CPaintableRoundRect%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="fill(self: PaintableRoundRect; r, g, b: uint8; alpha: uint8 = 255)"><wbr />fill<span class="attachedType" style="visibility:hidden">PaintableRoundRect</span></a></li>
-  <li><a class="reference" href="#fill,PaintableCircle,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#fill%2CPaintableCircle%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="fill(self: PaintableCircle; r, g, b: uint8; alpha: uint8 = 255)"><wbr />fill<span class="attachedType" style="visibility:hidden">PaintableCircle</span></a></li>
-  <li><a class="reference" href="#fill,PaintableEllipse,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#fill%2CPaintableEllipse%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="fill(self: PaintableEllipse; r, g, b: uint8; alpha: uint8 = 255)"><wbr />fill<span class="attachedType" style="visibility:hidden">PaintableEllipse</span></a></li>
-  <li><a class="reference" href="#fill,PaintablePie,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#fill%2CPaintablePie%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="fill(self: PaintablePie; r, g, b: uint8; alpha: uint8 = 255)"><wbr />fill<span class="attachedType" style="visibility:hidden">PaintablePie</span></a></li>
-  <li><a class="reference" href="#fill,PaintablePolygon[N],uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#fill%2CPaintablePolygon%5BN%5D%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="fill[N: static[int]](self: PaintablePolygon[N]; r, g, b: uint8; alpha: uint8 = 255)"><wbr />fill<span class="attachedType" style="visibility:hidden">PaintablePolygon</span></a></li>
-  <li><a class="reference" href="#fill,PaintableText,uint8,uint8,uint8,uint8"
+  <li><a class="reference" href="#fill%2CPaintableText%2Cuint8%2Cuint8%2Cuint8%2Cuint8"
     title="fill(self: PaintableText; r, g, b: uint8; alpha: uint8 = 255)"><wbr />fill<span class="attachedType" style="visibility:hidden">PaintableText</span></a></li>
-  <li><a class="reference" href="#fill,RGBAFillable,,uint8"
+  <li><a class="reference" href="#fill%2CRGBAFillable%2C%2Cuint8"
     title="fill(self: RGBAFillable; color: colors.Color; alpha: uint8 = 255)"><wbr />fill<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#present,Painter"
+  <li><a class="reference" href="#present%2CPainter"
     title="present(self: Painter)"><wbr />present<span class="attachedType" style="visibility:hidden">Painter</span></a></li>
 
   </ul>
@@ -1403,26 +1409,29 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="colors.html">colors</a>, <a class="reference external" href="math.html">math</a>, <a class="reference external" href="lenientops.html">lenientops</a>, <a class="reference external" href="sdl2.html">sdl2</a>, <a class="reference external" href="sdl2/gfx.html">sdl2/gfx</a>, <a class="reference external" href="sdl2/image.html">sdl2/image</a>, <a class="reference external" href="sdl2/ttf.html">sdl2/ttf</a>, <a class="reference external" href="imagemanager.html">imagemanager</a>, <a class="reference external" href="fontmanager.html">fontmanager</a>, <a class="reference external" href="exception.html">exception</a>
+<a class="reference external" href="imagemanager.html">imagemanager</a>, <a class="reference external" href="fontmanager.html">fontmanager</a>, <a class="reference external" href="exception.html">exception</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="Painter"><a name="Painter"></a><pre><span class="Identifier">Painter</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<a id="Painter"></a>
+<dt><pre><a href="painter.html#Painter"><span class="Identifier">Painter</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">RendererPtr</span>
-  <span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">Font</span>
+  <span class="Identifier">font</span><span class="Other">:</span> <a href="fontmanager.html#Font"><span class="Identifier">Font</span></a>
 </pre></dt>
 <dd>
 
 
 </dd>
-<dt id="OriginKind"><a name="OriginKind"></a><pre><span class="Identifier">OriginKind</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<a id="OriginKind"></a>
+<dt><pre><a href="painter.html#OriginKind"><span class="Identifier">OriginKind</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">pure</span></span><span class="Other">.}</span></span> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">NW</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">N</span><span class="Other">,</span> <span class="Identifier">NE</span><span class="Other">,</span> <span class="Identifier">W</span><span class="Other">,</span> <span class="Identifier">C</span><span class="Other">,</span> <span class="Identifier">E</span><span class="Other">,</span> <span class="Identifier">SW</span><span class="Other">,</span> <span class="Identifier">S</span><span class="Other">,</span> <span class="Identifier">SE</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="PaintableRect"><a name="PaintableRect"></a><pre><span class="Identifier">PaintableRect</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<a id="PaintableRect"></a>
+<dt><pre><a href="painter.html#PaintableRect"><span class="Identifier">PaintableRect</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">RendererPtr</span>
   <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">,</span> <span class="Identifier">w</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="Identifier">int16</span>
 </pre></dt>
@@ -1430,14 +1439,16 @@ function main() {
 
 
 </dd>
-<dt id="PaintableRoundRect"><a name="PaintableRoundRect"></a><pre><span class="Identifier">PaintableRoundRect</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">PaintableRect</span>
+<a id="PaintableRoundRect"></a>
+<dt><pre><a href="painter.html#PaintableRoundRect"><span class="Identifier">PaintableRoundRect</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="painter.html#PaintableRect"><span class="Identifier">PaintableRect</span></a>
   <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">int16</span>
 </pre></dt>
 <dd>
 
 
 </dd>
-<dt id="PaintableLine"><a name="PaintableLine"></a><pre><span class="Identifier">PaintableLine</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<a id="PaintableLine"></a>
+<dt><pre><a href="painter.html#PaintableLine"><span class="Identifier">PaintableLine</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">RendererPtr</span>
   <span class="Identifier">x0</span><span class="Other">,</span> <span class="Identifier">x1</span><span class="Other">,</span> <span class="Identifier">y0</span><span class="Other">,</span> <span class="Identifier">y1</span><span class="Other">:</span> <span class="Identifier">int16</span>
 </pre></dt>
@@ -1445,14 +1456,16 @@ function main() {
 
 
 </dd>
-<dt id="PaintableThickLine"><a name="PaintableThickLine"></a><pre><span class="Identifier">PaintableThickLine</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">PaintableLine</span>
+<a id="PaintableThickLine"></a>
+<dt><pre><a href="painter.html#PaintableThickLine"><span class="Identifier">PaintableThickLine</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="painter.html#PaintableLine"><span class="Identifier">PaintableLine</span></a>
   <span class="Identifier">width</span><span class="Other">:</span> <span class="Identifier">uint8</span>
 </pre></dt>
 <dd>
 
 
 </dd>
-<dt id="PaintableCircle"><a name="PaintableCircle"></a><pre><span class="Identifier">PaintableCircle</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<a id="PaintableCircle"></a>
+<dt><pre><a href="painter.html#PaintableCircle"><span class="Identifier">PaintableCircle</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">RendererPtr</span>
   <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">,</span> <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">int16</span>
 </pre></dt>
@@ -1460,14 +1473,16 @@ function main() {
 
 
 </dd>
-<dt id="PaintableArc"><a name="PaintableArc"></a><pre><span class="Identifier">PaintableArc</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">PaintableCircle</span>
+<a id="PaintableArc"></a>
+<dt><pre><a href="painter.html#PaintableArc"><span class="Identifier">PaintableArc</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="painter.html#PaintableCircle"><span class="Identifier">PaintableCircle</span></a>
   <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <span class="Identifier">int16</span>
 </pre></dt>
 <dd>
 
 
 </dd>
-<dt id="PaintableEllipse"><a name="PaintableEllipse"></a><pre><span class="Identifier">PaintableEllipse</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<a id="PaintableEllipse"></a>
+<dt><pre><a href="painter.html#PaintableEllipse"><span class="Identifier">PaintableEllipse</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">RendererPtr</span>
   <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">,</span> <span class="Identifier">rx</span><span class="Other">,</span> <span class="Identifier">ry</span><span class="Other">:</span> <span class="Identifier">int16</span>
 </pre></dt>
@@ -1475,14 +1490,16 @@ function main() {
 
 
 </dd>
-<dt id="PaintablePie"><a name="PaintablePie"></a><pre><span class="Identifier">PaintablePie</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">PaintableCircle</span>
+<a id="PaintablePie"></a>
+<dt><pre><a href="painter.html#PaintablePie"><span class="Identifier">PaintablePie</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="painter.html#PaintableCircle"><span class="Identifier">PaintableCircle</span></a>
   <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <span class="Identifier">int16</span>
 </pre></dt>
 <dd>
 
 
 </dd>
-<dt id="PaintablePolygon"><a name="PaintablePolygon"></a><pre><span class="Identifier">PaintablePolygon</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<a id="PaintablePolygon"></a>
+<dt><pre><a href="painter.html#PaintablePolygon"><span class="Identifier">PaintablePolygon</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">RendererPtr</span>
   <span class="Identifier">xs</span><span class="Other">,</span> <span class="Identifier">ys</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">,</span> <span class="Identifier">int16</span><span class="Other">]</span>
 </pre></dt>
@@ -1490,7 +1507,8 @@ function main() {
 
 
 </dd>
-<dt id="PaintableBezier"><a name="PaintableBezier"></a><pre><span class="Identifier">PaintableBezier</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<a id="PaintableBezier"></a>
+<dt><pre><a href="painter.html#PaintableBezier"><span class="Identifier">PaintableBezier</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">RendererPtr</span>
   <span class="Identifier">xs</span><span class="Other">,</span> <span class="Identifier">ys</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">,</span> <span class="Identifier">int16</span><span class="Other">]</span>
   <span class="Identifier">steps</span><span class="Other">:</span> <span class="Identifier">cint</span>
@@ -1499,12 +1517,13 @@ function main() {
 
 
 </dd>
-<dt id="PaintableText"><a name="PaintableText"></a><pre><span class="Identifier">PaintableText</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<a id="PaintableText"></a>
+<dt><pre><a href="painter.html#PaintableText"><span class="Identifier">PaintableText</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">RendererPtr</span>
   <span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">FontPtr</span>
   <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int16</span>
   <span class="Identifier">str</span><span class="Other">:</span> <span class="Identifier">string</span>
-  <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">OriginKind</span>
+  <span class="Identifier">origin</span><span class="Other">:</span> <a href="painter.html#OriginKind"><span class="Identifier">OriginKind</span></a>
 </pre></dt>
 <dd>
 
@@ -1515,218 +1534,257 @@ function main() {
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="newTPainter"><a name="newTPainter,RendererPtr"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newTPainter</span><span class="Other">(</span><span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">RendererPtr</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Painter</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="newTPainter,RendererPtr"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newTPainter</span><span class="Other">(</span><span class="Identifier">renderer</span><span class="Other">:</span> <span class="Identifier">RendererPtr</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Create new painter from given renderer.
 
 </dd>
-<dt id="clear"><a name="clear,Painter,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">clear</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="clear,Painter,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">clear</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Clear the window.
 
 </dd>
-<dt id="clear"><a name="clear,Painter,,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">clear</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">colors</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="clear,Painter,,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">clear</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">colors</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Clear the window.
 
 </dd>
-<dt id="clear"><a name="clear,Painter,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">clear</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">sdl2</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="clear,Painter,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">clear</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">sdl2</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Clear the window.
 
 </dd>
-<dt id="drawImage"><a name="drawImage,Painter,Image,N,N,int,uint8,OriginKind,bool,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">Image</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">;</span> <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
-                            <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">;</span> <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">OriginKind</span> <span class="Other">=</span> <span class="Identifier">OriginKind</span><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span>
+<a id="drawImage,Painter,Image,N,N,int,uint8,OriginKind,bool,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <a href="imagemanager.html#Image"><span class="Identifier">Image</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">;</span> <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
+                            <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">;</span> <span class="Identifier">origin</span><span class="Other">:</span> <a href="painter.html#OriginKind"><span class="Identifier">OriginKind</span></a> <span class="Other">=</span> <a href="painter.html#OriginKind"><span class="Identifier">OriginKind</span></a><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span>
                             <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">rotAngle</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.0</span><span class="Other">)</span></pre></dt>
 <dd>
 Draw image. The unit of <tt class="docutils literal"><span class="pre">rotAngle</span></tt> is degree.
 
 </dd>
-<dt id="drawImage"><a name="drawImage,Painter,Image,N0,N0,N1,N1,int,uint8,OriginKind,bool,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">Image</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span>
+<a id="drawImage,Painter,Image,N0,N0,N1,N1,int,uint8,OriginKind,bool,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <a href="imagemanager.html#Image"><span class="Identifier">Image</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span>
                                 <span class="Identifier">width</span><span class="Other">,</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">;</span> <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
                                 <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">;</span>
-                                <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">OriginKind</span> <span class="Other">=</span> <span class="Identifier">OriginKind</span><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span>
+                                <span class="Identifier">origin</span><span class="Other">:</span> <a href="painter.html#OriginKind"><span class="Identifier">OriginKind</span></a> <span class="Other">=</span> <a href="painter.html#OriginKind"><span class="Identifier">OriginKind</span></a><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span>
                                 <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">rotAngle</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.0</span><span class="Other">)</span></pre></dt>
 <dd>
 Draw image. The unit of <tt class="docutils literal"><span class="pre">rotAngle</span></tt> is degree.
 
 </dd>
-<dt id="drawImage"><a name="drawImage,Painter,Image,N0,N0,N1,N1,N2,N2,N3,N3,int,uint8,OriginKind,bool,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">,</span> <span class="Identifier">N2</span><span class="Other">,</span> <span class="Identifier">N3</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">Image</span><span class="Other">;</span> <span class="Identifier">srcX</span><span class="Other">,</span> <span class="Identifier">srcY</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span>
+<a id="drawImage,Painter,Image,N0,N0,N1,N1,N2,N2,N3,N3,int,uint8,OriginKind,bool,float"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">drawImage</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">,</span> <span class="Identifier">N2</span><span class="Other">,</span> <span class="Identifier">N3</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <a href="imagemanager.html#Image"><span class="Identifier">Image</span></a><span class="Other">;</span> <span class="Identifier">srcX</span><span class="Other">,</span> <span class="Identifier">srcY</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span>
                                       <span class="Identifier">srcWidth</span><span class="Other">,</span> <span class="Identifier">srcHeight</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N2</span><span class="Other">;</span>
                                       <span class="Identifier">width</span><span class="Other">,</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">N3</span><span class="Other">;</span> <span class="Identifier">spriteNum</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
                                       <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">;</span>
-                                      <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">OriginKind</span> <span class="Other">=</span> <span class="Identifier">OriginKind</span><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span>
+                                      <span class="Identifier">origin</span><span class="Other">:</span> <a href="painter.html#OriginKind"><span class="Identifier">OriginKind</span></a> <span class="Other">=</span> <a href="painter.html#OriginKind"><span class="Identifier">OriginKind</span></a><span class="Other">.</span><span class="Identifier">NW</span><span class="Other">;</span>
                                       <span class="Identifier">fixRatio</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">rotAngle</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.0</span><span class="Other">)</span></pre></dt>
 <dd>
 Draw image. The unit of <tt class="docutils literal"><span class="pre">rotAngle</span></tt> is degree.
 
 </dd>
-<dt id="rect"><a name="rect,Painter,N0,N0,N1,N1"></a><pre><span class="Keyword">proc</span> <span class="Identifier">rect</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span> <span class="Identifier">w</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintableRect</span></pre></dt>
+<a id="rect,Painter,N0,N0,N1,N1"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">rect</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span> <span class="Identifier">w</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#PaintableRect"><span class="Identifier">PaintableRect</span></a></pre></dt>
 <dd>
 Create paintable rectangle.
 
 </dd>
-<dt id="roundRect"><a name="roundRect,Painter,N0,N0,N1,N1,N2"></a><pre><span class="Keyword">proc</span> <span class="Identifier">roundRect</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">,</span> <span class="Identifier">N2</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span> <span class="Identifier">w</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">;</span> <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">N2</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintableRoundRect</span></pre></dt>
+<a id="roundRect,Painter,N0,N0,N1,N1,N2"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">roundRect</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">,</span> <span class="Identifier">N2</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span> <span class="Identifier">w</span><span class="Other">,</span> <span class="Identifier">h</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">;</span> <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">N2</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#PaintableRoundRect"><span class="Identifier">PaintableRoundRect</span></a></pre></dt>
 <dd>
 Create paintable round rectangle.
 
 </dd>
-<dt id="line"><a name="line,Painter,N,N,N,N"></a><pre><span class="Keyword">proc</span> <span class="Identifier">line</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">x0</span><span class="Other">,</span> <span class="Identifier">y0</span><span class="Other">,</span> <span class="Identifier">x1</span><span class="Other">,</span> <span class="Identifier">y1</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintableLine</span></pre></dt>
+<a id="line,Painter,N,N,N,N"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">line</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">x0</span><span class="Other">,</span> <span class="Identifier">y0</span><span class="Other">,</span> <span class="Identifier">x1</span><span class="Other">,</span> <span class="Identifier">y1</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#PaintableLine"><span class="Identifier">PaintableLine</span></a></pre></dt>
 <dd>
 Create paintable line.
 
 </dd>
-<dt id="thickLine"><a name="thickLine,Painter,N,N,N,N,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">thickLine</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">x0</span><span class="Other">,</span> <span class="Identifier">y0</span><span class="Other">,</span> <span class="Identifier">x1</span><span class="Other">,</span> <span class="Identifier">y1</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">;</span> <span class="Identifier">width</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintableThickLine</span></pre></dt>
+<a id="thickLine,Painter,N,N,N,N,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">thickLine</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">x0</span><span class="Other">,</span> <span class="Identifier">y0</span><span class="Other">,</span> <span class="Identifier">x1</span><span class="Other">,</span> <span class="Identifier">y1</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">;</span> <span class="Identifier">width</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#PaintableThickLine"><span class="Identifier">PaintableThickLine</span></a></pre></dt>
 <dd>
 Create paintable thick line.
 
 </dd>
-<dt id="circle"><a name="circle,Painter,N0,N0,N1"></a><pre><span class="Keyword">proc</span> <span class="Identifier">circle</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span> <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintableCircle</span></pre></dt>
+<a id="circle,Painter,N0,N0,N1"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">circle</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span> <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#PaintableCircle"><span class="Identifier">PaintableCircle</span></a></pre></dt>
 <dd>
 Create paintable circle.
 
 </dd>
-<dt id="arc"><a name="arc,Painter,N0,N0,N1,N2,N2"></a><pre><span class="Keyword">proc</span> <span class="Identifier">arc</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">,</span> <span class="Identifier">N2</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span> <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">;</span> <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <span class="Identifier">N2</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintableArc</span></pre></dt>
+<a id="arc,Painter,N0,N0,N1,N2,N2"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">arc</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">,</span> <span class="Identifier">N2</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span> <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">;</span> <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <span class="Identifier">N2</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#PaintableArc"><span class="Identifier">PaintableArc</span></a></pre></dt>
 <dd>
 Create paintable arc.
 
 </dd>
-<dt id="ellipse"><a name="ellipse,Painter,N,N,N,N"></a><pre><span class="Keyword">proc</span> <span class="Identifier">ellipse</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">,</span> <span class="Identifier">rx</span><span class="Other">,</span> <span class="Identifier">ry</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintableEllipse</span></pre></dt>
+<a id="ellipse,Painter,N,N,N,N"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">ellipse</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">,</span> <span class="Identifier">rx</span><span class="Other">,</span> <span class="Identifier">ry</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#PaintableEllipse"><span class="Identifier">PaintableEllipse</span></a></pre></dt>
 <dd>
 Create paintable ellipse.
 
 </dd>
-<dt id="pie"><a name="pie,Painter,N0,N0,N1,N2,N2"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pie</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">,</span> <span class="Identifier">N2</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span> <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">;</span> <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <span class="Identifier">N2</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintablePie</span></pre></dt>
+<a id="pie,Painter,N0,N0,N1,N2,N2"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">pie</span><span class="Other">[</span><span class="Identifier">N0</span><span class="Other">,</span> <span class="Identifier">N1</span><span class="Other">,</span> <span class="Identifier">N2</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N0</span><span class="Other">;</span> <span class="Identifier">radius</span><span class="Other">:</span> <span class="Identifier">N1</span><span class="Other">;</span> <span class="Identifier">start</span><span class="Other">,</span> <span class="Identifier">finish</span><span class="Other">:</span> <span class="Identifier">N2</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#PaintablePie"><span class="Identifier">PaintablePie</span></a></pre></dt>
 <dd>
 Create paintable pie.
 
 </dd>
-<dt id="polygon"><a name="polygon,Painter,array[N,T],array[N,T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">polygon</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">T</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">,</span> <span class="Identifier">ys</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">,</span> <span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintablePolygon</span><span class="Other">[</span>
+<a id="polygon,Painter,array[N,T],array[N,T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">polygon</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">T</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">,</span> <span class="Identifier">ys</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">,</span> <span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#PaintablePolygon"><span class="Identifier">PaintablePolygon</span></a><span class="Other">[</span>
     <span class="Identifier">N</span><span class="Other">]</span></pre></dt>
 <dd>
 Create paintable polygon.
 
 </dd>
-<dt id="bezier"><a name="bezier,Painter,array[N,T],array[N,T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">bezier</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">T</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">,</span> <span class="Identifier">ys</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">,</span> <span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintableBezier</span><span class="Other">[</span>
+<a id="bezier,Painter,array[N,T],array[N,T]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">bezier</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">T</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">xs</span><span class="Other">,</span> <span class="Identifier">ys</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">,</span> <span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#PaintableBezier"><span class="Identifier">PaintableBezier</span></a><span class="Other">[</span>
     <span class="Identifier">N</span><span class="Other">]</span></pre></dt>
 <dd>
 Create paintable bezier curve.
 
 </dd>
-<dt id="text"><a name="text,Painter,string,N,N,OriginKind"></a><pre><span class="Keyword">proc</span> <span class="Identifier">text</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">str</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">;</span>
-                       <span class="Identifier">origin</span><span class="Other">:</span> <span class="Identifier">OriginKind</span> <span class="Other">=</span> <span class="Identifier">OriginKind</span><span class="Other">.</span><span class="Identifier">SW</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">PaintableText</span></pre></dt>
+<a id="text,Painter,string,N,N,OriginKind"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">text</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">str</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">N</span><span class="Other">;</span>
+                       <span class="Identifier">origin</span><span class="Other">:</span> <a href="painter.html#OriginKind"><span class="Identifier">OriginKind</span></a> <span class="Other">=</span> <a href="painter.html#OriginKind"><span class="Identifier">OriginKind</span></a><span class="Other">.</span><span class="Identifier">SW</span><span class="Other">)</span><span class="Other">:</span> <a href="painter.html#PaintableText"><span class="Identifier">PaintableText</span></a></pre></dt>
 <dd>
 Create paintable text. Please set font by Painter#setFont before calling it.
 
 </dd>
-<dt id="setFont"><a name="setFont,Painter,Font"></a><pre><span class="Keyword">proc</span> <span class="Identifier">setFont</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">;</span> <span class="Identifier">font</span><span class="Other">:</span> <span class="Identifier">Font</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="setFont,Painter,Font"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">setFont</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">;</span> <span class="Identifier">font</span><span class="Other">:</span> <a href="fontmanager.html#Font"><span class="Identifier">Font</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Set font from path. If loading fails, then raise an error.
 
 </dd>
-<dt id="stroke"><a name="stroke,PaintableRect,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableRect</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="stroke,PaintableRect,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableRect"><span class="Identifier">PaintableRect</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Stroke rectangle.
 
 </dd>
-<dt id="stroke"><a name="stroke,PaintableRoundRect,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableRoundRect</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="stroke,PaintableRoundRect,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableRoundRect"><span class="Identifier">PaintableRoundRect</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Stroke round rectangle.
 
 </dd>
-<dt id="stroke"><a name="stroke,PaintableLine,uint8,uint8,uint8,uint8,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableLine</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">;</span>
-           <span class="Identifier">antialias</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="stroke,PaintableLine,uint8,uint8,uint8,uint8,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableLine"><span class="Identifier">PaintableLine</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">;</span>
+           <span class="Identifier">antialias</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Stroke line.
 
 </dd>
-<dt id="stroke"><a name="stroke,PaintableThickLine,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableThickLine</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="stroke,PaintableThickLine,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableThickLine"><span class="Identifier">PaintableThickLine</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Stroke thick line.
 
 </dd>
-<dt id="stroke"><a name="stroke,PaintableCircle,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableCircle</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="stroke,PaintableCircle,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableCircle"><span class="Identifier">PaintableCircle</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Stroke circle.
 
 </dd>
-<dt id="stroke"><a name="stroke,PaintableEllipse,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableEllipse</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="stroke,PaintableEllipse,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableEllipse"><span class="Identifier">PaintableEllipse</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Stroke ellipse.
 
 </dd>
-<dt id="stroke"><a name="stroke,PaintablePie,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintablePie</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="stroke,PaintablePie,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintablePie"><span class="Identifier">PaintablePie</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Stroke pie.
 
 </dd>
-<dt id="stroke"><a name="stroke,PaintablePolygon[N],uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintablePolygon</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span>
+<a id="stroke,PaintablePolygon[N],uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintablePolygon"><span class="Identifier">PaintablePolygon</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span>
                           <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span></pre></dt>
 <dd>
 Stroke polygon
 
 </dd>
-<dt id="stroke"><a name="stroke,PaintableBezier[N],uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableBezier</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span></pre></dt>
+<a id="stroke,PaintableBezier[N],uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableBezier"><span class="Identifier">PaintableBezier</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span></pre></dt>
 <dd>
 Stroke bezier curve.
 
 </dd>
-<dt id="stroke"><a name="stroke,RGBAStrokeable,,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">RGBAStrokeable</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">colors</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span></pre></dt>
+<a id="stroke,RGBAStrokeable,,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">RGBAStrokeable</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">colors</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span></pre></dt>
 <dd>
 Stroke shape.
 
 </dd>
-<dt id="stroke"><a name="stroke,PaintableLine,,uint8,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableLine</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">colors</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">;</span>
-           <span class="Identifier">antialias</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="stroke,PaintableLine,,uint8,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">stroke</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableLine"><span class="Identifier">PaintableLine</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">colors</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">;</span>
+           <span class="Identifier">antialias</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Stroke line.
 
 </dd>
-<dt id="fill"><a name="fill,PaintableRect,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableRect</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="fill,PaintableRect,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableRect"><span class="Identifier">PaintableRect</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Fill rectangle.
 
 </dd>
-<dt id="fill"><a name="fill,PaintableRoundRect,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableRoundRect</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="fill,PaintableRoundRect,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableRoundRect"><span class="Identifier">PaintableRoundRect</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Fill round rectangle.
 
 </dd>
-<dt id="fill"><a name="fill,PaintableCircle,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableCircle</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="fill,PaintableCircle,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableCircle"><span class="Identifier">PaintableCircle</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Fill circle.
 
 </dd>
-<dt id="fill"><a name="fill,PaintableEllipse,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableEllipse</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="fill,PaintableEllipse,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableEllipse"><span class="Identifier">PaintableEllipse</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Fill ellipse.
 
 </dd>
-<dt id="fill"><a name="fill,PaintablePie,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintablePie</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="fill,PaintablePie,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintablePie"><span class="Identifier">PaintablePie</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Fill pie.
 
 </dd>
-<dt id="fill"><a name="fill,PaintablePolygon[N],uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Keyword">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintablePolygon</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span></pre></dt>
+<a id="fill,PaintablePolygon[N],uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">[</span><span class="Identifier">N</span><span class="Other">:</span> <span class="Identifier">static</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintablePolygon"><span class="Identifier">PaintablePolygon</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span></pre></dt>
 <dd>
 Fill polygon.
 
 </dd>
-<dt id="fill"><a name="fill,PaintableText,uint8,uint8,uint8,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">PaintableText</span><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="fill,PaintableText,uint8,uint8,uint8,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#PaintableText"><span class="Identifier">PaintableText</span></a><span class="Other">;</span> <span class="Identifier">r</span><span class="Other">,</span> <span class="Identifier">g</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Fill text.
 
 </dd>
-<dt id="fill"><a name="fill,RGBAFillable,,uint8"></a><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">RGBAFillable</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">colors</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span></pre></dt>
+<a id="fill,RGBAFillable,,uint8"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">fill</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">RGBAFillable</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">colors</span><span class="Other">.</span><span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">uint8</span> <span class="Other">=</span> <span class="DecNumber">255</span><span class="Other">)</span></pre></dt>
 <dd>
 Fill rectangle.
 
 </dd>
-<dt id="present"><a name="present,Painter"></a><pre><span class="Keyword">proc</span> <span class="Identifier">present</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Painter</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="present,Painter"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">present</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="painter.html#Painter"><span class="Identifier">Painter</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -1741,7 +1799,7 @@ Fill rectangle.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-10-01 13:52:04 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-13 11:53:06 UTC</small>
       </div>
     </div>
   </div>

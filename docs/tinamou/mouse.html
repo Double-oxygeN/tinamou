@@ -16,7 +16,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module mouse</title>
+<title>mouse</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -57,7 +57,7 @@ body {
   line-height: 20px;
   color: #444;
   letter-spacing: 0.15px;
-  background-color: rgba(252, 248, 244, 0.45); }
+  background-color: #FDFBFA; }
 
 /* Skeleton grid */
 .container {
@@ -192,10 +192,10 @@ dd > pre {
   table-layout: fixed; }
 
 /* Nim search input */
-div#searchInput {
+div#searchInputDiv {
   margin-bottom: 8px;
 }
-div#searchInput input#searchInput {
+div#searchInputDiv input#searchInput {
   width: 10em;
 }
 div.search-groupby {
@@ -1143,7 +1143,7 @@ dt pre > span.Identifier ~ span.Identifier, dt pre > span.Operator ~ span.Identi
   color: inherit;
   font-weight: inherit; }
 
-dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator {
+dt pre > span.Operator ~ span.Identifier {
   color: inherit;
   font-weight: inherit; }
 
@@ -1158,15 +1158,6 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-div.pragma {
-  display: none;
-}
-span.pragmabegin {
-  cursor: pointer;
-}
-span.pragmaend {
-  cursor: pointer;
-}
 
 div.search_results {
   background-color: antiquewhite;
@@ -1179,32 +1170,47 @@ div#global-links ul {
   margin-left: 0;
   list-style-type: none;
 }
-</style>
 
-<script type="text/javascript" src="../dochack.js"></script>
+span.pragmadots {
+  /* Position: relative frees us up to make the dots
+  look really nice without fucking up the layout and
+  causing bulging in the parent container */
+  position: relative;
+  /* 1px down looks slightly nicer */
+  top: 1px;
 
-<script type="text/javascript">
-function togglepragma(d) {
-  if (d.style.display != 'inline')
-    d.style.display = 'inline';
-  else
-    d.style.display = 'none';
+  padding: 2px;
+  background-color: #D3D3D3;
+  border-radius: 4px;
+  margin: 0 2px;
+  cursor: pointer;
+
+  /* For some reason on Chrome, making the font size
+  smaller than 1em is causing the parent container to
+  bulge slightly. So, we're stuck with inheriting 1em,
+  which is sad, because 0.8em looks better... */
+}
+span.pragmadots:hover {
+  background-color: #DBDBDB;
+}
+span.pragmawrap {
+  display: none;
 }
 
+</style>
+
+<script type="text/javascript" src="dochack.js"></script>
+
+<script type="text/javascript">
 function main() {
-  var elements = document.getElementsByClassName("pragmabegin");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.nextSibling);
-    };
-  }
-  var elements = document.getElementsByClassName("pragmaend");
-  for (var i = 0; i < elements.length; ++i) {
-    var e = elements[i];
-    e.onclick = function(event) {
-      togglepragma(event.target.previousSibling);
-    };
+  var pragmaDots = document.getElementsByClassName("pragmadots");
+  for (var i = 0; i < pragmaDots.length; i++) {
+    pragmaDots[i].onclick = function(event) {
+      // Hide tease
+      event.target.parentNode.style.display = "none";
+      // Show actual
+      event.target.parentNode.nextElementSibling.style.display = "inline";
+    }
   }
 }
 </script>
@@ -1213,14 +1219,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module mouse</h1>
+    <h1 class="title">mouse</h1>
     <div class="row">
   <div class="three columns">
   <div id="global-links">
     <ul class="simple">
     </ul>
   </div>
-  <div id="searchInput">
+  <div id="searchInputDiv">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1233,16 +1239,10 @@ function main() {
   </div>
   <ul class="simple simple-toc" id="toc-list">
 <li>
-  <a class="reference reference-toplevel" href="#6" id="56">Imports</a>
-  <ul class="simple simple-toc-section">
-    
-  </ul>
-</li>
-<li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#MouseButton"
-    title="MouseButton = enum
+    title="MouseButton {.pure.} = enum
   LEFT, RIGHT, MIDDLE, UNKNOWN"><wbr />Mouse<wbr />Button<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#Mouse"
     title="Mouse = ref object of RootObj
@@ -1254,19 +1254,19 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#newMouse,"
+      <li><a class="reference" href="#newMouse%2C"
     title="newMouse(): Mouse"><wbr />new<wbr />Mouse<span class="attachedType" style="visibility:hidden">Mouse</span></a></li>
-  <li><a class="reference" href="#update,Mouse,Event"
+  <li><a class="reference" href="#update%2CMouse%2CEvent"
     title="update(self: Mouse; event: Event)"><wbr />update<span class="attachedType" style="visibility:hidden">Mouse</span></a></li>
-  <li><a class="reference" href="#frameEnd,Mouse"
+  <li><a class="reference" href="#frameEnd%2CMouse"
     title="frameEnd(self: Mouse)"><wbr />frame<wbr />End<span class="attachedType" style="visibility:hidden">Mouse</span></a></li>
-  <li><a class="reference" href="#isDown,Mouse,varargs[MouseButton]"
+  <li><a class="reference" href="#isDown%2CMouse%2Cvarargs%5BMouseButton%5D"
     title="isDown(self: Mouse; buttons: varargs[MouseButton]): bool"><wbr />is<wbr />Down<span class="attachedType" style="visibility:hidden">Mouse</span></a></li>
-  <li><a class="reference" href="#isPressed,Mouse,varargs[MouseButton]"
+  <li><a class="reference" href="#isPressed%2CMouse%2Cvarargs%5BMouseButton%5D"
     title="isPressed(self: Mouse; buttons: varargs[MouseButton]): bool"><wbr />is<wbr />Pressed<span class="attachedType" style="visibility:hidden">Mouse</span></a></li>
-  <li><a class="reference" href="#isReleased,Mouse,varargs[MouseButton]"
+  <li><a class="reference" href="#isReleased%2CMouse%2Cvarargs%5BMouseButton%5D"
     title="isReleased(self: Mouse; buttons: varargs[MouseButton]): bool"><wbr />is<wbr />Released<span class="attachedType" style="visibility:hidden">Mouse</span></a></li>
-  <li><a class="reference" href="#getPosition,Mouse"
+  <li><a class="reference" href="#getPosition%2CMouse"
     title="getPosition(self: Mouse): tuple[x, y: int]"><wbr />get<wbr />Position<span class="attachedType" style="visibility:hidden">Mouse</span></a></li>
 
   </ul>
@@ -1278,21 +1278,18 @@ function main() {
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
   <p class="module-desc">Mouse Input</p>
-  <div class="section" id="6">
-<h1><a class="toc-backref" href="#6">Imports</a></h1>
-<dl class="item">
-<a class="reference external" href="sdl2.html">sdl2</a>
-</dl></div>
-<div class="section" id="7">
+  <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="MouseButton"><a name="MouseButton"></a><pre><span class="Identifier">MouseButton</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<a id="MouseButton"></a>
+<dt><pre><a href="mouse.html#MouseButton"><span class="Identifier">MouseButton</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">pure</span></span><span class="Other">.}</span></span> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">LEFT</span><span class="Other">,</span> <span class="Identifier">RIGHT</span><span class="Other">,</span> <span class="Identifier">MIDDLE</span><span class="Other">,</span> <span class="Identifier">UNKNOWN</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="Mouse"><a name="Mouse"></a><pre><span class="Identifier">Mouse</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<a id="Mouse"></a>
+<dt><pre><a href="mouse.html#Mouse"><span class="Identifier">Mouse</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">buttonStates</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="Identifier">MouseButton</span><span class="Other">,</span> <span class="Identifier">DetailedKeyState</span><span class="Other">]</span>
   <span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span>
 </pre></dt>
@@ -1305,37 +1302,44 @@ function main() {
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="newMouse"><a name="newMouse,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newMouse</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Mouse</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="newMouse,"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">newMouse</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="mouse.html#Mouse"><span class="Identifier">Mouse</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Create new mouse.
 
 </dd>
-<dt id="update"><a name="update,Mouse,Event"></a><pre><span class="Keyword">proc</span> <span class="Identifier">update</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Mouse</span><span class="Other">;</span> <span class="Identifier">event</span><span class="Other">:</span> <span class="Identifier">Event</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="update,Mouse,Event"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">update</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="mouse.html#Mouse"><span class="Identifier">Mouse</span></a><span class="Other">;</span> <span class="Identifier">event</span><span class="Other">:</span> <span class="Identifier">Event</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Update mouse state by event.
 
 </dd>
-<dt id="frameEnd"><a name="frameEnd,Mouse"></a><pre><span class="Keyword">proc</span> <span class="Identifier">frameEnd</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Mouse</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="frameEnd,Mouse"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">frameEnd</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="mouse.html#Mouse"><span class="Identifier">Mouse</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Tell keyboard the end of a frame.
 
 </dd>
-<dt id="isDown"><a name="isDown,Mouse,varargs[MouseButton]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isDown</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Mouse</span><span class="Other">;</span> <span class="Identifier">buttons</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">MouseButton</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="isDown,Mouse,varargs[MouseButton]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">isDown</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="mouse.html#Mouse"><span class="Identifier">Mouse</span></a><span class="Other">;</span> <span class="Identifier">buttons</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="mouse.html#MouseButton"><span class="Identifier">MouseButton</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Check if any button of buttons is down or pressed now.
 
 </dd>
-<dt id="isPressed"><a name="isPressed,Mouse,varargs[MouseButton]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isPressed</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Mouse</span><span class="Other">;</span> <span class="Identifier">buttons</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">MouseButton</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="isPressed,Mouse,varargs[MouseButton]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">isPressed</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="mouse.html#Mouse"><span class="Identifier">Mouse</span></a><span class="Other">;</span> <span class="Identifier">buttons</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="mouse.html#MouseButton"><span class="Identifier">MouseButton</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Check if any button of buttons is now pressed.
 
 </dd>
-<dt id="isReleased"><a name="isReleased,Mouse,varargs[MouseButton]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isReleased</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Mouse</span><span class="Other">;</span> <span class="Identifier">buttons</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">MouseButton</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="isReleased,Mouse,varargs[MouseButton]"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">isReleased</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="mouse.html#Mouse"><span class="Identifier">Mouse</span></a><span class="Other">;</span> <span class="Identifier">buttons</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="mouse.html#MouseButton"><span class="Identifier">MouseButton</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Check if any button of buttons is now released.
 
 </dd>
-<dt id="getPosition"><a name="getPosition,Mouse"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getPosition</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Mouse</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">]</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<a id="getPosition,Mouse"></a>
+<dt><pre><span class="Keyword">proc</span> <span class="Identifier">getPosition</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="mouse.html#Mouse"><span class="Identifier">Mouse</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 Get current mouse position. If mouse is out of window, then result is negative.
 
@@ -1350,7 +1354,7 @@ Get current mouse position. If mouse is out of window, then result is negative.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-10-01 13:52:04 UTC</small>
+        <small>Made with Nim. Generated: 2019-01-13 11:53:06 UTC</small>
       </div>
     </div>
   </div>
