@@ -1,0 +1,3 @@
+[submodule "tests/source-serif-pro"]
+	path = tests/source-serif-pro
+	url = git@github.com:adobe-fonts/source-serif-pro.git
