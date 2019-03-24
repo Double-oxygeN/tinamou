@@ -48,6 +48,9 @@ proc newSoundEffect(path: static[string]): SoundEffect =
   result.src = path
   result.chunk = loadWAV(path)
 
+  if result.chunk.isNil:
+    raise newTinamouException(SE_LOAD_ERROR_CODE, "Could not play SE " & path & ". " & $sdl2.getError())
+
 proc newSoundEffectFromRW(src: RWopsPtr): SoundEffect =
   ## Create new sound effect from data.
   new result
@@ -57,7 +60,7 @@ proc newSoundEffectFromRW(src: RWopsPtr): SoundEffect =
 proc play*(self: SoundEffect) =
   ## Play sound.
   if playChannel(-1, self.chunk, 0) < 0:
-    raise newTinamouException(SE_PLAY_ERROR_CODE, "Could not play SE " & self.src & ". " & $sdl2.getError())
+    stderr.writeLine "tinamou: Could not play SE ", self.src, ". ", sdl2.getError()
 
 proc stopAllEffects*() =
   ## Stop sound.

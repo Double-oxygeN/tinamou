@@ -90,6 +90,9 @@ proc startGame*(sceneManager: SceneManager; firstSceneId: SceneId; title: string
     closeAudio()
     mixer.quit()
 
+  # allocate channels for playing sound effects
+  discard allocateChannels(16)
+
   if not sdl2.setHint("SDL_RENDER_SCALE_QUALITY", "best"):
     raise newTinamouException(INIT_TEXTURE_FILTERING_ERROR_CODE, "Linear texture filtering could not be enabled. " & $sdl2.getError())
 
