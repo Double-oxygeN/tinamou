@@ -60,7 +60,8 @@ proc newSoundEffectFromRW(src: RWopsPtr): SoundEffect =
 proc play*(self: SoundEffect) =
   ## Play sound.
   if playChannel(-1, self.chunk, 0) < 0:
-    stderr.writeLine "tinamou: Could not play SE ", self.src, ". ", sdl2.getError()
+    when appType == "console":
+      stderr.writeLine "tinamou: Could not play SE ", self.src, ". ", sdl2.getError()
 
 proc stopAllEffects*() =
   ## Stop sound.
